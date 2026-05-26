@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "datatables.net": "^2.3.8",
+    "flyonui": "^2.4.1",
+    "jquery": "^4.0.0",
+    "tailwindcss": "^4.3.0"
+  },
+  "name": "mvcproj",
+  "version": "1.0.0",
+  "description": "tailwind mvc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ali asadi",
+  "license": "ISC",
+  "devDependencies": {
+    "@iconify-json/tabler": "^1.2.35",
+    "@iconify/json": "^2.2.477",
+    "@iconify/tailwind4": "^1.2.3"
+  }
+}
