@@ -1,0 +1,36 @@
+# Composer
+/vendor/
+
+# Node.js
+/node_modules/
+
+# NPM Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment Files
+.env
+.env.*
+
+# IDE Files
+.idea/
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Cache & Temporary Files
+/storage/cache/*
+/storage/logs/*
+
+# Build Files (در صورت نیاز)
+dist/
+build/
+
+# Tailwind cache
+.cache/
+
+# PHPStorm
+*.iml
