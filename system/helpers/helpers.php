@@ -233,23 +233,3 @@ function array_dot($array, $return_array = array(), $return_key = '') {
 function currentUrl(){
     currentDomain() . $_SERVER['REQUEST_URI'];
 }
-
-function buildCategoryTree(array $categories, ?int $parentId = null, string $prefix = ''): string
-{
-    $html = '';
-
-    foreach ($categories as $category) {
-        if ($category->parent_id === $parentId) {
-            $select = old('parent_id') == $category->id ? 'selected' : '';
-            $html .= "<option \"{$select}\ class='text-xs md:text-md' value=\"{$category->id}\">{$prefix}{$category->name}</option>";
-
-            $html .= buildCategoryTree(
-                $categories,
-                $category->id,
-                $prefix . '-- '
-            );
-        }
-    }
-
-    return $html;
-}

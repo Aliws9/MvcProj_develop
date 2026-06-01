@@ -145,7 +145,7 @@ trait HasSoftDelete
 
           //تعداد تمامی ردیف ها
           $totalRow = $this->getCount();
-
+          dd($totalRow);
           //آدرس پیج فعلی که از لینک فعلی گرفته شده
           $currentPage = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 

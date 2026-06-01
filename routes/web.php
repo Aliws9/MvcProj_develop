@@ -18,4 +18,13 @@ Route::post('/admin/category/store' , 'Admin\CategoryController@store' , 'admin.
 Route::get('/admin/category/edit/{id}' , 'Admin\CategoryController@edit' , 'admin.category.edit');
 Route::put('/admin/category/update/{id}' , 'Admin\CategoryController@update' , 'admin.category.update');
 Route::delete('/admin/category/delete/{id}' , 'Admin\CategoryController@destroy' , 'admin.category.destroy');
+// post routs
+Route::get('/admin/post' , 'Admin\PostController@index' , 'admin.post.index');
 
+Route::get('/admin/post/create1' , 'Admin\PostController@create1' , 'admin.post.create1');
+// Route::get('/admin/post/create2' , 'Admin\PostController@create2' , 'admin.post.create2');
+
+Route::post('/admin/post/store' , 'Admin\PostController@store' , 'admin.post.store');
+Route::get('/admin/post/edit/{id}' , 'Admin\PostController@edit' , 'admin.post.edit');
+Route::put('/admin/post/update/{id}' , 'Admin\PostController@update' , 'admin.post.update');
+Route::delete('/admin/post/delete/{id}' , 'Admin\PostController@destroy' , 'admin.post.destroy');

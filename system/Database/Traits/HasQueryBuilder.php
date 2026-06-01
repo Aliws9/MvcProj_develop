@@ -217,6 +217,7 @@ trait HasQueryBuilder
 
           } else
           {
+            // dd($this->values);
                sizeof($this->values) > 0 ? $stmt->execute(array_values($this->values)) : $stmt->execute();
           }
 

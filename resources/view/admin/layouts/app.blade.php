@@ -5,14 +5,19 @@
 <head>
     @include('admin.layouts.head-tag')
     @yield('head-tag')
-<script src="<?= asset('flyonui/flyonui.js'); ?>">
+    <script src="<?= asset('flyonui/flyonui.js'); ?>">
     </script>
 </head>
 
 <body class="h-full">
-
+    <style>
+        li ul {
+            margin-top: 3px !important;
+            margin-bottom: 3px !important;
+        }
+    </style>
     <!-- Main Content -->
-    <div class="containers flex w-full lg:p-10 gap-8">
+    <div class="containers flex w-full lg:p-10 gap-6">
 
         <div class="md:w-2/10 hidden md:block">
             <!-- sidebar -->
@@ -20,7 +25,7 @@
 
         </div>
 
-        <div class="flex flex-col items-start w-full lg:w-8/10 gap-10 p-4 lg:p-0">
+        <div class="flex flex-col items-start w-full lg:w-8/10 gap-7 p-2.5 lg:p-0">
 
             <!-- Top Header -->
             @include('admin.layouts.header')
@@ -36,10 +41,10 @@
 
         </div>
     </div>
-    
+
     @include('admin.layouts.scripts')
 
-    
+
 
 
 

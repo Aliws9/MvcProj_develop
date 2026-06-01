@@ -85,7 +85,7 @@ trait HasValidationRules
         {
             if (strlen($this->request[$name]) > $count && $this->checkFirstError($name))
             {
-                $this->setError($name, "متن این فیلد بیشتر از ($count) است");
+                $this->setError($name, "متن فیلد ($name) بیشتر از ($count) کاراکتر است!");
             }
         }
     }
@@ -95,7 +95,7 @@ trait HasValidationRules
         {
             if (strlen($this->request[$name]) < $count && $this->checkFirstError($name))
             {
-                $this->setError($name, "متن این فیلد کمتر از ($count) است");
+                $this->setError($name, "متن فیلد ($name) کمتر از ($count) کاراکتر است!");
             }
         }
     }
@@ -105,7 +105,7 @@ trait HasValidationRules
         {
             if ($this->request[$name] > $count && $this->checkFirstError($name))
             {
-                $this->setError($name, " عدد این فیلد بیشتر از ($count) است");
+                $this->setError($name, " عدد فیلد ($name) بیشتر از ($count) است");
             }
         }
     }
@@ -115,7 +115,7 @@ trait HasValidationRules
         {
             if ($this->request[$name] < $count && $this->checkFirstError($name))
             {
-                $this->setError($name, "عدد این فیلد کمتر از ($count) است");
+                $this->setError($name, "عدد فیلد ($name) کمتر از ($count) است");
             }
         }
     }

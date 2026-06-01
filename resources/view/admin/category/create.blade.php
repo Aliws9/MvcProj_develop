@@ -14,14 +14,56 @@
             border: 0 !important;
         }
     </style>
+    <?php $errorName = errorClass('name');
+    $errorParent_id = errorClass('parent_id');
+    $errorDescription = errorClass('description');
+         ?>
     <div class="form_cust w-full md:w-full m-auto">
+
+        <div class="w-full md:w-3/4 m-auto">
+<!-- error name alert -->
+                <div class="<?= $errorName['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorName['message_error']; ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+
+                <!-- error parent_id alert -->
+                <div class="<?= $errorParent_id['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-parent-id">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorParent_id['message_error']; ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-parent-id"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+                
+                <!-- error description alert -->
+                <div class="<?= $errorDescription['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-description">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorDescription['message_error']; ?></p>
+                    <button class="ms-auto cursor-pointer leading-none"
+                        data-remove-element="#dismiss-alert-error-description" aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+        </div>
+
         <form class="form-my lg:mt-6" action="<?= route('admin.category.store') ?>" method="post"
             enctype="multipart/form-data">
-            <div class="w-full md:w-3/4 m-auto flex flex-col md:space-y-13 space-y-3">
+            <div class="w-full md:w-3/4 m-auto flex flex-col md:space-y-10 space-y-3">
                 <h1 class="text-xl">دسته بندی جدید</h1>
+
                 <div
                     class="divider divider-dashed after:!border-t-2 before:!border-t-2 md:after:!border-t-4 md:before:!border-t-4">
-                    <span class="icon-[line-md--circle] text-slate-300 size-13 md:size-17"></span></div>
+                    <span class="icon-[line-md--circle] text-slate-300 size-13 md:size-17"></span>
+                </div>
                 <div class="flex flex-col md:flex-row gap-7">
 
                     <div class="join w-full md:w-1/2 m-auto shadow-lg shadow-indigo-500/30 rounded-md">
@@ -50,13 +92,13 @@
 
                         <div class="textarea  w-full !border-blue-400 shadow-lg shadow-indigo-500/30">
                             <span
-                                class="icon-[streamline-plump-color--description-flat] text-base-content/80 mt-2 mx-4 size-5.5 md:size-7 shrink-0 mt-2.5"></span>
+                                class="icon-[streamline-plump-color--description-flat] text-base-content/80 mt-2 mx-4 size-5.5 md:size-6 shrink-0 mt-2.5"></span>
                             <div class="textarea-floating grow">
-                                
-                                <textarea rows="1" placeholder="توضیحات" id="textareaFloatingMedium" name="description"
-                                    value="<?= old('description'); ?>" class=" placeholder:!text-[#dad4ff]"></textarea>
 
-                                <label class="textarea-floating-label" for="textareaFloatingMedium">توضیحات ...</label>
+                                <textarea rows="1" placeholder="توضیحات" id="textareaFloatingMedium" name="description"
+                                    value="<?= old('description'); ?>" class=" placeholder:!text-[#dad4ff] !text-sm lg:!text-md"><?= old('description'); ?></textarea>
+
+                                <label class="textarea-floating-label !text-sm lg:!text-md" for="textareaFloatingMedium">توضیحات ...</label>
                             </div>
                         </div>
 
@@ -64,7 +106,8 @@
                 </div>
                 <div
                     class="divider divider-dashed after:!border-t-2 before:!border-t-2 md:after:!border-t-4 md:before:!border-t-4">
-                    <span class="icon-[line-md--circle] text-slate-300 size-13 md:size-17"></span></div>
+                    <span class="icon-[line-md--circle] text-slate-300 size-13 md:size-17"></span>
+                </div>
 
                 <input type="submit"
                     class="btn btn-primary btn-block md:btn-wide btn-outline !border-[0.15rem] !border-dashed  btn-sm lg:btn-md"
@@ -74,6 +117,13 @@
         </form>
     </div>
 
+    <!-- success alert -->
 
-
+     <!-- <div class=" alert alert-primary alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out" role="alert" id="dismiss-alert-success">
+          <span class="icon-[tabler--circle-check] shrink-0 size-6"></span>
+      <p>Dive into our platform to discover exciting new features and updates.</p>
+      <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-success" aria-label="Close Button">
+        <span class="icon-[tabler--x] size-5"></span>
+      </button>
+    </div>  -->
 @endsection

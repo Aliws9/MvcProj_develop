@@ -1,11 +1,10 @@
 <div
-    class="flex flex-col shadow-[-2px_-2px_12px_rgba(0,0,0,0.15)] hidden md:inline-block md:w-full w-0 bg-white z-2 rounded-lg flex-none items-start h-[95vh]">
+    class="flex flex-col shadow-[-2px_-2px_12px_rgba(0,0,0,0.15)] hidden md:inline-block md:w-full w-0 bg-white z-2 rounded-lg flex-none items-start h-[100vh] sticky top-4">
     <div class="w-full">
         <?php
 $current = Config::get('app.CURRENT_ROUTE');
          ?>
-         <script src="<?= asset('flyonui/flyonui.js'); ?>">
-    </script>
+
 
         <a href="#">
             <div
@@ -29,34 +28,66 @@ else
                     </a>
                 </li>
                 <li class="space-y-0.5">
-                    <a class="collapse-toggle <?php if ($current == 'admin/post/' || $current == 'admin/post/craete')
+                    <a class="collapse-toggle <?php if ($current == 'admin/post' || $current == 'admin/post/create1' || $current == 'admin/post/create2')
     echo 'menu-active open';
 else
-    echo '';  ?> collapse-open:bg-base-content/10"
-                        id="menu-app" data-collapse="#menu-app-collapse">
+    echo '';  ?> collapse-open:bg-base-content/10" id="menu-app" data-collapse="#menu-app-collapse">
                         <span class="icon-[tabler--article] size-5"></span>
                         مقالات
                         <span
                             class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
                     </a>
-                    <ul id="menu-app-collapse"
-                        class="collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300 <?php if ($current == 'admin/post' || $current == 'admin/post/create')
+
+                    <ul id="menu-app-collapse" class="collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300 <?php if ($current == 'admin/post' || $current == 'admin/post/create1' || $current == 'admin/post/create2')
     echo 'open';
 else
-    echo 'hidden';  ?>"
-                        aria-labelledby="menu-app">
+    echo 'hidden';  ?>" aria-labelledby="menu-app">
+
+
                         <li>
                             <a href="#">
                                 <span class="icon-[ooui--articles-rtl] size-5"></span>
                                 همه مقالات
                             </a>
                         </li>
+
                         <li>
-                            <a href="#">
+                            <a class="collapse-toggle <?php if ($current == 'admin/post/create1' || $current == 'admin/post/create2')
+    echo 'menu-active open';
+else
+    echo '';  ?> collapse-open:bg-base-content/10" id="menu-app-new" data-collapse="#menu-post-editor">
                                 <span class="icon-[jam--write] size-5"></span>
                                 مقاله جدید
+                                <span
+                                    class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
                             </a>
+
+                            <ul id="menu-post-editor" class="collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300 <?php if ($current == 'admin/post/create1' || $current == 'admin/post/create2')
+    echo 'open';
+else
+    echo 'hidden';  ?>" aria-labelledby="menu-app-new">
+
+                                <li>
+                                    <a href="<?= route('admin.post.create1'); ?>" class="<?php if ($current == 'admin/post/create1')
+    echo 'menu-active';
+else
+    echo '';  ?>">
+                                        <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
+                                        ویرایشگر ساده
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" class="">
+                                        <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
+                                        ویرایشگر پیشرفته
+                                    </a>
+                                </li>
+
+                            </ul>
+
                         </li>
+
                     </ul>
                 </li>
 
@@ -64,15 +95,13 @@ else
                     <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/category' OR $current == 'admin/category/create')
     echo 'menu-active open';
 else
-    echo '';  ?>"
-                        id="menu-category" data-collapse="#menu-category-collapse">
+    echo '';  ?>" id="menu-category" data-collapse="#menu-category-collapse">
                         <span class="icon-[tabler--category] size-5"></span>
                         دسته بندی ها
                         <span
                             class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
                     </a>
-                    <ul id="menu-category-collapse"
-                        class="<?php if ($current == 'admin/category' || $current == 'admin/category/create')
+                    <ul id="menu-category-collapse" class="<?php if ($current == 'admin/category' || $current == 'admin/category/create')
     echo 'open';
 else
     echo 'hidden';  ?> collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300"
@@ -105,18 +134,16 @@ else
                 </li>
 
                 <li class="space-y-0.5">
-                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/category/' || $current == 'admin/category/craete')
+                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/media' || $current == 'admin/media/create')
     echo 'menu-active open';
 else
-    echo '';  ?>"
-                        id="menu-media" data-collapse="#menu-media-collapse">
+    echo '';  ?>" id="menu-media" data-collapse="#menu-media-collapse">
                         <span class="icon-[qlementine-icons--media-16] size-5"></span>
                         رسانه
                         <span
                             class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
                     </a>
-                    <ul id="menu-media-collapse"
-                        class="<?php if ($current == 'admin/category/' || $current == 'admin/category/craete')
+                    <ul id="menu-media-collapse" class="<?php if ($current == 'admin/media' || $current == 'admin/media/create')
     echo 'open';
 else
     echo 'hidden';  ?> collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300"
@@ -137,18 +164,16 @@ else
                 </li>
 
                 <li class="space-y-0.5">
-                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/category/' || $current == 'admin/category/craete')
+                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/setting' || $current == 'admin/setting/create')
     echo 'menu-active open';
 else
-    echo '';  ?>"
-                        id="menu-setting" data-collapse="#menu-setting-collapse">
+    echo '';  ?>" id="menu-setting" data-collapse="#menu-setting-collapse">
                         <span class="icon-[tabler--settings] size-5"></span>
                         تنظیمات
                         <span
                             class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
                     </a>
-                    <ul id="menu-setting-collapse"
-                        class="<?php if ($current == 'admin/category/' || $current == 'admin/category/craete')
+                    <ul id="menu-setting-collapse" class="<?php if ($current == 'admin/setting' || $current == 'admin/setting/create')
     echo 'open';
 else
     echo 'hidden';  ?> collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300"

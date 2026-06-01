@@ -127,18 +127,3 @@ trait HasAttribute
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

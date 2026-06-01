@@ -8,9 +8,9 @@ class CategoryRequest extends Request{
 
     public function rules(){
         return [
-            'name' => "required|max:191",
+            'name' => "required|max:50|min:3",
             'parent_id' => "exists:categories,id",
-            'description' => "max:500"
+            'description' => "max:200"
         ];
     }
 

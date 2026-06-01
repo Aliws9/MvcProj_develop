@@ -7,7 +7,7 @@
     "tailwindcss": "^4.3.0"
   },
   "name": "mvcproj",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "tailwind mvc",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,13 @@
     "@iconify-json/tabler": "^1.2.35",
     "@iconify/json": "^2.2.477",
     "@iconify/tailwind4": "^1.2.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aliws9/MvcProj.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Aliws9/MvcProj/issues"
+  },
+  "homepage": "https://github.com/Aliws9/MvcProj#readme"
 }
