@@ -86,7 +86,7 @@ trait HasSoftDelete
 
           $this->resetQuery();
 
-          if ($this->sql == '')
+          if ($this->getSql() == '')
           {
 
                if (empty($array))
@@ -161,7 +161,7 @@ trait HasSoftDelete
 
           $this->setLimit($currentRow, $perPage);
 
-          if ($this->sql == '')
+          if ($this->getSql() == '')
           {
                $this->setSql("SELECT " . $this->getTableName() . ".* FROM " . $this->getTableName());
           }

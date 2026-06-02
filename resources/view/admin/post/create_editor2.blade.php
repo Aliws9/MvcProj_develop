@@ -2,9 +2,9 @@
 
 @section('head-tag')
     <title>ادمین | ایجاد مقاله (ادیتور ساده)</title>
-<script src="<?= asset('tinymce/tinymce.min.js'); ?>"></script>
 <script src="<?= asset('tinymce/lang/fa.js'); ?>"></script>
-
+        <!-- Place the first <script> tag in your HTML's <head> -->
+<script src="https://cdn.tiny.cloud/1/nhfbg3frjs0iz9ko0zfoulp8gqscvclx5p4q9klam9037hrr/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 @endsection
 
 @section('content')
@@ -27,45 +27,55 @@
 .tox-menubar button span{
     font-size: 14px !important;
 }
+.tox-promotion{
+    display: none !important;
+}
 
 </style>
 
     <div class="form_cust w-full md:w-full m-auto">
 <h1 class="text-lg md:text-3xl mb-5">مقاله جدید</h1>
-        <div class="w-full bg-slate-100 m-auto p-2 rounded-lg">
-            
-            <form method="POST" action="/articles/store">
+        <div class="w-full bg-slate-100 m-auto p-2 rounded-lg h-[120vh] lg:h-[100vh]">
+        
 
-    <textarea id="editor" name="content"></textarea>
 
-</form>
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+<script>
+  tinymce.init({
+    selector: 'textarea',
+    language: 'fa',
+    promotion: false,
+    toolbar_mode: 'sliding',
+    height: '100%',
+    plugins: [
+      // Core editing features
+      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+      // Your account includes a free trial of TinyMCE premium features
+      // Try the most popular premium features until Jun 13, 2026:
+      'checklist', 'mediaembed', 'casechange', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'advtemplate', 'tinymceai', 'uploadcare', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+    ],
+    toolbar: 'undo redo | tinymceai-chat tinymceai-quickactions tinymceai-review | blocks fontfamily fontsize | bold italic underline strikethrough | link media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography uploadcare | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' },
+    ],
+    tinymceai_token_provider: async () => {
+      await fetch(`https://demo.api.tiny.cloud/1/nhfbg3frjs0iz9ko0zfoulp8gqscvclx5p4q9klam9037hrr/auth/random`, { method: "POST", credentials: "include" });
+      return { token: await fetch(`https://demo.api.tiny.cloud/1/nhfbg3frjs0iz9ko0zfoulp8gqscvclx5p4q9klam9037hrr/jwt/tinymceai`, { credentials: "include" }).then(r => r.text()) };
+    },
+    uploadcare_public_key: '8cccaeffedb8951d0b85',
+  });
+</script>
+
+<textarea class="h-full">
+  متن خود را بنویسید
+</textarea>
 
         </div>
 
-<script>
-    tinymce.init({
-  selector: '#editor',
-  license_key: 'gpl',
-  promotion: false,
-  language: 'fa',
-  directionality: 'rtl',
-  toolbar_mode: 'sliding',
-  plugins: [
-    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap',
-    'preview', 'anchor', 'searchreplace', 'visualblocks',
-    'fullscreen', 'insertdatetime', 'media', 'table', 'help', 'wordcount'
-  ],
-  toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | bullist numlist | link image | fullscreen',
-  content_style: `
-    body {
-      font-family: Tahoma, Arial, sans-serif;
-      direction: rtl;
-      text-align: right;
-    }
-  `
-});
 
-</script>
 
 
 

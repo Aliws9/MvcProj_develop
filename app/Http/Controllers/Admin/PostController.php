@@ -14,10 +14,10 @@ class PostController extends AdminController{
         $categories = Category::all();
         return view('admin.post.create_editor1' , compact('categories'));
     }
-    // public function create2(){
-    //     $categories = Category::all();
-    //     return view('admin.post.create_editor2' , compact('categories'));
-    // }
+public function create2(){
+        $categories = Category::all();
+        return view('admin.post.create_editor2' , compact('categories'));
+    }
     public function store(){
 
     }

@@ -6737,6 +6737,9 @@
   .h-\[100vh\] {
     height: 100vh;
   }
+  .h-\[120vh\] {
+    height: 120vh;
+  }
   .h-auto {
     height: auto;
   }

@@ -22,7 +22,7 @@ Route::delete('/admin/category/delete/{id}' , 'Admin\CategoryController@destroy'
 Route::get('/admin/post' , 'Admin\PostController@index' , 'admin.post.index');
 
 Route::get('/admin/post/create1' , 'Admin\PostController@create1' , 'admin.post.create1');
-// Route::get('/admin/post/create2' , 'Admin\PostController@create2' , 'admin.post.create2');
+Route::get('/admin/post/create2' , 'Admin\PostController@create2' , 'admin.post.create2');
 
 Route::post('/admin/post/store' , 'Admin\PostController@store' , 'admin.post.store');
 Route::get('/admin/post/edit/{id}' , 'Admin\PostController@edit' , 'admin.post.edit');

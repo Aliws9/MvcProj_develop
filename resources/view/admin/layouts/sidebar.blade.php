@@ -78,7 +78,10 @@ else
                                 </li>
 
                                 <li>
-                                    <a href="#" class="">
+                                    <a href="<?= route('admin.post.create2') ?>" class="<?php if ($current == 'admin/post/create2')
+    echo 'menu-active';
+else
+    echo '';  ?>">
                                         <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
                                         ویرایشگر پیشرفته
                                     </a>
