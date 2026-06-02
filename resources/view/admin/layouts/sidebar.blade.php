@@ -45,7 +45,7 @@ else
 
 
                         <li>
-                            <a href="#">
+                            <a href="<?= route('admin.post.index') ?>" class="<?php echo $current == 'admin/post' ? 'menu-active' : '' ?>">
                                 <span class="icon-[ooui--articles-rtl] size-5"></span>
                                 همه مقالات
                             </a>

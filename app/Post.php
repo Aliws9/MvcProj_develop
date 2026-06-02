@@ -4,40 +4,25 @@ namespace App;
 
 use System\Database\ORM\Model;
 
+use System\Database\Traits\HasSoftDelete;
+
 class Post extends Model{
+
+    use HasSoftDelete;
+
+    protected $deletedAt = 'deleted_at';
 
      protected $table = "posts";
 
-     protected $fillable = ['title' , 'body' , 'cat_id'];
+     protected $fillable = ['title' , 'body' , 'image' , 'user_id' , 'cat_id' , 'status' , 'published_at'];
 
-     protected $casts = [];
+     protected $casts = ['image' => 'array'];
 
-     // protected $primaryKey = 'id';
-
-
-     // protected $createdAt = 'created_at';
-     // protected $updatedAt = 'updated_at';
-
-     // // protected $deletedAt = null;
-     // // // softDelete
-
-     // protected $collection = [];
-
-
-
-
-
-
-     public function Category(){
+     public function category(){
           return $this->blongsTo('\App\Category' , 'cat_id' , 'id');
      }
-
-
-
-
-
-
-
-
+     public function user(){
+          return $this->blongsTo('\App\User' , 'user_id' , 'id');
+     }
 
 }

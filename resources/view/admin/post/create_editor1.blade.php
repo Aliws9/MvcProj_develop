@@ -74,12 +74,14 @@
                     var myContent = tinymce.get("editor").getContent();
 
                     $('#cont').text(myContent);
+                    $('#cont2').html(myContent);
                 });
             });
 
         </script>
         <button id="send" type="button" class="btn btn-primary">send</button>
-        <div id="cont" class="p-2 bg-red-200 mt-4"></div>
+        <div id="cont" class="p-2 bg-red-200 mt-4"></div><br>
+        <div id="cont2" class="p-2 bg-red-200 mt-4"></div>
 
 
 

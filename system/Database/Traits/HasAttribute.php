@@ -89,7 +89,7 @@ trait HasAttribute
 
      // image = 'serialize' ['80*80'=> 'https://upload/image.png' , '140*240' => 'https://upload/image2.png']
      private function castDecodeValue($attributeKey, $val) {
-
+        
           if ($this->casts[$attributeKey] == 'array' || $this->casts[$attributeKey] == 'object')
           {
                return unserialize($val);
