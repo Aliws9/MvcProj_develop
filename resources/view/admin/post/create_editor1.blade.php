@@ -44,42 +44,86 @@
             <div id="middle-center-modal"
                 class="overlay modal overlay-open:opacity-100 overlay-open:duration-300 overlay-backdrop-open:bg-primary/30 modal-middle hidden [--body-scroll:true]"
                 role="dialog" tabindex="-1">
-                <div class="modal-dialog lg:modal-dialog-xl">
+                <div class="modal-dialog modal-dialog-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">مدیریت رسانه ها</h3>
                             <button type="button" class="btn btn-text btn-circle btn-sm absolute end-3 top-3"
                                 aria-label="Close" data-overlay="#middle-center-modal">
                                 <span class="icon-[tabler--x] size-4"></span>
                             </button>
+
                         </div>
+
                         <div class="modal-body">
-                            <input type="file" id="filepond" name="filepond" multiple>
+                            <nav class="tabs tabs-bordered  justify-center" aria-label="Tabs" role="tablist"
+                                aria-orientation="horizontal">
+                                <button type="button" class="tab active-tab:tab-active active" id="tabs-center-item-1"
+                                    data-tab="#tabs-center-1" aria-controls="tabs-center-1" role="tab" aria-selected="true">
+                                    همه رسانه ها
+                                </button>
+                                <button type="button" class="tab active-tab:tab-active" id="tabs-center-item-2"
+                                    data-tab="#tabs-center-2" aria-controls="tabs-center-2" role="tab"
+                                    aria-selected="false">
+                                    آپلود جدید
+                                </button>
+                            </nav>
+                            <div class="mt-3">
+                                <div id="tabs-center-1" role="tabpanel" aria-labelledby="tabs-center-item-1" class="flex flex-col gap-5">
 
-                            <input type="hidden" id="uploaded_files" name="uploaded_files"><br>
-                            <div id="media-preview" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+                                    <div class="flex flex-row gap-2 flex-row-reverse">
+                                        <!-- sidebar -->
+                                        <div class="bg-slate-100 border-1 border-slate-200 h-full p-2 w-2/7">
+                                            side
+                                        </div>
 
+                                        <!-- content media -->
+                                        <div class="bg-slate-100 border-1 border-slate-200 p-2 w-5/7">
+                                            image
+                                        </div>
+
+                                    </div>
+
+                                    <input type="button" value="درج" class="btn btn-primary btn-soft btn-disabled w-fit"
+                                        id="merge_media2">
+
+                                </div>
+
+                                <div id="tabs-center-2" class="hidden" role="tabpanel" aria-labelledby="tabs-center-item-2">
+
+
+                                    <input type="file" id="filepond" name="filepond" multiple>
+
+                                    <input type="hidden" id="uploaded_files" name="uploaded_files"><br>
+                                    <div id="media-preview" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+
+                                    <input type="button" value="آپلود" class="btn btn-primary btn-soft" id="send_media">
+                                    <input type="button" value="درج" class="btn btn-primary btn-soft btn-disabled"
+                                        id="merge_media">
+
+
+                                </div>
+                            </div>
 
                         </div>
                         <div class="modal-footer">
-                            <input type="button" value="آپلود" class="btn btn-primary btn-soft" id="send_media">
                         </div>
                     </div>
                 </div>
             </div>
 
-<script>
+
+            <script>
 $(document).ready(function () {
     const pond = FilePond.create(document.querySelector('#filepond'), {
         credits: false,
         allowMultiple: true,
         maxFiles: 30,
-        instantUpload: false,   // آپلود خودکار خاموش
+        instantUpload: false,
         storeAsFile: false,
 
         server: {
             process: {
-                url: "{{ route('admin.media.store') }}",
+                url: "<?= route('admin.media.store') ?>",
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -90,7 +134,6 @@ $(document).ready(function () {
     });
 
     $('#send_media').on('click', function () {
-        // شروع آپلود همه فایل‌های صف
         pond.processFiles();
     });
 
@@ -100,17 +143,11 @@ $(document).ready(function () {
             return;
         }
 
-        // اینجا بعد از آپلود کامل هر فایل اجرا می‌شود
         const serverPath = file.serverId;
-        console.log('Uploaded:', serverPath);
-
-        // نمونه: افزودن به hidden input
         let current = $('#uploaded_files').val();
         let arr = current ? JSON.parse(current) : [];
         arr.push(serverPath);
         $('#uploaded_files').val(JSON.stringify(arr));
-
-        // اینجا می‌توانی preview بسازی یا هر کار دیگری انجام بدهی
     });
 });
 </script>
@@ -145,12 +182,12 @@ $(document).ready(function () {
                     ],
                     toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | bullist numlist | link image | fullscreen',
                     content_style: `
-                                body {
-                                  font-family: Tahoma, Arial, sans-serif;
-                                  direction: rtl;
-                                  text-align: right;
-                                }
-                              `
+                                        body {
+                                          font-family: Tahoma, Arial, sans-serif;
+                                          direction: rtl;
+                                          text-align: right;
+                                        }
+                                      `
                 });
 
 

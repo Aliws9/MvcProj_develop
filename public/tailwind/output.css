@@ -9,6 +9,7 @@
       "Courier New", monospace;
     --color-red-100: oklch(93.6% 0.032 17.717);
     --color-red-200: oklch(88.5% 0.062 18.334);
+    --color-red-300: oklch(80.8% 0.114 19.571);
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-yellow-500: oklch(79.5% 0.184 86.047);
     --color-green-100: oklch(96.2% 0.044 156.743);
@@ -7073,11 +7074,26 @@
   .w-1\/2 {
     width: calc(1 / 2 * 100%);
   }
+  .w-2\/6 {
+    width: calc(2 / 6 * 100%);
+  }
+  .w-2\/7 {
+    width: calc(2 / 7 * 100%);
+  }
   .w-3\.5 {
     width: calc(var(--spacing) * 3.5);
   }
+  .w-4\/6 {
+    width: calc(4 / 6 * 100%);
+  }
+  .w-4\/7 {
+    width: calc(4 / 7 * 100%);
+  }
   .w-5 {
     width: calc(var(--spacing) * 5);
+  }
+  .w-5\/7 {
+    width: calc(5 / 7 * 100%);
   }
   .w-12 {
     width: calc(var(--spacing) * 12);
@@ -7325,6 +7341,9 @@
         }
       }
     }
+  }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .flex-col {
     flex-direction: column;
@@ -8644,6 +8663,9 @@
   .border-secondary {
     border-color: var(--color-secondary);
   }
+  .border-slate-200 {
+    border-color: var(--color-slate-200);
+  }
   .border-success {
     border-color: var(--color-success);
   }
@@ -8953,6 +8975,9 @@
   }
   .bg-red-200 {
     background-color: var(--color-red-200);
+  }
+  .bg-red-300 {
+    background-color: var(--color-red-300);
   }
   .bg-secondary {
     background-color: var(--color-secondary);
@@ -10769,6 +10794,11 @@
       width: 100%;
     }
   }
+  .md\:grid-cols-4 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
   .md\:flex-row {
     @media (width >= 48rem) {
       flex-direction: row;
@@ -10878,11 +10908,6 @@
   .lg\:w-8\/10 {
     @media (width >= 64rem) {
       width: calc(8 / 10 * 100%);
-    }
-  }
-  .lg\:modal-dialog-xl {
-    @media (width >= 64rem) {
-      max-width: calc(0.25rem * 256);
     }
   }
   .lg\:border-s-7 {
@@ -11027,6 +11052,154 @@
       background-color: var(--color-base-content);
       @supports (color: color-mix(in lab, red, red)) {
         background-color: color-mix(in oklab, var(--color-base-content) 10%, transparent);
+      }
+    }
+  }
+  .active-tab\:tab-active {
+    &[data-tab].active {
+      &:not([disabled]) {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+      }
+      .tabs-lifted > .tab&:not([disabled]) {
+        background-color: var(--tab-bg);
+        border-width: var(--tab-border, 1px) var(--tab-border, 1px) 0 var(--tab-border, 1px);
+        border-color: var(--tab-border-color);
+        border-end-start-radius: 0;
+        border-end-end-radius: 0;
+        padding-inline-start: calc(var(--tab-p, 1rem) - var(--tab-border, 1px));
+        padding-inline-end: calc(var(--tab-p, 1rem) - var(--tab-border, 1px));
+        padding-bottom: var(--tab-border, 1px);
+        padding-top: 0;
+      }
+      .tabs-lifted > .tab&:not([disabled]):before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 1;
+        width: calc(100% + var(--radius-field, 0.375rem) * 2);
+        height: var(--radius-field, 0.375rem);
+        bottom: 0;
+        background-size: var(--radius-field, 0.375rem);
+        background-repeat: no-repeat;
+        background-position: top left, top right;
+        --tab-grad: calc(69% - var(--tab-border, 1px));
+        --radius-start: radial-gradient(
+    circle at top left,
+    transparent var(--tab-grad),
+    var(--tab-border-color) calc(var(--tab-grad) + 0.25px),
+    var(--tab-border-color) calc(var(--tab-grad) + var(--tab-border, 1px)),
+    var(--tab-bg) calc(var(--tab-grad) + var(--tab-border, 1px) + 0.25px)
+  );
+        --radius-end: radial-gradient(
+    circle at top right,
+    transparent var(--tab-grad),
+    var(--tab-border-color) calc(var(--tab-grad) + 0.25px),
+    var(--tab-border-color) calc(var(--tab-grad) + var(--tab-border, 1px)),
+    var(--tab-bg) calc(var(--tab-grad) + var(--tab-border, 1px) + 0.25px)
+  );
+        background-image: var(--radius-start), var(--radius-end);
+      }
+      .tabs-lifted > .tab&:not([disabled]):first-child:before {
+        background-image: var(--radius-end);
+        background-position: top right;
+      }
+      .tabs-lifted > .tab&:not([disabled]):last-child:before {
+        background-image: var(--radius-start);
+        background-position: top left;
+      }
+      [dir="rtl"] .tabs-lifted > .tab&:not([disabled]):first-child:before {
+        background-image: var(--radius-start);
+        background-position: top left;
+      }
+      [dir="rtl"] .tabs-lifted > .tab&:not([disabled]):last-child:before {
+        background-image: var(--radius-end);
+        background-position: top right;
+      }
+      .tabs-lifted > &:not([disabled]) + .tabs-lifted .active-tab\:tab-active:not([disabled]) {
+        &:before {
+          background-image: var(--radius-end);
+          background-position: top right;
+        }
+      }
+      .tabs-lifted > .active-tab\:tab-active:not([disabled]) + .tabs-lifted &:not([disabled]) {
+        &:before {
+          background-image: var(--radius-end);
+          background-position: top right;
+        }
+      }
+    }
+    [data-tab].active & {
+      &:not([disabled]) {
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+      }
+      .tabs-lifted > .tab&:not([disabled]) {
+        background-color: var(--tab-bg);
+        border-width: var(--tab-border, 1px) var(--tab-border, 1px) 0 var(--tab-border, 1px);
+        border-color: var(--tab-border-color);
+        border-end-start-radius: 0;
+        border-end-end-radius: 0;
+        padding-inline-start: calc(var(--tab-p, 1rem) - var(--tab-border, 1px));
+        padding-inline-end: calc(var(--tab-p, 1rem) - var(--tab-border, 1px));
+        padding-bottom: var(--tab-border, 1px);
+        padding-top: 0;
+      }
+      .tabs-lifted > .tab&:not([disabled]):before {
+        content: "";
+        display: block;
+        position: absolute;
+        z-index: 1;
+        width: calc(100% + var(--radius-field, 0.375rem) * 2);
+        height: var(--radius-field, 0.375rem);
+        bottom: 0;
+        background-size: var(--radius-field, 0.375rem);
+        background-repeat: no-repeat;
+        background-position: top left, top right;
+        --tab-grad: calc(69% - var(--tab-border, 1px));
+        --radius-start: radial-gradient(
+    circle at top left,
+    transparent var(--tab-grad),
+    var(--tab-border-color) calc(var(--tab-grad) + 0.25px),
+    var(--tab-border-color) calc(var(--tab-grad) + var(--tab-border, 1px)),
+    var(--tab-bg) calc(var(--tab-grad) + var(--tab-border, 1px) + 0.25px)
+  );
+        --radius-end: radial-gradient(
+    circle at top right,
+    transparent var(--tab-grad),
+    var(--tab-border-color) calc(var(--tab-grad) + 0.25px),
+    var(--tab-border-color) calc(var(--tab-grad) + var(--tab-border, 1px)),
+    var(--tab-bg) calc(var(--tab-grad) + var(--tab-border, 1px) + 0.25px)
+  );
+        background-image: var(--radius-start), var(--radius-end);
+      }
+      .tabs-lifted > .tab&:not([disabled]):first-child:before {
+        background-image: var(--radius-end);
+        background-position: top right;
+      }
+      .tabs-lifted > .tab&:not([disabled]):last-child:before {
+        background-image: var(--radius-start);
+        background-position: top left;
+      }
+      [dir="rtl"] .tabs-lifted > .tab&:not([disabled]):first-child:before {
+        background-image: var(--radius-start);
+        background-position: top left;
+      }
+      [dir="rtl"] .tabs-lifted > .tab&:not([disabled]):last-child:before {
+        background-image: var(--radius-end);
+        background-position: top right;
+      }
+      .tabs-lifted > &:not([disabled]) + .tabs-lifted .active-tab\:tab-active:not([disabled]) {
+        &:before {
+          background-image: var(--radius-end);
+          background-position: top right;
+        }
+      }
+      .tabs-lifted > .active-tab\:tab-active:not([disabled]) + .tabs-lifted &:not([disabled]) {
+        &:before {
+          background-image: var(--radius-end);
+          background-position: top right;
+        }
       }
     }
   }
