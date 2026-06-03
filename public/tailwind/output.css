@@ -6724,6 +6724,9 @@
   .h-25 {
     height: calc(var(--spacing) * 25);
   }
+  .h-40 {
+    height: calc(var(--spacing) * 40);
+  }
   .h-50 {
     height: calc(var(--spacing) * 50);
   }
@@ -9124,6 +9127,9 @@
   }
   .fill-gray-200 {
     fill: var(--color-gray-200);
+  }
+  .object-cover {
+    object-fit: cover;
   }
   .checkbox-lg {
     padding: calc(0.25rem * 1);

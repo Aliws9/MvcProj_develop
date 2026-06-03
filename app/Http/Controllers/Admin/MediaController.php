@@ -64,7 +64,7 @@ class MediaController extends AdminController{
     // این مسیر را بر اساس فرانت خودت برگردان
     // اگر URL تو این است: localhost:8000/public/upload
     // همین را برگردان:
-    $relativePath = 'public/upload/' . $datePath . '/' . $filename;
+    $relativePath = 'http://localhost:8000/upload/' . $datePath . '/' . $filename;
 
     header('Content-Type: text/plain; charset=utf-8');
     echo $relativePath;

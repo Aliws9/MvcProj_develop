@@ -5,8 +5,11 @@
 
     RewriteEngine On
 
-    # Handle Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+# پوشه upload را مستقیماً سرو کن
+RewriteRule ^public/upload/ - [L]
+
+# Front Controller
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
 </IfModule>

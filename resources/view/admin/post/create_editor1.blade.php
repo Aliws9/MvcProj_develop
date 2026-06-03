@@ -5,7 +5,13 @@
     <script src="<?= asset('tinymce/tinymce.min.js'); ?>"></script>
     <script src="<?= asset('tinymce/lang/fa.js'); ?>"></script>
     <script src="<?= asset('jquery/dist/jquery.min.js'); ?>"></script>
+<link
+    href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css"
+    rel="stylesheet"
+/>
 
+<!-- add before </body> -->
+<script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
     <link rel="stylesheet" href="<?= asset('filepond/dist/filepond.min.css'); ?>">
 @endsection
 
@@ -68,7 +74,8 @@
                                 </button>
                             </nav>
                             <div class="mt-3">
-                                <div id="tabs-center-1" role="tabpanel" aria-labelledby="tabs-center-item-1" class="flex flex-col gap-5">
+                                <div id="tabs-center-1" role="tabpanel" aria-labelledby="tabs-center-item-1"
+                                    class="flex flex-col gap-5">
 
                                     <div class="flex flex-row gap-2 flex-row-reverse">
                                         <!-- sidebar -->
@@ -113,44 +120,137 @@
 
 
             <script>
-$(document).ready(function () {
-    const pond = FilePond.create(document.querySelector('#filepond'), {
-        credits: false,
-        allowMultiple: true,
-        maxFiles: 30,
-        instantUpload: false,
-        storeAsFile: false,
+                $(document).ready(function () {
+                    
+                    const pond = FilePond.create(document.querySelector('#filepond'), {
+                        credits: false,
+                        allowMultiple: true,
+                        maxFiles: 30,
+                        instantUpload: false,
+                        storeAsFile: false,
 
-        server: {
-            process: {
-                url: "<?= route('admin.media.store') ?>",
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                onload: (response) => response
-            }
-        }
-    });
+                        server: {
+                            process: {
+                                url: "<?= route('admin.media.store') ?>",
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                onload: (response) => response
+                            }
+                        }
+                    });
 
-    $('#send_media').on('click', function () {
-        pond.processFiles();
-    });
+                    $('#send_media').on('click', function () {
+                        pond.processFiles();
+                    });
 
-    pond.on('processfile', function (error, file) {
-        if (error) {
-            console.error(error);
-            return;
-        }
+                    $(document).on('click', '.edit-media', function(){
 
-        const serverPath = file.serverId;
-        let current = $('#uploaded_files').val();
-        let arr = current ? JSON.parse(current) : [];
-        arr.push(serverPath);
-        $('#uploaded_files').val(JSON.stringify(arr));
-    });
+    let path = $(this)
+        .closest('.media-item')
+        .data('path');
+
+    console.log(path);
+
+    // باز کردن سایدبار اطلاعات
 });
-</script>
+
+$(document).on('click', '.delete-media', function(){
+
+    let card = $(this).closest('.media-item');
+
+    let path = card.data('path');
+
+    let files = JSON.parse($('#uploaded_files').val() || '[]');
+
+    files = files.filter(item => item !== path);
+
+    $('#uploaded_files').val(JSON.stringify(files));
+
+    card.remove();
+});
+
+                    pond.on('processfile', function (error, file) {
+
+    if (error) {
+        console.error(error);
+        return;
+    }
+
+    const serverPath = file.serverId;
+
+    let current = $('#uploaded_files').val();
+    let arr = current ? JSON.parse(current) : [];
+    arr.push(serverPath);
+    $('#uploaded_files').val(JSON.stringify(arr));
+
+    // ----------------------
+    // نمایش فایل آپلود شده
+    // ----------------------
+
+    let ext = serverPath.split('.').pop().toLowerCase();
+
+    let preview = '';
+
+    if (['jpg','jpeg','png','webp','gif','bmp'].includes(ext)) {
+
+        preview = `
+            <img src="${serverPath}"
+                 class="w-full h-40 object-cover rounded">
+        `;
+
+    } else if (['mp4','webm','mov'].includes(ext)) {
+
+        preview = `
+            <video controls class="w-full rounded">
+                <source src="${serverPath}">
+            </video>
+        `;
+
+    } else if (['mp3','wav','ogg'].includes(ext)) {
+
+        preview = `
+            <audio controls class="w-full">
+                <source src="${serverPath}">
+            </audio>
+        `;
+
+    } else {
+
+        preview = `
+            <div class="p-3 text-center">
+                <span>${file.filename}</span>
+            </div>
+        `;
+    }
+
+    $('#media-preview').prepend(`
+        <div class="media-item border rounded p-2 bg-white"
+             data-path="${serverPath}">
+
+            ${preview}
+
+            <div class="flex gap-2 mt-2">
+
+                <button type="button"
+                        class="edit-media btn btn-sm btn-soft">
+                    ویرایش
+                </button>
+
+                <button type="button"
+                        class="delete-media btn btn-sm btn-error">
+                    حذف
+                </button>
+
+            </div>
+
+        </div>
+    `);
+
+});
+                });
+            </script>
             <!-- Middle End -->
 
 
@@ -182,12 +282,12 @@ $(document).ready(function () {
                     ],
                     toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | bullist numlist | link image | fullscreen',
                     content_style: `
-                                        body {
-                                          font-family: Tahoma, Arial, sans-serif;
-                                          direction: rtl;
-                                          text-align: right;
-                                        }
-                                      `
+                                            body {
+                                              font-family: Tahoma, Arial, sans-serif;
+                                              direction: rtl;
+                                              text-align: right;
+                                            }
+                                          `
                 });
 
 
