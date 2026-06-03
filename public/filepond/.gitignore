@@ -1,0 +1,9 @@
+npm-debug.log
+node_modules/
+coverage/
+.idea
+.vscode/
+upload/
+test*.html
+_TODO.md
+_RELEASE.md

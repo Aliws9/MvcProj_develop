@@ -28,3 +28,13 @@ Route::post('/admin/post/store' , 'Admin\PostController@store' , 'admin.post.sto
 Route::get('/admin/post/edit/{id}' , 'Admin\PostController@edit' , 'admin.post.edit');
 Route::put('/admin/post/update/{id}' , 'Admin\PostController@update' , 'admin.post.update');
 Route::delete('/admin/post/delete/{id}' , 'Admin\PostController@destroy' , 'admin.post.destroy');
+
+// media routs
+Route::get('/admin/media' , 'Admin\MediaController@index' , 'admin.media.index');
+
+Route::get('/admin/media/create1' , 'Admin\MediaController@create' , 'admin.media.create');
+
+Route::post('/admin/media/store' , 'Admin\MediaController@store' , 'admin.media.store');
+Route::get('/admin/media/edit/{id}' , 'Admin\MediaController@edit' , 'admin.media.edit');
+Route::put('/admin/media/update/{id}' , 'Admin\MediaController@update' , 'admin.media.update');
+Route::delete('/admin/media/delete/{id}' , 'Admin\MediaController@destroy' , 'admin.media.destroy');

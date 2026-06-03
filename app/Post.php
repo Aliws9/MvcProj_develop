@@ -25,4 +25,8 @@ class Post extends Model{
           return $this->blongsTo('\App\User' , 'user_id' , 'id');
      }
 
+     public function postMeta(){
+        return $this->hasMany('\App\PostMeta' , 'post_id' , 'id');
+     }
+
 }
