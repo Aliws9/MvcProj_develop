@@ -35,6 +35,9 @@ Route::get('/admin/media' , 'Admin\MediaController@index' , 'admin.media.index')
 Route::get('/admin/media/create1' , 'Admin\MediaController@create' , 'admin.media.create');
 
 Route::post('/admin/media/store' , 'Admin\MediaController@store' , 'admin.media.store');
+Route::post('/admin/media/altImage' , 'Admin\MediaController@altImage' , 'admin.media.altImage');
 Route::get('/admin/media/edit/{id}' , 'Admin\MediaController@edit' , 'admin.media.edit');
 Route::put('/admin/media/update/{id}' , 'Admin\MediaController@update' , 'admin.media.update');
+Route::put('/admin/media/updateAlt/{id}' , 'Admin\MediaController@updateAlt' , 'admin.media.updateAlt');
 Route::delete('/admin/media/delete/{id}' , 'Admin\MediaController@destroy' , 'admin.media.destroy');
+Route::get('/admin/media/list', 'Admin\MediaController@getList', 'admin.media.list');

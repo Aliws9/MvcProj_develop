@@ -11,7 +11,7 @@ class Media extends Model{
 
      protected $table = "media";
 
-     protected $fillable = ['file_name' , 'path' , 'format' , 'unique_id' , 'cat_id'];
+     protected $fillable = ['file_name' , 'path' , 'url' , 'format' , 'mime_type' , 'size' , 'width' , 'height' , 'user_id' , ''];
 
      protected $casts = ['image' => 'array'];
 

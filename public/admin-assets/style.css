@@ -1,0 +1,11 @@
+/* دکمه انتخاب رسانه */
+.mm-trigger-btn {
+    cursor: pointer;
+}
+
+/* پیش‌نمایش فیلد رسانه */
+.mm-field-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+}

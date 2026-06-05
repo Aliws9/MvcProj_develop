@@ -7,9 +7,9 @@ namespace System\Database\Traits;
 trait HasMethodCaller
 {
 
-     private $allMethods = ['create', 'update', 'delete', 'find', 'all', 'where', 'save', 'whereOr', 'whereIn', 'whereNull', 'whereNotNull', 'limit', 'orderBy', 'get', 'paginate'];
+     private $allMethods = ['create', 'update', 'delete', 'find', 'all', 'where', 'save', 'whereOr', 'whereIn', 'whereNull', 'whereNotNull', 'limit', 'orderBy', 'get', 'paginate','updateWhere'];
 
-     private $allowedMethods = ['create', 'update', 'delete', 'find', 'all', 'where', 'save', 'whereOr', 'whereIn', 'whereNull', 'whereNotNull', 'limit', 'orderBy', 'get', 'paginate' , 'count'];
+     private $allowedMethods = ['create', 'update', 'delete', 'find', 'all', 'where', 'save', 'whereOr', 'whereIn', 'whereNull', 'whereNotNull', 'limit', 'orderBy', 'get', 'paginate' , 'count' , 'updateWhere'];
 
 
 

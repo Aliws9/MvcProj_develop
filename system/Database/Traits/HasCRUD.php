@@ -20,6 +20,35 @@ trait HasCRUD
 
     }
 
+    protected function updateWhereMethod($conditions, $values) {
+    // conditions = ['slug' => 'php-news']
+    // values = ['name' => 'new name', 'description' => 'new desc']
+    
+    $values = $this->arrayToCastEncodeValue($values);
+    
+    $fillArray = [];
+    foreach ($values as $attribute => $value) {
+        if (in_array($attribute, $this->fillable)) {
+            array_push($fillArray, $this->getAttributeName($attribute) . " = ?");
+            $this->addValues($attribute, $value);
+        }
+    }
+    
+    $fillString = implode(', ', $fillArray);
+    
+    $this->setSql("UPDATE " . $this->getTableName() . " SET $fillString, " .
+        $this->getAttributeName($this->updatedAt) . "=Now()");
+    
+    foreach ($conditions as $field => $val) {
+        $this->setWhere("AND", $this->getAttributeName($field) . " = ?");
+        $this->addValues($field, $val);
+    }
+    
+    $result = $this->executeQuery();
+    $this->resetQuery();
+    return $result;
+}
+
     protected function updateMethod($values) {
 
         $values = $this->arrayToCastEncodeValue($values);
