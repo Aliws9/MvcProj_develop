@@ -8,7 +8,6 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-red-100: oklch(93.6% 0.032 17.717);
-    --color-red-200: oklch(88.5% 0.062 18.334);
     --color-red-500: oklch(63.7% 0.237 25.331);
     --color-yellow-500: oklch(79.5% 0.184 86.047);
     --color-green-100: oklch(96.2% 0.044 156.743);
@@ -6876,12 +6875,6 @@
   .h-100 {
     height: calc(var(--spacing) * 100);
   }
-  .h-\[20px\] {
-    height: 20px;
-  }
-  .h-\[70px\] {
-    height: 70px;
-  }
   .h-\[100vh\] {
     height: 100vh;
   }
@@ -6899,9 +6892,6 @@
   }
   .\!max-h-\[100\%\] {
     max-height: 100% !important;
-  }
-  .max-h-36 {
-    max-height: calc(var(--spacing) * 36);
   }
   .btn-wide {
     width: 100%;
@@ -9155,9 +9145,6 @@
   .bg-red-100 {
     background-color: var(--color-red-100);
   }
-  .bg-red-200 {
-    background-color: var(--color-red-200);
-  }
   .bg-secondary {
     background-color: var(--color-secondary);
   }
@@ -11113,6 +11100,12 @@
     @media (width >= 48rem) {
       font-size: var(--text-3xl);
       line-height: var(--tw-leading, var(--text-3xl--line-height));
+    }
+  }
+  .md\:text-lg {
+    @media (width >= 48rem) {
+      font-size: var(--text-lg);
+      line-height: var(--tw-leading, var(--text-lg--line-height));
     }
   }
   .md\:before\:\!border-t-4 {
@@ -52635,6 +52628,482 @@
       border-color: color-mix(in oklab,var(--color-error-content)90%,#0000);
     }
   }
+}
+.flatpickr-calendar {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  max-width: calc(var(--spacing) * 72);
+  touch-action: manipulation;
+  flex-direction: row;
+  gap: calc(var(--spacing) * 1.5);
+  overflow: hidden;
+  border-radius: var(--radius-box);
+  border-color: transparent;
+  background-color: var(--color-base-100);
+  --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  --tw-shadow-color: color-mix(in oklab, color-mix(in oklab, var(--color-base-300) 20%, transparent) var(--tw-shadow-alpha), transparent);
+  &.hasWeeks {
+    max-width: 21rem;
+  }
+  &::after, &::before {
+    content: none;
+  }
+}
+.flatpickr-current-month {
+  position: absolute;
+  inset-inline-start: calc(var(--spacing) * 4);
+  display: flex;
+  width: auto;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing) * 1);
+  padding-top: calc(var(--spacing) * 0);
+  font-size: var(--text-base);
+  line-height: var(--tw-leading, var(--text-base--line-height));
+  --tw-font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-base-content);
+  &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+    inset-inline-start: auto;
+  }
+  &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+    inset-inline-end: calc(var(--spacing) * 4);
+  }
+  .flatpickr-monthDropdown-months, input.cur-year {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    border-style: var(--tw-border-style);
+    border-width: 0px;
+    vertical-align: middle;
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+    --tw-outline-style: none;
+    outline-style: none;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    color: inherit;
+  }
+  span.cur-month {
+    margin: calc(var(--spacing) * 0);
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+    &:hover {
+      @media (hover: hover) {
+        background-color: transparent;
+      }
+    }
+  }
+  .numInputWrapper {
+    display: inline-block;
+    width: 6ch;
+    &:hover {
+      @media (hover: hover) {
+        background-color: transparent;
+      }
+    }
+  }
+  .flatpickr-monthDropdown-months {
+    position: relative;
+    margin-top: -1px;
+    cursor: pointer;
+    background-color: var(--color-base-100) !important;
+    padding: calc(var(--spacing) * 0);
+  }
+  input.cur-year {
+    margin: calc(var(--spacing) * 0);
+    height: calc(var(--spacing) * 5);
+    cursor: default;
+    padding-inline-start: calc(var(--spacing) * 1);
+    &:focus {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+    &[disabled], &[disabled]:hover {
+      pointer-events: none;
+      background-color: transparent;
+    }
+  }
+}
+.flatpickr-months {
+  .flatpickr-month {
+    position: relative;
+    display: flex;
+    height: calc(var(--spacing) * 15);
+    align-items: center;
+    overflow: hidden;
+    border-top-left-radius: var(--radius-box);
+    border-top-right-radius: var(--radius-box);
+    padding-inline: calc(var(--spacing) * 4);
+    text-align: center;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .flatpickr-prev-month, .flatpickr-next-month {
+    position: absolute;
+    top: calc(var(--spacing) * 4);
+    display: flex;
+    width: calc(var(--spacing) * 7);
+    height: calc(var(--spacing) * 7);
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(infinity * 1px);
+    background-color: var(--color-neutral);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-neutral) 10%, transparent);
+    }
+    padding: calc(var(--spacing) * 0);
+    color: var(--color-base-content);
+    text-decoration-line: none;
+    &:hover {
+      @media (hover: hover) {
+        fill: var(--color-base-content);
+        @supports (color: color-mix(in lab, red, red)) {
+          fill: color-mix(in oklab, var(--color-base-content) 90%, transparent);
+        }
+      }
+    }
+    &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+      rotate: 180deg;
+    }
+    svg {
+      width: calc(var(--spacing) * 3);
+      height: calc(var(--spacing) * 3);
+      fill: var(--color-base-content);
+      @supports (color: color-mix(in lab, red, red)) {
+        fill: color-mix(in oklab, var(--color-base-content) 90%, transparent);
+      }
+      vertical-align: middle;
+      color: var(--color-base-content);
+    }
+  }
+  .flatpickr-prev-month:hover svg, .flatpickr-next-month:hover svg {
+    fill: var(--color-base-content);
+    @supports (color: color-mix(in lab, red, red)) {
+      fill: color-mix(in oklab, var(--color-base-content) 90%, transparent);
+    }
+  }
+  .flatpickr-prev-month {
+    &.flatpickr-prev-month {
+      inset-inline-start: auto;
+      inset-inline-end: 50px;
+      &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+        inset-inline-start: calc(var(--spacing) * 14);
+      }
+      &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+        inset-inline-end: auto;
+      }
+      &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+        --tw-skew-x: skewX(calc(1deg * -1));
+        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+      }
+    }
+  }
+  .flatpickr-next-month {
+    &.flatpickr-prev-month {
+      inset-inline-start: calc(var(--spacing) * 0);
+      inset-inline-end: calc(var(--spacing) * 0);
+    }
+    &.flatpickr-next-month {
+      inset-inline-end: calc(var(--spacing) * 4);
+      &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+        inset-inline-start: calc(var(--spacing) * 4);
+      }
+      &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+        inset-inline-end: auto;
+      }
+      &:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
+        --tw-skew-x: skewX(calc(1deg * -1));
+        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+      }
+    }
+  }
+}
+.flatpickr-weekdays {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  overflow: hidden;
+  padding-inline: calc(var(--spacing) * 3);
+  text-align: center;
+}
+.flatpickr-weekdaycontainer {
+  display: flex;
+  width: 100%;
+}
+span.flatpickr-weekday, .flatpickr-weekwrapper .flatpickr-weekday {
+  margin: calc(var(--spacing) * 0);
+  display: block;
+  cursor: default;
+  text-align: center;
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  --tw-font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-base-content);
+}
+.flatpickr-days {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: calc(var(--spacing) * 72);
+  flex-wrap: wrap;
+  overflow: hidden;
+  padding-inline: calc(var(--spacing) * 2.5);
+  padding-block: calc(var(--spacing) * 2);
+  &:focus {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+  .flatpickr-calendar.hasTime & {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 0px;
+  }
+  & .dayContainer {
+    display: flex;
+    max-width: 100%;
+    min-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: calc(var(--spacing) * 0.5);
+    padding: calc(var(--spacing) * 0);
+    opacity: 100%;
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+}
+.flatpickr-day {
+  position: relative;
+  margin: calc(var(--spacing) * 0);
+  display: flex;
+  width: calc(var(--spacing) * 9.5);
+  height: calc(var(--spacing) * 9.5);
+  max-width: calc(var(--spacing) * 9.5);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: var(--text-base);
+  line-height: var(--tw-leading, var(--text-base--line-height));
+  color: var(--color-base-content);
+  &.today:not(.selected) {
+    border-color: transparent;
+    background-color: var(--color-primary);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
+    }
+    color: var(--color-primary);
+  }
+  &.inRange, &.prevMonthDay.inRange, &.nextMonthDay.inRange, &.today.inRange, &.prevMonthDay.today.inRange, &.nextMonthDay.today.inRange, &:hover, &.prevMonthDay:hover, &.nextMonthDay:hover, &:focus, &.prevMonthDay:focus, &.nextMonthDay:focus {
+    cursor: pointer;
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+  &:hover:not(.selected, .today, .inRange, .endRange), &:focus:not(.selected, .today, .inRange, .endRange), &.prevMonthDay:hover:not(.selected, .today, .inRange, .endRange), &.nextMonthDay:hover:not(.selected, .today, .inRange, .endRange), &.prevMonthDay:focus:not(.selected, .today, .inRange, .endRange), &.nextMonthDay:focus:not(.selected, .today, .inRange, .endRange) {
+    border-color: transparent;
+    background-color: var(--color-neutral);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-neutral) 10%, transparent);
+    }
+  }
+  &.selected, &.startRange, &.endRange, &.selected.inRange, &.startRange.inRange, &.endRange.inRange, &.selected:focus, &.startRange:focus, &.endRange:focus, &.selected:hover, &.startRange:hover, &.endRange:hover, &.selected.prevMonthDay, &.startRange.prevMonthDay, &.endRange.prevMonthDay, &.selected.nextMonthDay, &.startRange.nextMonthDay, &.endRange.nextMonthDay {
+    border-color: transparent;
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    --tw-shadow-color: var(--color-base-300);
+    @supports (color: color-mix(in lab, red, red)) {
+      --tw-shadow-color: color-mix(in oklab, color-mix(in oklab, var(--color-base-300) 20%, transparent) var(--tw-shadow-alpha), transparent);
+    }
+  }
+  &.inRange:not(.startRange):not(.endRange) {
+    border-radius: 0;
+    border-color: transparent;
+  }
+  z &.disabled, &.disabled:hover {
+    pointer-events: none;
+    border-color: transparent;
+    background-color: transparent;
+    color: var(--color-base-content);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+    }
+  }
+  &.prevMonthDay, &.nextMonthDay, &.notAllowed, &.notAllowed.prevMonthDay, &.notAllowed.nextMonthDay {
+    border-color: transparent;
+    background-color: transparent;
+  }
+  &.week.selected {
+    border-radius: 0;
+  }
+  &.selected.startRange, &.startRange.startRange, &.endRange.startRange {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+  &.selected.endRange, &.startRange.endRange, &.endRange.endRange {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+  &.flatpickr-disabled, &.flatpickr-disabled:hover, &.prevMonthDay, &.nextMonthDay, &.notAllowed, &.notAllowed.prevMonthDay, &.notAllowed.nextMonthDay {
+    color: var(--color-base-content);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+    }
+  }
+}
+.flatpickr-day.inRange, .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.inRange:hover {
+  background-color: var(--color-primary);
+  @supports (color: color-mix(in lab, red, red)) {
+    background-color: color-mix(in oklab, var(--color-primary) 20%, transparent);
+  }
+  color: var(--color-primary);
+  box-shadow: unset;
+}
+.flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)), .flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)), .flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
+  box-shadow: unset;
+}
+.flatpickr-weekwrapper {
+  & span.flatpickr-day, & span.flatpickr-day:hover {
+    margin: calc(var(--spacing) * 0);
+    display: flex;
+    width: calc(var(--spacing) * 9.5);
+    height: calc(var(--spacing) * 9.5);
+    max-width: calc(var(--spacing) * 9.5);
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+    color: var(--color-base-content);
+    &:not(:last-child) {
+      margin-bottom: calc(var(--spacing) * 0.5);
+    }
+  }
+  & .flatpickr-weeks {
+    padding-block: calc(var(--spacing) * 2);
+    padding-inline-start: calc(var(--spacing) * 2.5);
+    padding-inline-end: calc(var(--spacing) * 0);
+    --tw-shadow: 0 0 #0000;
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  & .flatpickr-weekday {
+    padding-inline-start: calc(var(--spacing) * 3);
+    line-height: 28px;
+  }
+}
+.flatpickr-calendar .flatpickr-innerContainer:has(> .flatpickr-weekwrapper) {
+  & > .flatpickr-rContainer .flatpickr-weekdays, & > .flatpickr-rContainer .flatpickr-days {
+    padding-inline-start: calc(var(--spacing) * 0);
+  }
+}
+.flatpickr-calendar.hasTime .flatpickr-time {
+  height: 100%;
+  border-color: var(--color-base-content);
+  @supports (color: color-mix(in lab, red, red)) {
+    border-color: color-mix(in oklab, var(--color-base-content) 10%, transparent);
+  }
+  padding-inline: calc(var(--spacing) * 4.5);
+  padding-block: calc(var(--spacing) * 3);
+}
+.flatpickr-time {
+  max-height: unset;
+  gap: calc(var(--spacing) * 2);
+  --tw-leading: 30px;
+  line-height: 30px;
+  & .numInputWrapper {
+    border-radius: var(--radius-field);
+    height: inherit;
+  }
+  & input:hover, & .flatpickr-am-pm:hover, & input:focus, & .flatpickr-am-pm:focus {
+    background: unset;
+  }
+  & .numInputWrapper span.arrowUp {
+    top: 10%;
+  }
+  & .flatpickr-time-separator {
+    color: var(--color-base-content);
+  }
+}
+.flatpickr-time:after {
+  content: none;
+}
+.flatpickr-calendar.hasTime.noCalendar > .flatpickr-time {
+  border-color: transparent;
+}
+.flatpickr-time input.flatpickr-hour {
+  height: auto;
+  border-radius: var(--radius-field);
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+  --tw-border-style: solid;
+  border-style: solid;
+  border-color: color-mix(in oklab, var(--color-base-content) 10%, transparent);
+  font-size: var(--text-base);
+  line-height: var(--tw-leading, var(--text-base--line-height));
+  --tw-leading: inherit;
+  line-height: inherit;
+  --tw-font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-base-content);
+}
+.flatpickr-time input.flatpickr-minute {
+  height: auto;
+  border-radius: var(--radius-field);
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+  --tw-border-style: solid;
+  border-style: solid;
+  border-color: color-mix(in oklab, var(--color-base-content) 10%, transparent);
+  font-size: var(--text-base);
+  line-height: var(--tw-leading, var(--text-base--line-height));
+  --tw-leading: inherit;
+  line-height: inherit;
+  color: var(--color-base-content);
+}
+.flatpickr-time .flatpickr-am-pm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-field);
+  border-style: var(--tw-border-style);
+  border-width: 1px;
+  border-color: color-mix(in oklab, var(--color-base-content) 10%, transparent);
+  font-size: var(--text-base);
+  line-height: var(--tw-leading, var(--text-base--line-height));
+  --tw-leading: inherit;
+  line-height: inherit;
+  color: var(--color-base-content);
+}
+.numInputWrapper:hover, .numInputWrapper span:hover {
+  background: unset;
+}
+.flatpickr-current-month .numInputWrapper span.arrowUp:after, .flatpickr-time .numInputWrapper span.arrowUp:after {
+  border-bottom-color: var(--color-base-content);
+  @supports (color: color-mix(in lab, red, red)) {
+    border-bottom-color: color-mix(in oklab, var(--color-base-content) 80%, transparent);
+  }
+}
+.flatpickr-current-month .numInputWrapper span.arrowDown:after, .flatpickr-time .numInputWrapper span.arrowDown:after {
+  border-top-color: var(--color-base-content);
+  @supports (color: color-mix(in lab, red, red)) {
+    border-top-color: color-mix(in oklab, var(--color-base-content) 80%, transparent);
+  }
+}
+.numInputWrapper span {
+  border-style: var(--tw-border-style);
+  border-width: 0px;
+}
+.flatpickr-calendar:not(.inline):not(.open) {
+  display: none;
 }
 @layer base {
   :where(:root),:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {
