@@ -307,6 +307,7 @@
                  data-format="${item.format}"
                  data-size="${item.size}"
                  data-width="${item.width || ''}"
+                 data-alt="${item.alt || ''}"
                  data-height="${item.height || ''}">
                 ${inner}
             </div>
@@ -371,20 +372,53 @@ $(document).ready(function() {
     function showSidebar(item) {
         const fmt = (item.format || '').toLowerCase();
         const isImg = CONFIG.imageExts.includes(fmt);
+        const isVid = CONFIG.videoExts.includes(fmt);
+        const isAud = CONFIG.audioExts.includes(fmt);
         const sizeText = item.size > 1048576
             ? (item.size / 1048576).toFixed(2) + ' MB'
             : (item.size / 1024).toFixed(1) + ' KB';
 
         let preview = '';
+
+        if(isVid){
+            preview = `<video controls class="w-full mb-1 md:mb-3">
+            <!-- منابع ویدیو در فرمت‌های مختلف برای پشتیبانی از مرورگرهای گوناگون -->
+            <source src="${item.url}" type="video/mp4">
+            <source src="${item.url}" type="video/mov">
+            <!-- متن جایگزین در صورت عدم پشتیبانی مرورگر -->
+            مرورگر شما از تگ ویدیو پشتیبانی نمی‌کند. لطفاً مرورگر خود را به‌روز کنید.
+        </video>`;
+        }
+
         if (isImg) {
-            preview = `<img src="${item.url}" class="w-full rounded-lg mb-3 object-cover max-h-36">`;
+            preview = `
+            <div style="width: 100%;       
+background-image: url('${item.url}');
+background-size: contain; 
+background-repeat: no-repeat;
+background-position: center;" class="h-[200px] md:h-[200px] mb-1 md:mb-3">
+            </div>
+            `;
+        }
+
+        if (isAud) {
+            preview = `
+            <audio controls preload="auto" class="w-full">
+            <!-- منابع صوتی در فرمت‌های مختلف برای پشتیبانی از همه مرورگرها -->
+            <source src="${item.url}" type="audio/mpeg">
+            <source src="${item.url}" type="audio/mp3">
+            <source src="${item.url}" type="audio/ogg">
+            <source src="${item.url}" type="audio/wav">
+            متن جایگزین - مرورگر شما از تگ audio پشتیبانی نمی‌کند.
+        </audio>
+            `;
         }
 
         // قابل تغیر
         let alt = '';
         if(item.format == 'png' || item.format == 'jpg'){
             alt = `<form class="auto-form">
-            <input type="text" name="value" class="input input-xs md:input-sm alt_image" placeholder="متن جایگزین...">
+            <input type="text" name="value" class="input input-xs md:input-sm alt_image" value="${item.alt}" placeholder="متن جایگزین...">
             <input type="hidden" name="media_id" value="${item.id}">
             <input type="hidden" name="key" value="alt">
             </form>`;

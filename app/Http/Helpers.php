@@ -48,7 +48,7 @@ function buildCategoryTreeEdit($pid , $mid , array $categories, ?int $parentId =
             if ($category->parent_id === $parentId)
             {
                 $select = old('parent_id') == $category->id ? 'selected' : '';
-                $html .= "<option \"{$select}\ class='text-xs md:text-md' value=\"{$category->id}\">{$prefix}{$category->name}</option>";
+                $html .= "<option \"{$select}\ class='text-xs md:text-lg' value=\"{$category->id}\">{$prefix}{$category->name}</option>";
 
                 $html .= buildCategoryTreeEdit(
                     $pid,

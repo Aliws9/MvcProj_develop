@@ -148,7 +148,20 @@ class MediaController extends AdminController
         {
         $medias = Media::all();
         $list = [];
+
         foreach ($medias as $media) {
+            $altValue = '';
+
+            // get() آرایه برمیگردونه، نه null — باید count چک بشه
+            $altResults = MediaMeta::where('media_id', $media->id)
+                                   ->where('key', 'alt')
+                                   ->get();
+
+            if (!empty($altResults) && count($altResults) > 0) {
+                // آرایه‌ست، پس باید index بزنیم
+                $altValue = $altResults[0]->value ?? '';
+                }
+
             $list[] = [
                 'id'        => $media->id,
                 'file_name' => $media->file_name,
@@ -157,8 +170,10 @@ class MediaController extends AdminController
                 'size'      => $media->size,
                 'width'     => $media->width,
                 'height'    => $media->height,
+                'alt'       => $altValue,
             ];
             }
+
         header('Content-Type: application/json');
         echo json_encode($list);
         exit;
