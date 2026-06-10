@@ -158,7 +158,7 @@
     $pr = 'اصلی';
     foreach ($posts as $post)
     {
-        if ($post->cat_id != NULL)
+        if ($post->cat_id != 0)
         {
             $pr = $post->category()->name;
         }else{
@@ -176,7 +176,9 @@
                                             <label for="table-filter-1" class="sr-only">Checkbox</label>
                                         </div>
                                     </td>
-                                    <td><?= $post->image ?></td>
+                                    <td><div class="w-20">
+                                        <img class="w-full rounded" src="<?= $post->image ?>">
+                                    </div></td>
                                     <td><?= $post->title ?></td>
 
                                     <td class="!max-w-[200px] !break-words !whitespace-normal !min-w-[200px]">

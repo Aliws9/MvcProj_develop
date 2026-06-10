@@ -64,23 +64,41 @@ trait HasRelation
      }
 
 
-     public function getHasManyRelation($table, $foreignKey, $otherKey, $otherKeyValue) {
+    //  public function getHasManyRelation($table, $foreignKey, $otherKey, $otherKeyValue) {
 
-          // a = users
-          // b = phone
+    //       // a = users
+    //       // b = phone
 
-          $this->setSql("SELECT `b`.* FROM {$table} AS `a` JOIN " . $this->getTableName() . " AS `b` on 
-          `a`.`{$otherKey}` = `b`.`{$foreignKey}` ");
+    //       $this->setSql("SELECT `b`.* FROM {$table} AS `a` JOIN " . $this->getTableName() . " AS `b` on 
+    //       `a`.`{$otherKey}` = `b`.`{$foreignKey}` ");
 
-          $this->table = 'b';
+    //       $this->table = 'b';
 
-          $this->setWhere('AND', "`a`.`$otherKey` = ? ");
+    //       $this->setWhere('AND', "`a`.`$otherKey` = ? ");
 
-          $this->addValues($otherKey, $otherKeyValue);
+    //       $this->addValues($otherKey, $otherKeyValue);
 
-          return $this;
+    //       return $this;
 
-     }
+    //  }
+
+    public function getHasManyRelation($table, $foreignKey, $otherKey, $otherKeyValue) {
+    $originalTable = $this->table; // ← ذخیره table اصلی
+
+    $this->setSql("SELECT `b`.* FROM {$table} AS `a` JOIN " . $this->getTableName() . " AS `b` on 
+    `a`.`{$otherKey}` = `b`.`{$foreignKey}` ");
+
+    $this->table = 'b';
+
+    $this->setWhere('AND', "`a`.`$otherKey` = ? ");
+    $this->addValues($otherKey, $otherKeyValue);
+
+    // table رو برمیگردونیم
+    // چون این متد فقط query میسازه و get() بعدا صدا میشه
+    // باید table رو در getMethod هندل کنیم
+    
+    return $this;
+}
 
 
 
