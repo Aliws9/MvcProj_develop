@@ -5,6 +5,11 @@ use App\Http\Requests\Admin\MediaMetaRequest;
 use App\Http\Requests\Admin\MediaRequest;
 use App\Media;
 use App\MediaMeta;
+use System\Auth\Auth;
+use App\Http\Services\ImageUpload;
+
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class MediaController extends AdminController
     {
@@ -75,7 +80,7 @@ class MediaController extends AdminController
             }
 
         // ساخت مسیر آپلود
-        $datePath = date('Y/m');
+        $datePath = date('Y/m/d');
         $uploadDir = dirname(__DIR__, 4) . '/public/upload/' . $datePath;
 
         if (!is_dir($uploadDir)) {
@@ -84,19 +89,30 @@ class MediaController extends AdminController
 
         $originalName = pathinfo($file['name'], PATHINFO_FILENAME);
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-        $uniqueName = uniqid() . '_' . time() . '.' . $ext;
+        $uniqueName = date('Y_m_d_H_i_s_') . uniqid();
         $destination = $uploadDir . '/' . $uniqueName;
 
-        if (!move_uploaded_file($file['tmp_name'], $destination)) {
-            http_response_code(500);
-            exit;
-            }
+
 
         // اطلاعات تصویر
-        $width = $height = null;
-        if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
-            [$width, $height] = getimagesize($destination);
+        $width = 800;
+        $height = 499;
+
+
+        if (!in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+            if (!move_uploaded_file($file['tmp_name'], $destination)) {
+                http_response_code(500);
+                exit;
+                }
             }
+        else {
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($file['tmp_name'])->scale($width);
+            $height = $image->height();
+            $image->save($destination);
+            }
+
+
 
         $relativePath = 'upload/' . $datePath . '/' . $uniqueName;
         $fullUrl = asset($relativePath);
@@ -112,7 +128,7 @@ class MediaController extends AdminController
             'size'      => $file['size'],
             'width'     => $width,
             'height'    => $height,
-            'user_id'   => 1, // یا Auth::user()->id
+            'user_id'   => Auth::user()->id, // یا Auth::user()->id
         ]);
 
         // FilePond انتظار داره یه serverId برگرده (برای حذف بعداً)

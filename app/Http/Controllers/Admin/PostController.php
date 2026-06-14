@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Post;
 use App\Http\Requests\Admin\PostRequest;
 use System\Config\Config;
+use System\Auth\Auth;
 
 class PostController extends AdminController
     {
@@ -28,6 +28,9 @@ class PostController extends AdminController
         {
         $request = new PostRequest();
         $inputs = $request->all();
+        $inputs['user_id'] = Auth::user()->id;
+        $inputs['status'] = 0 ;
+
 
         if ($inputs['radio-3'] === 'publish_now') {
 
@@ -71,8 +74,16 @@ class PostController extends AdminController
         {
 
         }
-    public function edit()
+    public function edit($id)
         {
+            $post = Post::find($id);
+
+        $categories = Category::all();
+        
+
+        return view('admin.post.edit' , compact('post' , 'categories' ));
+
+
 
         }
     public function destroy()

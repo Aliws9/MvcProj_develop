@@ -181,9 +181,7 @@
                                         </div>
                                     </td>
                                     <td><?= $category->name ?></td>
-                                    <td><?php  //echo count(Category::find($category->id)->posts()->get()); 
-                                    echo $postCounts[$category->id] ?? 0;
-                                    ?></td>
+                                    <td></td>
 
                                     <td class="!max-w-[200px] !break-words !whitespace-normal !min-w-[200px]">
                                         <?= $category->description; ?>

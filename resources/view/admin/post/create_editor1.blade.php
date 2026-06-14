@@ -11,6 +11,11 @@
 
 @section('content')
 
+<?php
+var_dump(extension_loaded('gd')); 
+var_dump(extension_loaded('gd'));
+var_dump(extension_loaded('imagick'));
+?>
 
     <div class="form_cust w-full">
         <h1 class="text-lg md:text-2xl mb-5 font-semibold">مقاله جدید</h1>

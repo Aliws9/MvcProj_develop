@@ -168,6 +168,7 @@ trait HasQueryBuilder
           $stmt = $pdo_instance->prepare($query);
            
           sizeof($this->bindValues) > 0 ? $stmt->execute($this->bindValues) : $stmt->execute();
+        //   $this->table = '';
           return $stmt;
      }
 

@@ -10,18 +10,8 @@ class CategoryController extends AdminController
 
     public function index()
         {
-        // $categories = Category::all();
-        // return view('admin.category.index', compact('categories'));
-
         $categories = Category::all();
-
-        // تعداد پست‌ها رو اینجا حساب کن نه در view
-        $postCounts = [];
-        foreach ($categories as $category) {
-            $postCounts[$category->id] = count($category->posts()->get());
-            }
-
-        return view('admin.category.index', compact('categories', 'postCounts'));
+        return view('admin.category.index', compact('categories'));
         }
 
     public function create()
