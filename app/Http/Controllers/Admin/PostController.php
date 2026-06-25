@@ -29,7 +29,7 @@ class PostController extends AdminController
         $request = new PostRequest();
         $inputs = $request->all();
         $inputs['user_id'] = Auth::user()->id;
-        $inputs['status'] = 0 ;
+        $inputs['status'] = 0;
 
 
         if ($inputs['radio-3'] === 'publish_now') {
@@ -40,7 +40,7 @@ class PostController extends AdminController
         elseif ($inputs['radio-3'] === 'publish_date') {
             unset($inputs['radio-3']);
             // dd($inputs['published_at']);
-            
+
             require_once Config::get('app.BASE_DIR') . '/public/jdf/jdf.php';
 
             $jalali = $inputs['published_at'];
@@ -64,30 +64,43 @@ class PostController extends AdminController
             }
 
         if (empty($request->cat_id)) {
-            $inputs['cat_id'] = 0;
+            $inputs['cat_id'] = NULL;
             }
 
         Post::create($inputs);
         return redirect('admin/post');
         }
-    public function update()
+    public function update($id)
         {
+        $request = new PostRequest();
+        $inputs = $request->all();
 
+        $inputs['user_id'] = Auth::user()->id;
+        $inputs['status'] = 0;
+
+        if (empty($request->cat_id)) {
+            $inputs['cat_id'] = null;
+            }
+
+        Post::update($inputs);
+        return redirect('admin/post');
         }
+
     public function edit($id)
         {
-            $post = Post::find($id);
+        $post = Post::find($id);
 
         $categories = Category::all();
-        
 
-        return view('admin.post.edit' , compact('post' , 'categories' ));
+
+        return view('admin.post.edit', compact('post', 'categories'));
 
 
 
         }
-    public function destroy()
+    public function destroy($id)
         {
-
+        Post::delete($id);
+        return back();
         }
     }

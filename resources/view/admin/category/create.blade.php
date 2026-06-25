@@ -14,7 +14,8 @@
             border: 0 !important;
         }
     </style>
-    <?php $errorName = errorClass('name');
+    <?php 
+    $errorName = errorClass('name');
     $errorParent_id = errorClass('parent_id');
     $errorDescription = errorClass('description');
          ?>

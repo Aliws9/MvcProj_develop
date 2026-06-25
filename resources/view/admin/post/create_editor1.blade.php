@@ -11,13 +11,66 @@
 
 @section('content')
 
-<?php
-var_dump(extension_loaded('gd')); 
-var_dump(extension_loaded('gd'));
-var_dump(extension_loaded('imagick'));
-?>
-
     <div class="form_cust w-full">
+
+                <div class="w-full md:w-3/4 m-auto">
+<!-- error name alert -->
+<?php
+$errorTitle = errorClass('title');
+$errorBody = errorClass('body');
+$errorImage = errorClass('image');
+$errorDescription = errorClass('description');
+?>
+<!-- title -->
+                <div class="<?= $errorTitle['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorTitle['message_error'] ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+
+                <!-- body -->
+
+                <div class="<?= $errorBody['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorBody['message_error']; ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+
+                <!-- description -->
+
+                <div class="<?= $errorDescription['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorDescription['message_error']; ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+
+                <!-- image -->
+
+                <div class="<?= $errorImage['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorImage['message_error']; ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+        </div>
+
+        <!-- form -->
+
         <h1 class="text-lg md:text-2xl mb-5 font-semibold">مقاله جدید</h1>
 
         <form method="POST" action="<?= route('admin.post.store') ?>" enctype="multipart/form-data">

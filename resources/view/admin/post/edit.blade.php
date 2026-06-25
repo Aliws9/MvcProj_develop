@@ -13,9 +13,80 @@
 
 
     <div class="form_cust w-full">
-        <h1 class="text-lg md:text-2xl mb-5 font-semibold">ویرایش مقاله</h1>
 
-        <form method="POST" action="<?= route('admin.post.update' , [$post->id]) ?>" enctype="multipart/form-data">
+                        <div class="w-full md:w-3/4 m-auto">
+<!-- error name alert -->
+<?php
+$errorTitle = errorClass('title');
+$errorBody = errorClass('body');
+$errorImage = errorClass('image');
+$errorCategory = errorClass('cat_id');
+$errorDescription = errorClass('description');
+?>
+<!-- title -->
+                <div class="<?= $errorTitle['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorTitle['message_error'] ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+
+                <!-- category -->
+                <div class="<?= $errorCategory['class_error'] ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorCategory['message_error'] ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+
+                <!-- body -->
+
+                <div class="<?= $errorBody['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorBody['message_error']; ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+
+                <!-- description -->
+
+                <div class="<?= $errorDescription['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorDescription['message_error']; ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+
+                <!-- image -->
+
+                <div class="<?= $errorImage['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                    role="alert" id="dismiss-alert-error-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                    <p><?= $errorImage['message_error']; ?></p>
+                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                        aria-label="Close Button">
+                        <span class="icon-[tabler--x] size-5"></span>
+                    </button>
+                </div>
+        </div>
+
+
+        <h1 class="text-lg md:text-2xl mb-5 font-semibold">ویرایش مقاله</h1>
+        <form method="post" action="<?= route('admin.post.update' , [$post->id]) ?>" enctype="multipart/form-data">
+                            <input type="hidden" name="_method" value="put">
+                            <input type="hidden" name="id" value="<?= $post->id ?>">
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
@@ -61,7 +132,7 @@
                     <div class="bg-white rounded-lg shadow-sm p-4">
                         <h3 class="font-semibold mb-3">دسته‌بندی</h3>
                         <select name="cat_id" class="select">
-                            <option selected value="<?= $post->category()->id; ?>" class="text-xs lg:text-md"><?= $post->category()->name; ?></option>
+                            <option selected value="<?= !isset($post->category()->id) ? null : $post->category()->id; ?>" class="text-xs lg:text-md"><?= !isset($post->category()->id) ? 'دسته بندی والد' : $post->category()->name; ?></option>
                             <?php echo buildCategoryTree($categories); ?>
 
                         </select>
