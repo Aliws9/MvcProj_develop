@@ -106,7 +106,7 @@
                 <div class="inline-block min-w-full align-middle">
                     <div class="overflow-hidden">
                         <table class="table table-striped">
-                            <thead>
+                            <thead class="bg-white">
                                 <tr class="border-0 bg-base-300/20 *:first:rounded-s-md *:last:rounded-e-md">
                                     <th scope="col" class="--exclude-from-ordering w-3.5 pe-0">
                                         <div class="flex h-5 items-center">
@@ -117,7 +117,7 @@
                                     </th>
                                     <th scope="col" class="group w-fit">
                                         <div class="flex items-center justify-between">
-                                            نام دسته بندی
+                                            کاربر
                                             <span
                                                 class="icon-[tabler--chevron-up] datatable-ordering-asc:block hidden"></span>
                                             <span
@@ -127,7 +127,7 @@
                                     
                                     <th scope="col" class="group w-fit">
                                         <div class="flex items-center justify-between">
-                                            توضیحات
+                                            کامنت
                                             <span
                                                 class="icon-[tabler--chevron-up] datatable-ordering-asc:block hidden"></span>
                                             <span
@@ -136,7 +136,7 @@
                                     </th>
                                     <th scope="col" class="group w-fit">
                                         <div class="flex items-center justify-between">
-                                            دسته والد
+                                            وضعیت
                                             <span
                                                 class="icon-[tabler--chevron-up] datatable-ordering-asc:block hidden"></span>
                                             <span
@@ -158,7 +158,18 @@
                                             <label for="table-filter-1" class="sr-only">Checkbox</label>
                                         </div>
                                     </td>
-                                    <td>تست 1</td>
+                                     <td>
+            <div class="flex items-center gap-3">
+              <div class="avatar">
+                <div class="bg-base-content/10 h-10 w-10 rounded-full">
+                  <img src="https://cdn.flyonui.com/fy-assets/components/table/product-2.png" alt="product image" />
+                </div>
+              </div>
+              <div>
+                <div class="font-medium">iPhone 14 Pro</div>
+              </div>
+            </div>
+          </td>
                                     <td></td>
 
                                     <td class="!max-w-[200px] !break-words !whitespace-normal !min-w-[200px]">
