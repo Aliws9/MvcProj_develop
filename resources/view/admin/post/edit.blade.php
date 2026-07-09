@@ -14,79 +14,79 @@
 
     <div class="form_cust w-full">
 
-                        <div class="w-full md:w-3/4 m-auto">
-<!-- error name alert -->
-<?php
-$errorTitle = errorClass('title');
-$errorBody = errorClass('body');
-$errorImage = errorClass('image');
-$errorCategory = errorClass('cat_id');
-$errorDescription = errorClass('description');
-?>
-<!-- title -->
-                <div class="<?= $errorTitle['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
-                    role="alert" id="dismiss-alert-error-name">
-                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
-                    <p><?= $errorTitle['message_error'] ?></p>
-                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
-                        aria-label="Close Button">
-                        <span class="icon-[tabler--x] size-5"></span>
-                    </button>
-                </div>
+        <div class="w-full md:w-3/4 m-auto">
+            <!-- error name alert -->
+            <?php
+    $errorTitle = errorClass('title');
+    $errorBody = errorClass('body');
+    $errorImage = errorClass('image');
+    $errorCategory = errorClass('cat_id');
+    $errorDescription = errorClass('description');
+    ?>
+            <!-- title -->
+            <div class="<?= $errorTitle['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                role="alert" id="dismiss-alert-error-name">
+                <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                <p><?= $errorTitle['message_error'] ?></p>
+                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                    aria-label="Close Button">
+                    <span class="icon-[tabler--x] size-5"></span>
+                </button>
+            </div>
 
-                <!-- category -->
-                <div class="<?= $errorCategory['class_error'] ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
-                    role="alert" id="dismiss-alert-error-name">
-                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
-                    <p><?= $errorCategory['message_error'] ?></p>
-                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
-                        aria-label="Close Button">
-                        <span class="icon-[tabler--x] size-5"></span>
-                    </button>
-                </div>
+            <!-- category -->
+            <div class="<?= $errorCategory['class_error'] ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                role="alert" id="dismiss-alert-error-name">
+                <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                <p><?= $errorCategory['message_error'] ?></p>
+                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                    aria-label="Close Button">
+                    <span class="icon-[tabler--x] size-5"></span>
+                </button>
+            </div>
 
-                <!-- body -->
+            <!-- body -->
 
-                <div class="<?= $errorBody['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
-                    role="alert" id="dismiss-alert-error-name">
-                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
-                    <p><?= $errorBody['message_error']; ?></p>
-                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
-                        aria-label="Close Button">
-                        <span class="icon-[tabler--x] size-5"></span>
-                    </button>
-                </div>
+            <div class="<?= $errorBody['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                role="alert" id="dismiss-alert-error-name">
+                <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                <p><?= $errorBody['message_error']; ?></p>
+                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                    aria-label="Close Button">
+                    <span class="icon-[tabler--x] size-5"></span>
+                </button>
+            </div>
 
-                <!-- description -->
+            <!-- description -->
 
-                <div class="<?= $errorDescription['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
-                    role="alert" id="dismiss-alert-error-name">
-                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
-                    <p><?= $errorDescription['message_error']; ?></p>
-                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
-                        aria-label="Close Button">
-                        <span class="icon-[tabler--x] size-5"></span>
-                    </button>
-                </div>
+            <div class="<?= $errorDescription['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                role="alert" id="dismiss-alert-error-name">
+                <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                <p><?= $errorDescription['message_error']; ?></p>
+                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                    aria-label="Close Button">
+                    <span class="icon-[tabler--x] size-5"></span>
+                </button>
+            </div>
 
-                <!-- image -->
+            <!-- image -->
 
-                <div class="<?= $errorImage['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
-                    role="alert" id="dismiss-alert-error-name">
-                    <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
-                    <p><?= $errorImage['message_error']; ?></p>
-                    <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
-                        aria-label="Close Button">
-                        <span class="icon-[tabler--x] size-5"></span>
-                    </button>
-                </div>
+            <div class="<?= $errorImage['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                role="alert" id="dismiss-alert-error-name">
+                <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                <p><?= $errorImage['message_error']; ?></p>
+                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                    aria-label="Close Button">
+                    <span class="icon-[tabler--x] size-5"></span>
+                </button>
+            </div>
         </div>
 
 
         <h1 class="text-lg md:text-2xl mb-5 font-semibold">ویرایش مقاله</h1>
-        <form method="post" action="<?= route('admin.post.update' , [$post->id]) ?>" enctype="multipart/form-data">
-                            <input type="hidden" name="_method" value="put">
-                            <input type="hidden" name="id" value="<?= $post->id ?>">
+        <form method="post" action="<?= route('admin.post.update', [$post->id]) ?>" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="id" value="<?= $post->id ?>">
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
@@ -103,15 +103,16 @@ $errorDescription = errorClass('description');
                     <!-- ویرایشگر TinyMCE -->
                     <div class="bg-white rounded-lg overflow-hidden shadow-sm h-full min-h-[350px] md:min-h-[500px]">
                         <textarea id="mm-tinymce-editor" name="body">
-                                                                <?= $post->body ?>
-                                                            </textarea>
+                                                                    <?= $post->body ?>
+                                                                </textarea>
                     </div>
 
                     <div>
-                    <label>توضیحات</label>
-                    <textarea class="input !h-[100px] md:!h-[200px]" name="description"><?= $post->description ?></textarea>
-                    <!-- <label>کلمات کلیدی</label>
-                    <input type="text" class=""> -->
+                        <label>توضیحات</label>
+                        <textarea class="input !h-[100px] md:!h-[200px]"
+                            name="description"><?= $post->description ?></textarea>
+                        <!-- <label>کلمات کلیدی</label>
+                        <input type="text" class=""> -->
                     </div>
 
                 </div>
@@ -132,7 +133,9 @@ $errorDescription = errorClass('description');
                     <div class="bg-white rounded-lg shadow-sm p-4">
                         <h3 class="font-semibold mb-3">دسته‌بندی</h3>
                         <select name="cat_id" class="select">
-                            <option selected value="<?= !isset($post->category()->id) ? null : $post->category()->id; ?>" class="text-xs lg:text-md"><?= !isset($post->category()->id) ? 'دسته بندی والد' : $post->category()->name; ?></option>
+                            <option selected value="<?= !isset($post->category()->id) ? null : $post->category()->id; ?>"
+                                class="text-xs lg:text-md">
+                                <?= !isset($post->category()->id) ? 'دسته بندی والد' : $post->category()->name; ?></option>
                             <?php echo buildCategoryTree($categories); ?>
 
                         </select>
@@ -152,16 +155,16 @@ $errorDescription = errorClass('description');
                             </button>
 
                             <div class="mm-preview mt-2">
-                                
+
                                 <div class="relative inline-block">
                                     <img src="<?= $post->image ?>"
                                         class="w-full h-32 object-cover rounded-lg border-2 border-primary">
                                     <button type="button" class="mm-clear-btn absolute -top-2 -right-2
-                                                                                   btn btn-circle btn-xs btn-error">
+                                                                                       btn btn-circle btn-xs btn-error">
                                         <span class="icon-[tabler--x] size-3"></span>
                                     </button>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -267,15 +270,15 @@ $errorDescription = errorClass('description');
                     });
                 },
                 content_style: `
-                                                    body {
-                                                        font-family: vazir, Arial, sans-serif;
-                                                        direction: rtl;
-                                                        text-align: right;
-                                                        font-size: 14px;
-                                                        line-height: 1.8;
-                                                        padding: 16px;
-                                                    }
-                                                `
+                                                        body {
+                                                            font-family: vazir, Arial, sans-serif;
+                                                            direction: rtl;
+                                                            text-align: right;
+                                                            font-size: 14px;
+                                                            line-height: 1.8;
+                                                            padding: 16px;
+                                                        }
+                                                    `
             });
 
         });

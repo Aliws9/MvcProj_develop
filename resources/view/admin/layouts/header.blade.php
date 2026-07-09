@@ -235,6 +235,12 @@ else
                         </li>
                         <li>
                             <a href="#">
+                                <span class="icon-[hugeicons--connect] size-5"></span>
+                                تنظیمات اتصال
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
                                 <span class="icon-[fluent-mdl2--site-scan] size-5"></span>
                                 هویت سایت
                             </a>

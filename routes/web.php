@@ -41,3 +41,19 @@ Route::put('/admin/media/update/{id}' , 'Admin\MediaController@update' , 'admin.
 Route::put('/admin/media/updateAlt/{id}' , 'Admin\MediaController@updateAlt' , 'admin.media.updateAlt');
 Route::delete('/admin/media/delete/{id}' , 'Admin\MediaController@destroy' , 'admin.media.destroy');
 Route::get('/admin/media/list', 'Admin\MediaController@getList', 'admin.media.list');
+// Users routs
+Route::get('/admin/users' , 'Admin\UsersController@index' , 'admin.users.index');
+Route::get('/admin/users/create' , 'Admin\UsersController@create' , 'admin.users.create');
+Route::post('/admin/users/store' , 'Admin\UsersController@store' , 'admin.users.store');
+Route::get('/admin/users/edit/{id}' , 'Admin\UsersController@edit' , 'admin.users.edit');
+Route::put('/admin/users/update/{id}' , 'Admin\UsersController@update' , 'admin.users.update');
+Route::delete('/admin/users/delete/{id}' , 'Admin\UsersController@destroy' , 'admin.users.destroy');
+
+//coment routs
+Route::get('/admin/comments' , 'Admin\CommentsController@index' , 'admin.comments.index');
+// // Route::get('/admin/comments' , 'Admin\CommentsController@create' , 'admin.comments.create');
+// // Route::post('/admin/comments' , 'Admin\CommentsController@store' , 'admin.comments.store');
+Route::get('/admin/comments/{id}' , 'Admin\CommentsController@edit' , 'admin.comments.edit');
+Route::put('/admin/comments/{id}' , 'Admin\CommentsController@update' , 'admin.comments.update');
+Route::delete('/admin/comments/{id}' , 'Admin\CommentsController@destroy' , 'admin.comments.destroy');
+Route::put('/admin/comments/app' , 'Admin\CommentsController@approved' , 'admin.comments.approved');

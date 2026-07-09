@@ -129,6 +129,43 @@ else
                         </li>
                     </ul>
                 </li>
+
+                <li class="space-y-0.5">
+                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/users' OR $current == 'admin/users/create' OR $current == 'admin/users/edit')
+    echo 'menu-active open';
+else
+    echo '';  ?>" id="menu-users" data-collapse="#menu-users-collapse">
+                        <span class="icon-[tabler--category] size-5"></span>
+                         کاربران
+                        <span
+                            class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
+                    </a>
+                    <ul id="menu-users-collapse" class="<?php if ($current == 'admin/users' || $current == 'admin/users/create')
+    echo 'open';
+else
+    echo 'hidden';  ?> collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300"
+                        aria-labelledby="menu-users">
+                        <li>
+                            <a href="<?= route('admin.users.index'); ?>" class="<?php if ($current == 'admin/users')
+    echo 'menu-active';
+else
+    echo '';  ?>">
+                                <span class="icon-[iconamoon--category-fill] size-5"></span>
+                                 همه کاربران
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= route('admin.users.create'); ?>" class="<?php if ($current == 'admin/users/create')
+    echo 'menu-active';
+else
+    echo '';  ?>">
+                                <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
+                                 کاربر جدید
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li>
                     <a href="#">
                         <span class="icon-[material-symbols--comment] size-5"></span>
@@ -191,6 +228,12 @@ else
                             <a href="#">
                                 <span class="icon-[fluent-mdl2--site-scan] size-5"></span>
                                 هویت سایت
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span class="icon-[hugeicons--connect] size-5"></span>
+                                تنظیمات اتصال
                             </a>
                         </li>
                         <li>

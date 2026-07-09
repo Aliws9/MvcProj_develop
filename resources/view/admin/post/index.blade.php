@@ -2,7 +2,7 @@
 
 @section('head-tag')
     <title>ادمین | مقالات</title>
-        <script src="<?= asset('jquery/dist/jquery.min.js'); ?>"></script>
+    <script src="<?= asset('jquery/dist/jquery.min.js'); ?>"></script>
     <script src="<?= asset('datatables.net/js/dataTables.min.js'); ?>"></script>
     <script src="<?= asset('flyonui/flyonui.js'); ?>"></script>
     <style>
@@ -38,26 +38,26 @@
 
 @section('content')
 
-<div class="overflow-x-auto w-full">
+    <div class="overflow-x-auto w-full">
         <div class="mb-5">
             <a href="<?= route('admin.post.create1') ?>" class="btn btn-primary rounded btn-sm lg:btn-md">ایجاد مقاله</a>
         </div>
 
         <div id="datatable-filter"
             class="bg-base-100 --prevent-on-load-init flex flex-col rounded-md shadow-base-300/20 shadow-sm" data-datatable='{
-              "pageLength": 5,
-              "pagingOptions": {
-                "pageBtnClasses": "btn btn-text btn-circle btn-sm"
-              },  
-              "selecting": true,
-              "rowSelectingOptions": {
-                "selectAllSelector": "#datatable-filter-select-all-rows",
-                "individualSelector": ".datatable-filter-select-row"
-              },
-              "language": {
-                  "zeroRecords": "<div class=\"py-10 px-5 flex flex-col justify-center items-center text-center\"><span class=\"icon-[tabler--search] shrink-0 size-6 text-base-content\"></span><div class=\"max-w-sm mx-auto\"><p class=\"mt-2 text-sm text-base-content/80\">No search results</p></div></div>"
-                }
-            }'>
+                  "pageLength": 5,
+                  "pagingOptions": {
+                    "pageBtnClasses": "btn btn-text btn-circle btn-sm"
+                  },  
+                  "selecting": true,
+                  "rowSelectingOptions": {
+                    "selectAllSelector": "#datatable-filter-select-all-rows",
+                    "individualSelector": ".datatable-filter-select-row"
+                  },
+                  "language": {
+                      "zeroRecords": "<div class=\"py-10 px-5 flex flex-col justify-center items-center text-center\"><span class=\"icon-[tabler--search] shrink-0 size-6 text-base-content\"></span><div class=\"max-w-sm mx-auto\"><p class=\"mt-2 text-sm text-base-content/80\">No search results</p></div></div>"
+                    }
+                }'>
             <div class="border-base-content/25 flex items-center border-b px-5 py-3 gap-3">
                 <div class="input input-sm max-w-60">
                     <span class="icon-[tabler--search] text-base-content/80 my-auto me-3 size-4 shrink-0"></span>
@@ -68,14 +68,14 @@
                 <div class="flex flex-1 items-center justify-end gap-3">
                     <!-- Select -->
                     <select data-select='{
-                      "placeholder": "Select option...",
-                      "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
-                      "toggleClasses": "advance-select-toggle advance-select-sm",
-                      "dropdownClasses": "advance-select-menu w-24 max-sm:w-16 bg-white shadow-md pr-2 rounded",
-                      "optionClasses": "advance-select-option selected:select-active",
-                      "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"icon-[tabler--check] shrink-0 size-3 text-primary hidden selected:block \"></span></div>",
-                      "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] shrink-0 size-4 text-base-content absolute top-1/2 end-5 -translate-y-1/2 \"></span>"
-                      }' class="hidden" data-datatable-page-entities="">
+                          "placeholder": "Select option...",
+                          "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                          "toggleClasses": "advance-select-toggle advance-select-sm",
+                          "dropdownClasses": "advance-select-menu w-24 max-sm:w-16 bg-white shadow-md pr-2 rounded",
+                          "optionClasses": "advance-select-option selected:select-active",
+                          "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"icon-[tabler--check] shrink-0 size-3 text-primary hidden selected:block \"></span></div>",
+                          "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] shrink-0 size-4 text-base-content absolute top-1/2 end-5 -translate-y-1/2 \"></span>"
+                          }' class="hidden" data-datatable-page-entities="">
                         <option value="5" selected="">5</option>
                         <option value="10">10</option>
                         <option value="20">20</option>
@@ -85,14 +85,14 @@
                     </select>
                     <!-- End Select -->
                     <select data-select='{
-                      "placeholder": "Select option...",
-                      "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
-                      "toggleClasses": "advance-select-toggle advance-select-sm max-sm:w-20 w-36",
-                      "dropdownClasses": "advance-select-menu max-sm:w-28 w-full bg-white shadow-md pr-2 rounded",
-                      "optionClasses": "advance-select-option selected:select-active",
-                      "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"icon-[tabler--check] shrink-0 size-3 text-primary hidden selected:block \"></span></div>",
-                      "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] shrink-0 size-4 text-base-content absolute top-1/2 end-23 -translate-y-1/2 \"></span>"
-                      }' class="hidden" id="select-stock">
+                          "placeholder": "Select option...",
+                          "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                          "toggleClasses": "advance-select-toggle advance-select-sm max-sm:w-20 w-36",
+                          "dropdownClasses": "advance-select-menu max-sm:w-28 w-full bg-white shadow-md pr-2 rounded",
+                          "optionClasses": "advance-select-option selected:select-active",
+                          "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"icon-[tabler--check] shrink-0 size-3 text-primary hidden selected:block \"></span></div>",
+                          "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] shrink-0 size-4 text-base-content absolute top-1/2 end-23 -translate-y-1/2 \"></span>"
+                          }' class="hidden" id="select-stock">
                         <option value="all">All</option>
                         <option value="In Stock">In Stock</option>
                         <option value="Out of Stock">Out of Stock</option>
@@ -156,15 +156,14 @@
                                 <?php
 
     $pr = 'اصلی';
-    foreach ($posts as $post)
-    {
-        if ($post->cat_id != 0)
-        {
+    foreach ($posts as $post) {
+        if ($post->cat_id != 0) {
             $pr = $post->category()->name;
-        }else{
+            }
+        else {
             $pr = 'بدون دسته بندی';
-        }
-                        ?>
+            }
+                            ?>
 
                                 <tr id="<?= $post->id ?>">
 
@@ -176,16 +175,18 @@
                                             <label for="table-filter-1" class="sr-only">Checkbox</label>
                                         </div>
                                     </td>
-                                    <td><div class="w-20">
-                                        <img class="w-full rounded" src="<?= $post->image ?>">
-                                    </div></td>
+                                    <td>
+                                        <div class="w-20">
+                                            <img class="w-full rounded" src="<?= $post->image ?>">
+                                        </div>
+                                    </td>
                                     <td><?= $post->title ?></td>
 
                                     <td class="!max-w-[200px] !break-words !whitespace-normal !min-w-[200px]">
                                         <?= $post->description; ?>
                                     </td>
 
-                                    <td><span class="badge badge-soft badge-success badge-sm"><?php echo $pr; ?></span>
+                                    <td><span class="badge badge-soft badge-success badge-sm"><?php    echo $pr; ?></span>
                                     </td>
                                     <td>
                                         <a href="<?= route('admin.post.edit', [$post->id]) ?>"
@@ -194,8 +195,8 @@
                                         </a>
                                         <div class="join join-vertical gap-0">
                                             <div class=" join-item join join-horizontal">
-                                                <form action="<?= route('admin.post.destroy', [$post->id]) ?>"
-                                                    method="post" class="inline ajax-form join-item">
+                                                <form action="<?= route('admin.post.destroy', [$post->id]) ?>" method="post"
+                                                    class="inline ajax-form join-item">
                                                     <input type="hidden" name="_method" value="delete">
                                                     <input type="hidden" name="id" value="<?= $post->id ?>">
                                                     <button type="submit" class="btn btn-circle btn-text btn-sm"
@@ -213,7 +214,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <?php } ?>
+                                <?php        } ?>
                                 <script>
                                     $(document).on("submit", ".ajax-form", function (e) {
                                         e.preventDefault(); // جلوگیری از ارسال فرم به صورت عادی
