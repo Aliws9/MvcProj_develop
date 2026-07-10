@@ -67,194 +67,216 @@
                         <div class="p-0">
 
                             <ul class="menu accordion w-full space-y-0.5 bg-blue-50 !text-sm">
-                <li>
-                    <a href="<?= route('admin.index') ?>" class="<?php if ($current == 'admin')
+                                <li>
+                                    <a href="<?= route('admin.index') ?>" class="<?php if ($current == 'admin')
     echo 'menu-active';
 else
     echo '';  ?>">
-                        <span class="icon-[tabler--home] size-5"></span>
-                        داشبورد
-                    </a>
-                </li>
-                <li class="space-y-0.5">
-                    <a class="collapse-toggle <?php if ($current == 'admin/post' || $current == 'admin/post/create1' || $current == 'admin/post/create2')
+                                        <span class="icon-[tabler--home] size-5"></span>
+                                        داشبورد
+                                    </a>
+                                </li>
+                                <li class="space-y-0.5">
+                                    <a class="collapse-toggle <?php if ($current == 'admin/post' || $current == 'admin/post/create1' || $current == 'admin/post/create2')
     echo 'menu-active open';
 else
     echo '';  ?> collapse-open:bg-base-content/10" id="menu-app-post" data-collapse="#menu-app-collapse3">
-                        <span class="icon-[tabler--article] size-5"></span>
-                        مقالات
-                        <span
-                            class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
-                    </a>
+                                        <span class="icon-[tabler--article] size-5"></span>
+                                        مقالات
+                                        <span
+                                            class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
+                                    </a>
 
-                    <ul id="menu-app-collapse3" class="collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300 <?php if ($current == 'admin/post' || $current == 'admin/post/create1' || $current == 'admin/post/create2')
+                                    <ul id="menu-app-collapse3" class="collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300 <?php if ($current == 'admin/post' || $current == 'admin/post/create1' || $current == 'admin/post/create2')
     echo 'open';
 else
     echo 'hidden';  ?>" aria-labelledby="menu-app-post">
 
 
-                        <li>
-                            <a href="#">
-                                <span class="icon-[ooui--articles-rtl] size-5"></span>
-                                همه مقالات
-                            </a>
-                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon-[ooui--articles-rtl] size-5"></span>
+                                                همه مقالات
+                                            </a>
+                                        </li>
 
-                        <li>
-                            <a class="collapse-toggle <?php if ($current == 'admin/post/create1' || $current == 'admin/post/create2')
+                                        <li>
+                                            <a class="collapse-toggle <?php if ($current == 'admin/post/create1' || $current == 'admin/post/create2')
     echo 'menu-active open';
 else
     echo '';  ?> collapse-open:bg-base-content/10" id="menu-app2" data-collapse="#menu-post-editor2">
-                                <span class="icon-[jam--write] size-5"></span>
-                                مقاله جدید
-                                <span
-                                    class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
-                            </a>
+                                                <span class="icon-[jam--write] size-5"></span>
+                                                مقاله جدید
+                                                <span
+                                                    class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
+                                            </a>
 
-                            <ul id="menu-post-editor2" class="collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300 <?php if ($current == 'admin/post/create1' || $current == 'admin/post/create2')
+                                            <ul id="menu-post-editor2" class="collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300 <?php if ($current == 'admin/post/create1' || $current == 'admin/post/create2')
     echo 'open';
 else
     echo 'hidden';  ?>" aria-labelledby="menu-app2">
 
-                                <li>
-                                    <a href="<?= route('admin.post.create1'); ?>" class="<?php if ($current == 'admin/post/create1')
+                                                <li>
+                                                    <a href="<?= route('admin.post.create1'); ?>" class="<?php if ($current == 'admin/post/create1')
     echo 'menu-active';
 else
     echo '';  ?>">
-                                        <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
-                                        ویرایشگر ساده
-                                    </a>
+                                                        <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
+                                                        ویرایشگر ساده
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#" class="">
+                                                        <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
+                                                        ویرایشگر پیشرفته
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+
+                                        </li>
+
+                                    </ul>
                                 </li>
 
-                                <li>
-                                    <a href="#" class="">
-                                        <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
-                                        ویرایشگر پیشرفته
-                                    </a>
-                                </li>
-
-                            </ul>
-
-                        </li>
-
-                    </ul>
-                </li>
-
-                <li class="space-y-0.5">
-                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/category' OR $current == 'admin/category/create')
+                                <li class="space-y-0.5">
+                                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/category' OR $current == 'admin/category/create')
     echo 'menu-active open';
 else
     echo '';  ?>" id="menu-category2" data-collapse="#menu-category-collapse2">
-                        <span class="icon-[tabler--category] size-5"></span>
-                        دسته بندی ها
-                        <span
-                            class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
-                    </a>
-                    <ul id="menu-category-collapse2" class="<?php if ($current == 'admin/category' || $current == 'admin/category/create')
+                                        <span class="icon-[tabler--category] size-5"></span>
+                                        دسته بندی ها
+                                        <span
+                                            class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
+                                    </a>
+                                    <ul id="menu-category-collapse2" class="<?php if ($current == 'admin/category' || $current == 'admin/category/create')
     echo 'open';
 else
     echo 'hidden';  ?> collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300"
-                        aria-labelledby="menu-category2">
-                        <li>
-                            <a href="<?= route('admin.category.index'); ?>" class="<?php if ($current == 'admin/category')
+                                        aria-labelledby="menu-category2">
+                                        <li>
+                                            <a href="<?= route('admin.category.index'); ?>" class="<?php if ($current == 'admin/category')
     echo 'menu-active';
 else
     echo '';  ?>">
-                                <span class="icon-[iconamoon--category-fill] size-5"></span>
-                                همه دسته بندی ها
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= route('admin.category.create'); ?>" class="<?php if ($current == 'admin/category/create')
+                                                <span class="icon-[iconamoon--category-fill] size-5"></span>
+                                                همه دسته بندی ها
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="<?= route('admin.category.create'); ?>" class="<?php if ($current == 'admin/category/create')
     echo 'menu-active';
 else
     echo '';  ?>">
-                                <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
-                                دسته بندی جدید
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon-[material-symbols--comment] size-5"></span>
-                        نظرات
-                    </a>
-                </li>
+                                                <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
+                                                دسته بندی جدید
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="<?= route('admin.comments.index') ?>" class="<?php if ($current == 'admin/comments')
+    echo 'menu-active';
+else
+    echo '';  ?>">
+                                        <?php
+$c = Comment::where('approved', 0)->get();
 
-                <li class="space-y-0.5">
-                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/media' || $current == 'admin/media/create')
+if (count($c) > 0) {
+    echo "                        <div class='indicator'>
+                            <span class='indicator-item indicator-start badge badge-primary'
+                                style='position: absolute; top: -10px; right: -15px; font-size: 10px;padding-left:3px; padding-right: 3px;'>" . count($c) . "</span>
+                            <div class='grid place-items-center rounded-md'>
+                                <span class='icon-[material-symbols--comment] size-5'></span>
+                            </div>
+                        </div>
+     ";
+    }
+else {
+    echo "
+                       <span class='icon-[material-symbols--comment] size-5'></span>
+    ";
+    } ?>
+
+                                        <span>نظرات</span>
+
+                                    </a>
+                                </li>
+
+                                <li class="space-y-0.5">
+                                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/media' || $current == 'admin/media/create')
     echo 'menu-active open';
 else
     echo '';  ?>" id="menu-media2" data-collapse="#menu-media-collapse2">
-                        <span class="icon-[qlementine-icons--media-16] size-5"></span>
-                        رسانه
-                        <span
-                            class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
-                    </a>
-                    <ul id="menu-media-collapse2" class="<?php if ($current == 'admin/media' || $current == 'admin/media/create')
+                                        <span class="icon-[qlementine-icons--media-16] size-5"></span>
+                                        رسانه
+                                        <span
+                                            class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
+                                    </a>
+                                    <ul id="menu-media-collapse2" class="<?php if ($current == 'admin/media' || $current == 'admin/media/create')
     echo 'open';
 else
     echo 'hidden';  ?> collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300"
-                        aria-labelledby="menu-media2">
-                        <li>
-                            <a href="#">
-                                <span class="icon-[flowbite--upload-solid] size-5"></span>
-                                رسانه جدید
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="icon-[material-symbols--perm-media] size-5"></span>
-                                همه رسانه ها
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                                        aria-labelledby="menu-media2">
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon-[flowbite--upload-solid] size-5"></span>
+                                                رسانه جدید
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon-[material-symbols--perm-media] size-5"></span>
+                                                همه رسانه ها
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                <li class="space-y-0.5">
-                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/setting' || $current == 'admin/setting/create')
+                                <li class="space-y-0.5">
+                                    <a class="collapse-toggle collapse-open:bg-base-content/10 <?php if ($current == 'admin/setting' || $current == 'admin/setting/create')
     echo 'menu-active open';
 else
     echo '';  ?>" id="menu-setting2" data-collapse="#menu-setting-collapse2">
-                        <span class="icon-[tabler--settings] size-5"></span>
-                        تنظیمات
-                        <span
-                            class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
-                    </a>
-                    <ul id="menu-setting-collapse2" class="<?php if ($current == 'admin/setting' || $current == 'admin/setting/create')
+                                        <span class="icon-[tabler--settings] size-5"></span>
+                                        تنظیمات
+                                        <span
+                                            class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
+                                    </a>
+                                    <ul id="menu-setting-collapse2" class="<?php if ($current == 'admin/setting' || $current == 'admin/setting/create')
     echo 'open';
 else
     echo 'hidden';  ?> collapse w-auto space-y-0.5 overflow-hidden transition-[height] duration-300"
-                        aria-labelledby="menu-setting2">
-                        <li>
-                            <a href="#">
-                                <span class="icon-[tabler--seo] size-5"></span>
-                                تنظیمات SEO
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="icon-[hugeicons--connect] size-5"></span>
-                                تنظیمات اتصال
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="icon-[fluent-mdl2--site-scan] size-5"></span>
-                                هویت سایت
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="icon-[tdesign--menu] size-5"></span>
-                                منو ها
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                                        aria-labelledby="menu-setting2">
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon-[tabler--seo] size-5"></span>
+                                                تنظیمات SEO
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon-[hugeicons--connect] size-5"></span>
+                                                تنظیمات اتصال
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon-[fluent-mdl2--site-scan] size-5"></span>
+                                                هویت سایت
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon-[tdesign--menu] size-5"></span>
+                                                منو ها
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 
-            </ul>
+                            </ul>
 
                         </div>
                     </div>

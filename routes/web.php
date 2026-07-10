@@ -51,9 +51,8 @@ Route::delete('/admin/users/delete/{id}' , 'Admin\UsersController@destroy' , 'ad
 
 //coment routs
 Route::get('/admin/comments' , 'Admin\CommentsController@index' , 'admin.comments.index');
-// // Route::get('/admin/comments' , 'Admin\CommentsController@create' , 'admin.comments.create');
-// // Route::post('/admin/comments' , 'Admin\CommentsController@store' , 'admin.comments.store');
 Route::get('/admin/comments/{id}' , 'Admin\CommentsController@edit' , 'admin.comments.edit');
-Route::put('/admin/comments/{id}' , 'Admin\CommentsController@update' , 'admin.comments.update');
-Route::delete('/admin/comments/{id}' , 'Admin\CommentsController@destroy' , 'admin.comments.destroy');
+Route::post('/admin/comments/update' , 'Admin\CommentsController@update' , 'admin.comments.update');
+Route::post('/admin/comments/answer' , 'Admin\CommentsController@answer' , 'admin.comments.answer');
+Route::delete('/admin/comments/delete/{id}' , 'Admin\CommentsController@destroy' , 'admin.comments.destroy');
 Route::put('/admin/comments/app' , 'Admin\CommentsController@approved' , 'admin.comments.approved');

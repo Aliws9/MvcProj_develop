@@ -2,6 +2,9 @@
     class="flex flex-col shadow-[-2px_-2px_12px_rgba(0,0,0,0.15)] hidden md:inline-block md:w-full w-0 bg-white z-2 rounded-lg flex-none items-start h-[100vh] sticky top-4">
     <div class="w-full">
         <?php
+
+use App\Comment;
+
 $current = Config::get('app.CURRENT_ROUTE');
          ?>
 
@@ -45,7 +48,8 @@ else
 
 
                         <li>
-                            <a href="<?= route('admin.post.index') ?>" class="<?php echo $current == 'admin/post' ? 'menu-active' : '' ?>">
+                            <a href="<?= route('admin.post.index') ?>"
+                                class="<?php echo $current == 'admin/post' ? 'menu-active' : '' ?>">
                                 <span class="icon-[ooui--articles-rtl] size-5"></span>
                                 همه مقالات
                             </a>
@@ -136,7 +140,7 @@ else
 else
     echo '';  ?>" id="menu-users" data-collapse="#menu-users-collapse">
                         <span class="icon-[tabler--category] size-5"></span>
-                         کاربران
+                        کاربران
                         <span
                             class="icon-[tabler--chevron-down] collapse-open:rotate-180 size-4 transition-all duration-300"></span>
                     </a>
@@ -151,7 +155,7 @@ else
 else
     echo '';  ?>">
                                 <span class="icon-[iconamoon--category-fill] size-5"></span>
-                                 همه کاربران
+                                همه کاربران
                             </a>
                         </li>
                         <li>
@@ -160,16 +164,38 @@ else
 else
     echo '';  ?>">
                                 <span class="icon-[fluent--tab-new-24-filled] size-5"></span>
-                                 کاربر جدید
+                                کاربر جدید
                             </a>
                         </li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="#">
-                        <span class="icon-[material-symbols--comment] size-5"></span>
-                        نظرات
+                    <a href="<?= route('admin.comments.index') ?>" class="<?php if ($current == 'admin/comments')
+    echo 'menu-active';
+else
+    echo '';  ?>">
+                        <?php
+$c = Comment::where('approved', 0)->get();
+
+if (count($c) > 0) {
+    echo "                        <div class='indicator'>
+                            <span class='indicator-item indicator-start badge badge-primary'
+                                style='position: absolute; top: -10px; right: -15px; font-size: 10px;padding-left:3px; padding-right: 3px;'>" . count($c) . "</span>
+                            <div class='grid place-items-center rounded-md'>
+                                <span class='icon-[material-symbols--comment] size-5'></span>
+                            </div>
+                        </div>
+     ";
+    }
+else {
+    echo "
+                       <span class='icon-[material-symbols--comment] size-5'></span>
+    ";
+    } ?>
+
+                        <span>نظرات</span>
+
                     </a>
                 </li>
 

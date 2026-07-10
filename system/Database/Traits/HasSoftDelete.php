@@ -80,60 +80,110 @@ trait HasSoftDelete
      }
 
 
+    protected function getMethod($array = []) {
 
+
+        if ($this->sql == '')
+        {
+
+            if (empty($array))
+            {
+                $fields = $this->getTableName() . '.*';
+
+            } else
+            {
+
+
+                foreach ($array as $key => $field)
+                {
+
+                    $array[$key] = $this->getAttributeName($field);
+
+                }
+
+                $fields = implode(' , ', $array);
+
+            }
+
+            $query = "SELECT " . $fields . " FROM " . $this->getTableName();
+
+            $this->setSql($query);
+
+        }
+
+        $stmt = $this->executeQuery();
+        $data = $stmt->fetchAll();
+
+        // $this->setAllowMethod(['limit', 'get', 'paginate']);
+
+        if ($data)
+        {
+
+            $this->arrayToObjects($data);
+            return $this->collection;
+
+        } else
+        {
+
+            return [];
+
+        }
+
+
+    }
      // array = [id , name , pass]
-     protected function getMethod($array = []) {
+    //  protected function getMethod($array = []) {
 
-          $this->resetQuery();
+    //       $this->resetQuery();
 
-          if ($this->getSql() == '')
-          {
+    //       if ($this->getSql() == '')
+    //       {
 
-               if (empty($array))
-               {
-                    $fields = $this->getTableName() . '.*';
+    //            if (empty($array))
+    //            {
+    //                 $fields = $this->getTableName() . '.*';
 
-               } else
-               {
-
-
-                    foreach ($array as $key => $field)
-                    {
-
-                         $array[$key] = $this->getAttributeName($field);
-
-                    }
-
-                    $fields = implode(' , ', $array);
-
-               }
-
-               $this->setSql("SELECT " . $fields . " FROM " . $this->getTableName());
-
-          }
-
-          $this->setWhere('AND', $this->getAttributeName($this->deletedAt) . " IS NULL ");
-
-          $stmt = $this->executeQuery();
-          $data = $stmt->fetchAll();
-
-          // $this->setAllowMethod(['limit', 'get', 'paginate']);
-
-          if ($data)
-          {
-
-               $this->arrayToObjects($data);
-               return $this->collection;
-
-          } else
-          {
-
-               return [];
-
-          }
+    //            } else
+    //            {
 
 
-     }
+    //                 foreach ($array as $key => $field)
+    //                 {
+
+    //                      $array[$key] = $this->getAttributeName($field);
+
+    //                 }
+
+    //                 $fields = implode(' , ', $array);
+
+    //            }
+
+    //            $this->setSql("SELECT " . $fields . " FROM " . $this->getTableName());
+
+    //       }
+
+    //       $this->setWhere('AND', $this->getAttributeName($this->deletedAt) . " IS NULL ");
+
+    //       $stmt = $this->executeQuery();
+    //       $data = $stmt->fetchAll();
+
+    //       // $this->setAllowMethod(['limit', 'get', 'paginate']);
+
+    //       if ($data)
+    //       {
+
+    //            $this->arrayToObjects($data);
+    //            return $this->collection;
+
+    //       } else
+    //       {
+
+    //            return [];
+
+    //       }
+
+
+    //  }
 
 
 
