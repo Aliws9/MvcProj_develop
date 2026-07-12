@@ -30,7 +30,6 @@ class CommentsController extends AdminController
         else {
             Comment::update(['id' => $id, 'approved' => 0]);
             }
-        return back();
         }
 
     /**
@@ -123,29 +122,29 @@ class CommentsController extends AdminController
         return view('admin.comments.edit', compact('comment'));
         }
 
-public function deleteWithDescendants($id)
-{
-    $comment = Comment::find($id);
+    public function deleteWithDescendants($id)
+        {
+        $comment = Comment::find($id);
 
-    if (!$comment) {
-        return false;
-    }
+        if (!$comment) {
+            return false;
+            }
 
-    $children = Comment::where('parent_id', $id)->get();
+        $children = Comment::where('parent_id', $id)->get();
 
-    foreach ($children as $child) {
-        $this->deleteWithDescendants($child->id);
-    }
+        foreach ($children as $child) {
+            $this->deleteWithDescendants($child->id);
+            }
 
-    return $comment->delete($id);
+        return $comment->delete($id);
 
-}
+        }
 
-public function destroy($id)
-{
-    $this->deleteWithDescendants($id);
-    // return back();
-}
+    public function destroy($id)
+        {
+        $this->deleteWithDescendants($id);
+        // return back();
+        }
 
 
     // public function destroy($id)

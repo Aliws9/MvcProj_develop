@@ -53,9 +53,9 @@
                             <tbody>
                                 <?php
 
-                    // use App\Comment;
+    // use App\Comment;
 
- if (empty($comments)): ?>
+    if (empty($comments)): ?>
                                 <tr>
                                     <td colspan="4" class="text-center py-10 text-base-content/50">
                                         هیچ کامنتی ثبت نشده است
@@ -64,7 +64,7 @@
                                 <?php endif; ?>
 
                                 <?php foreach ($comments as $comment): ?>
-                                <?php $user = $comment->user(); ?>
+                                <?php    $user = $comment->user(); ?>
 
                                 <tr id="comment-row-<?= $comment->id ?>">
 
@@ -84,43 +84,46 @@
                                         </div>
                                     </td>
 
-                                    <td class="!max-w-[300px] !break-words !whitespace-normal !min-w-[200px] comment-text-<?= $comment->id ?>">
+                                    <td
+                                        class="!max-w-[300px] !break-words !whitespace-normal !min-w-[200px] comment-text-<?= $comment->id ?>">
                                         <div>
                                             <span class="!text-sm">
-                                        <?= $comment->comment; ?>
-                                        </span>
-                                        <?php $rr = Comment::find($comment->parent_id);
-                                        if($rr != null){
-                                            echo "                                        <span class='text-xs text-blue-400'>پاسخ به کامنت ". mb_substr(strip_tags($rr->comment),0,15,'UTF-8') ."... با آیدی ". $comment->id ."</span>
-";
-                                        }
-                                          ?>
+                                                <?= $comment->comment; ?>
+                                            </span>
+                                            <?php    $rr = Comment::find($comment->parent_id);
+        if ($rr != null) {
+            echo "                                        <span class='text-xs text-blue-400'>پاسخ به کامنت " . mb_substr(strip_tags($rr->comment), 0, 15, 'UTF-8') . "... با آیدی " . $comment->id . "</span>
+    ";
+            }
+                                              ?>
 
                                         </div>
 
                                     </td>
 
                                     <td>
-                                        <?php if ($comment->approved == 1): ?>
-                                            <span class="badge badge-soft badge-success badge-sm">تایید شده</span>
-                                        <?php else: ?>
-                                            <span class="badge badge-soft badge-warning badge-sm">در انتظار تایید</span>
-                                        <?php endif; ?>
+                                        <?php    if ($comment->approved == 1): ?>
+                                        <span class="badge badge-soft badge-success badge-sm">تایید شده</span>
+                                        <?php    else: ?>
+                                        <span class="badge badge-soft badge-warning badge-sm">در انتظار تایید</span>
+                                        <?php    endif; ?>
                                     </td>
 
                                     <td>
-                                        <!-- <form action="<?php // echo route('admin.comments.destroy', [$comment->id]) ?>"
-                                                    method="post" class="inline ajax-form join-item">
-                                                    <input type="hidden" name="_method" value="delete">
-                                                    <button type="submit">
-                                            <span class="badge badge-soft badge-error badge-sm cursor-pointer btn-delete-comment"
-                                            data-id="<?php //echo $comment->id ?>">حذف</span>
-                                            </button>
-                                            </form> -->
-                                        <span class="badge badge-soft badge-error badge-sm cursor-pointer btn-delete-comment"
+                                        <!-- <form action="<?php    // echo route('admin.comments.destroy', [$comment->id]) ?>"
+                                                        method="post" class="inline ajax-form join-item">
+                                                        <input type="hidden" name="_method" value="delete">
+                                                        <button type="submit">
+                                                <span class="badge badge-soft badge-error badge-sm cursor-pointer btn-delete-comment"
+                                                data-id="<?php    //echo $comment->id ?>">حذف</span>
+                                                </button>
+                                                </form> -->
+                                        <span
+                                            class="badge badge-soft badge-error badge-sm cursor-pointer btn-delete-comment"
                                             data-id="<?= $comment->id ?>">حذف</span>
 
-                                        <span class="badge badge-soft badge-success badge-sm cursor-pointer btn-toggle-approved"
+                                        <span
+                                            class="badge badge-soft badge-success badge-sm cursor-pointer btn-toggle-approved"
                                             data-id="<?= $comment->id ?>">
                                             <?= $comment->approved == 1 ? 'عدم تایید' : 'تایید'; ?>
                                         </span>
@@ -128,7 +131,8 @@
                                         <span class="badge badge-soft badge-info badge-sm cursor-pointer btn-answer-comment"
                                             data-id="<?= $comment->id ?>">پاسخ</span>
 
-                                        <span class="badge badge-soft badge-primary badge-sm cursor-pointer btn-edit-comment"
+                                        <span
+                                            class="badge badge-soft badge-primary badge-sm cursor-pointer btn-edit-comment"
                                             data-id="<?= $comment->id ?>">ویرایش</span>
                                     </td>
 
@@ -140,7 +144,8 @@
                                 <tr id="editor-row-<?= $comment->id ?>" class="comment-editor-row">
                                     <td colspan="4" class="bg-slate-50 p-4">
                                         <div class="flex flex-col gap-3">
-                                            <span class="editor-mode-label-<?= $comment->id ?> text-sm font-semibold"></span>
+                                            <span
+                                                class="editor-mode-label-<?= $comment->id ?> text-sm font-semibold"></span>
 
                                             <div class="bg-white rounded-lg overflow-hidden shadow-sm">
                                                 <textarea id="tinymce-comment-<?= $comment->id ?>"
@@ -153,8 +158,7 @@
                                                     data-id="<?= $comment->id ?>">
                                                     انصراف
                                                 </button>
-                                                <button type="button"
-                                                    class="btn btn-primary btn-sm btn-save-editor"
+                                                <button type="button" class="btn btn-primary btn-sm btn-save-editor"
                                                     data-id="<?= $comment->id ?>">
                                                     <span class="editor-save-label-<?= $comment->id ?>"></span>
                                                 </button>
@@ -199,15 +203,15 @@
                     plugins: ['advlist', 'autolink', 'lists', 'link', 'charmap', 'searchreplace', 'visualblocks', 'wordcount'],
                     toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link',
                     content_style: `
-                        body {
-                            font-family: vazir, Arial, sans-serif;
-                            direction: rtl;
-                            text-align: right;
-                            font-size: 14px;
-                            line-height: 1.8;
-                            padding: 12px;
-                        }
-                    `,
+                            body {
+                                font-family: vazir, Arial, sans-serif;
+                                direction: rtl;
+                                text-align: right;
+                                font-size: 14px;
+                                line-height: 1.8;
+                                padding: 12px;
+                            }
+                        `,
                     setup: function (editor) {
                         editor.on('init', function () {
                             initializedEditors[id] = editor;
@@ -361,9 +365,9 @@
                 const id = $(this).data('id');
 
                 $.ajax({
-                    url: "<?= url('admin/comments/app') ?>",
+                    url: "<?= url('admin/comments/app/') ?>/" + id,
                     type: 'POST',
-                    data: { _method: 'put', id: id },
+                    data: { _method: 'put' },
                     success: function () {
                         location.reload();
                     },
@@ -374,6 +378,6 @@
             });
 
         });
-    </script>
+    </script><?= url('admin/comments/app') ?>
 
 @endsection

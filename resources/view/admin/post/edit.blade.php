@@ -21,25 +21,16 @@
     $errorBody = errorClass('body');
     $errorImage = errorClass('image');
     $errorCategory = errorClass('cat_id');
-    $errorDescription = errorClass('description');
+    $errorSeoDescription = errorClass('seo_description');
+    $errorSeoTitle = errorClass('seo_title');
+    $errorsummary = errorClass('summary');
     ?>
             <!-- title -->
             <div class="<?= $errorTitle['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
-                role="alert" id="dismiss-alert-error-name">
+                role="alert" id="dismiss-alert-error-name-title">
                 <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
                 <p><?= $errorTitle['message_error'] ?></p>
-                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
-                    aria-label="Close Button">
-                    <span class="icon-[tabler--x] size-5"></span>
-                </button>
-            </div>
-
-            <!-- category -->
-            <div class="<?= $errorCategory['class_error'] ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
-                role="alert" id="dismiss-alert-error-name">
-                <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
-                <p><?= $errorCategory['message_error'] ?></p>
-                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name-title"
                     aria-label="Close Button">
                     <span class="icon-[tabler--x] size-5"></span>
                 </button>
@@ -48,22 +39,46 @@
             <!-- body -->
 
             <div class="<?= $errorBody['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
-                role="alert" id="dismiss-alert-error-name">
+                role="alert" id="dismiss-alert-error-name-body">
                 <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
                 <p><?= $errorBody['message_error']; ?></p>
-                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name-body"
                     aria-label="Close Button">
                     <span class="icon-[tabler--x] size-5"></span>
                 </button>
             </div>
 
-            <!-- description -->
+            <!-- seo_description -->
 
-            <div class="<?= $errorDescription['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
-                role="alert" id="dismiss-alert-error-name">
+            <div class="<?= $errorSeoDescription['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                role="alert" id="dismiss-alert-error-name-seo-description">
                 <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
-                <p><?= $errorDescription['message_error']; ?></p>
-                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                <p><?= $errorSeoDescription['message_error']; ?></p>
+                <button class="ms-auto cursor-pointer leading-none"
+                    data-remove-element="#dismiss-alert-error-name-seo-description" aria-label="Close Button">
+                    <span class="icon-[tabler--x] size-5"></span>
+                </button>
+            </div>
+
+            <!-- seo_title -->
+
+            <div class="<?= $errorSeoTitle['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                role="alert" id="dismiss-alert-error-seo-title">
+                <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                <p><?= $errorSeoTitle['message_error']; ?></p>
+                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-seo-title"
+                    aria-label="Close Button">
+                    <span class="icon-[tabler--x] size-5"></span>
+                </button>
+            </div>
+
+            <!-- summary -->
+
+            <div class="<?= $errorsummary['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
+                role="alert" id="dismiss-alert-error-seo-summary">
+                <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
+                <p><?= $errorsummary['message_error']; ?></p>
+                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-seo-summary"
                     aria-label="Close Button">
                     <span class="icon-[tabler--x] size-5"></span>
                 </button>
@@ -72,15 +87,16 @@
             <!-- image -->
 
             <div class="<?= $errorImage['class_error']; ?> alert alert-error alert-soft flex items-center removing:translate-x-5 removing:opacity-0 gap-4 transition duration-300 ease-in-out"
-                role="alert" id="dismiss-alert-error-name">
+                role="alert" id="dismiss-alert-error-name-image">
                 <span class="icon-[tabler--alert-triangle] shrink-0 size-6"></span>
                 <p><?= $errorImage['message_error']; ?></p>
-                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name"
+                <button class="ms-auto cursor-pointer leading-none" data-remove-element="#dismiss-alert-error-name-image"
                     aria-label="Close Button">
                     <span class="icon-[tabler--x] size-5"></span>
                 </button>
             </div>
         </div>
+
 
 
         <h1 class="text-lg md:text-2xl mb-5 font-semibold">ویرایش مقاله</h1>
@@ -107,13 +123,61 @@
                                                                 </textarea>
                     </div>
 
+                    <!-- seo title -->
                     <div>
-                        <label>توضیحات</label>
-                        <textarea class="input !h-[100px] md:!h-[200px]"
-                            name="description"><?= $post->description ?></textarea>
-                        <!-- <label>کلمات کلیدی</label>
-                        <input type="text" class=""> -->
+                        <div class="space-x-2 !flex !items-center">
+                            <label>عنوان در گوگل</label>
+                            <span class="text-xs badge badge-soft badge-success badge-sm">50 تا 60 کاراکتر</span>
+                            <div class="input-wrapper">
+                                <span class="badge badge-soft badge-info text-xs char-count">0 کاراکتر</span>
+                            </div>
+                        </div>
+                        <input type="text" placeholder="تایتل مقاله (مقدار پیشفرض)" class="input seo-input"
+                            name="seo_title" value="<?= $post->seo_title ?>">
                     </div>
+
+                    <!-- seo description -->
+                    <div>
+                        <div class="space-x-2 !flex !items-center">
+                            <label>توصیحات در گوگل</label>
+                            <span class="text-xs badge badge-soft badge-success badge-sm">140 تا 160 کاراکتر</span>
+                            <div class="input-wrapper">
+                                <span class="badge badge-soft badge-info text-xs char-count">0 کاراکتر</span>
+                            </div>
+                        </div>
+                        <textarea placeholder="180 کاراکتر از ابتدای پاراگراف (مقدار پیشفرض)"
+                            class="input !h-[700px] md:!h-[70px] py-2 seo-input"
+                            name="seo_description"><?= $post->seo_description ?></textarea>
+                        <!-- <label>کلمات کلیدی</label>
+                                            <input type="text" class=""> -->
+                    </div>
+
+                    <!-- summary -->
+                    <div>
+                        <div class="space-x-2 !flex !items-center">
+                            <label>خلاصه</label>
+                            <span class="text-xs badge badge-soft badge-success badge-sm">حداکثر 300 کاراکتر</span>
+                            <div class="input-wrapper">
+                                <span class="badge badge-soft badge-info text-xs char-count">0 کاراکتر</span>
+                            </div>
+                        </div>
+                        <textarea placeholder="300 کاراکتر از ابتدای پاراگراف (مقدار پیشفرض)"
+                            class="input !h-[100px] md:!h-[100px] py-2 seo-input"
+                            name="summary"><?= $post->summary ?></textarea>
+                    </div>
+
+                    <script>
+                        $(document).ready(function () {
+                            $('.seo-input').each(function () {
+                                let input = $(this);
+                                let counter = input.closest('div').find('.char-count');
+
+                                input.on('input', function () {
+                                    counter.text(input.val().length);
+                                });
+                            });
+                        });
+                    </script>
 
                 </div>
 

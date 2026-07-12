@@ -14,7 +14,7 @@ class Post extends Model{
 
      protected $table = "posts";
 
-     protected $fillable = ['title' , 'body' , 'description' , 'image' , 'user_id' , 'cat_id' , 'status' , 'published_at'];
+     protected $fillable = ['title' , 'body' , 'seo_title' , 'summary' , 'seo_description' , 'image' , 'user_id' , 'cat_id' , 'status' , 'published_at'];
 
      protected $casts = ['image' => 'array'];
 

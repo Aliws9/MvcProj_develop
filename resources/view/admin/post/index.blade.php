@@ -133,7 +133,7 @@
                                     </th>
                                     <th scope="col" class="group w-fit">
                                         <div class="flex items-center justify-between">
-                                            توضیحات
+                                            خلاصه
                                             <span
                                                 class="icon-[tabler--chevron-up] datatable-ordering-asc:block hidden"></span>
                                             <span
@@ -183,7 +183,7 @@
                                     <td><?= $post->title ?></td>
 
                                     <td class="!max-w-[200px] !break-words !whitespace-normal !min-w-[200px]">
-                                        <?= $post->description; ?>
+                                        <?= mb_substr($post->summary , 0 , 100 , 'UTF-8') . '...'; ?>
                                     </td>
 
                                     <td><span class="badge badge-soft badge-success badge-sm"><?php    echo $pr; ?></span>

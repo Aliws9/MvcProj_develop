@@ -18,7 +18,6 @@
     --color-blue-50: oklch(97% 0.014 254.604);
     --color-blue-100: oklch(93.2% 0.032 255.585);
     --color-blue-200: oklch(88.2% 0.059 254.128);
-    --color-blue-300: oklch(80.9% 0.105 251.813);
     --color-blue-400: oklch(70.7% 0.165 254.624);
     --color-blue-600: oklch(54.6% 0.245 262.881);
     --color-indigo-500: oklch(58.5% 0.233 277.117);
@@ -6863,6 +6862,9 @@
   .\!h-\[100px\] {
     height: 100px !important;
   }
+  .\!h-\[700px\] {
+    height: 700px !important;
+  }
   .\!h-full {
     height: 100% !important;
   }
@@ -7566,6 +7568,9 @@
   .place-items-center {
     place-items: center;
   }
+  .\!items-center {
+    align-items: center !important;
+  }
   .items-center {
     align-items: center;
   }
@@ -7652,6 +7657,13 @@
       --tw-space-x-reverse: 0;
       margin-inline-start: calc(calc(var(--spacing) * 1) * var(--tw-space-x-reverse));
       margin-inline-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-x-reverse)));
+    }
+  }
+  .space-x-2 {
+    :where(& > :not(:last-child)) {
+      --tw-space-x-reverse: 0;
+      margin-inline-start: calc(calc(var(--spacing) * 2) * var(--tw-space-x-reverse));
+      margin-inline-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-x-reverse)));
     }
   }
   .accordion {
@@ -9873,10 +9885,6 @@
     line-height: var(--tw-leading, var(--text-xs--line-height));
     --size: calc(var(--size-field, 0.25rem) * 6);
   }
-  .\!text-lg {
-    font-size: var(--text-lg) !important;
-    line-height: var(--tw-leading, var(--text-lg--line-height)) !important;
-  }
   .\!text-sm {
     font-size: var(--text-sm) !important;
     line-height: var(--tw-leading, var(--text-sm--line-height)) !important;
@@ -10281,9 +10289,6 @@
   }
   .text-black {
     color: var(--color-black);
-  }
-  .text-blue-300 {
-    color: var(--color-blue-300);
   }
   .text-blue-400 {
     color: var(--color-blue-400);
@@ -11033,9 +11038,14 @@
       height: 50% !important;
     }
   }
-  .md\:\!h-\[200px\] {
+  .md\:\!h-\[70px\] {
     @media (width >= 48rem) {
-      height: 200px !important;
+      height: 70px !important;
+    }
+  }
+  .md\:\!h-\[100px\] {
+    @media (width >= 48rem) {
+      height: 100px !important;
     }
   }
   .md\:\!h-auto {

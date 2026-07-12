@@ -55,4 +55,4 @@ Route::get('/admin/comments/{id}' , 'Admin\CommentsController@edit' , 'admin.com
 Route::post('/admin/comments/update' , 'Admin\CommentsController@update' , 'admin.comments.update');
 Route::post('/admin/comments/answer' , 'Admin\CommentsController@answer' , 'admin.comments.answer');
 Route::delete('/admin/comments/delete/{id}' , 'Admin\CommentsController@destroy' , 'admin.comments.destroy');
-Route::put('/admin/comments/app' , 'Admin\CommentsController@approved' , 'admin.comments.approved');
+Route::put('/admin/comments/app/{id}' , 'Admin\CommentsController@approved' , 'admin.comments.approved');

@@ -308,7 +308,7 @@ trait HasCRUD
         {
             $this->setSql("SELECT " . $this->getTableName() . ".* FROM " . $this->getTableName());
         }
-
+        
         $stmt = $this->executeQuery();
         $data = $stmt->fetchAll();
 
@@ -326,7 +326,6 @@ trait HasCRUD
             return [];
 
         }
-
 
     }
 

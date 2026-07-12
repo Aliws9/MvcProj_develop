@@ -4,7 +4,6 @@
         <?php
 
 use App\Comment;
-
 $current = Config::get('app.CURRENT_ROUTE');
          ?>
 
@@ -176,7 +175,7 @@ else
 else
     echo '';  ?>">
                         <?php
-$c = Comment::where('approved', 0)->get();
+$c = Comment::where('approved', 0)->where('deleted_at' , NULL)->get();
 
 if (count($c) > 0) {
     echo "                        <div class='indicator'>

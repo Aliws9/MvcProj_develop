@@ -114,8 +114,6 @@ trait HasSoftDelete
         $stmt = $this->executeQuery();
         $data = $stmt->fetchAll();
 
-        // $this->setAllowMethod(['limit', 'get', 'paginate']);
-
         if ($data)
         {
 
