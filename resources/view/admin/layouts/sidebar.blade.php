@@ -175,7 +175,7 @@ else
 else
     echo '';  ?>">
                         <?php
-$c = Comment::where('approved', 0)->where('deleted_at' , NULL)->get();
+$c = Comment::where('approved', 0)->whereNull('deleted_at')->get();
 
 if (count($c) > 0) {
     echo "                        <div class='indicator'>

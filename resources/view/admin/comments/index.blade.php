@@ -66,7 +66,7 @@
                                 <?php foreach ($comments as $comment): ?>
                                 <?php    $user = $comment->user(); ?>
 
-                                <tr id="comment-row-<?= $comment->id ?>">
+                                <tr id="comment-row-<?= $comment->id ?>" class="<?= $comment->approved == 0 ? 'bg-slate-50' : '' ?>">
 
                                     <td>
                                         <div class="flex items-center gap-3">
@@ -378,6 +378,6 @@
             });
 
         });
-    </script><?= url('admin/comments/app') ?>
+    </script>
 
 @endsection

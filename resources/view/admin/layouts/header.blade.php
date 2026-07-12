@@ -181,8 +181,7 @@ else
 else
     echo '';  ?>">
                                         <?php
-$c = Comment::where('approved', 0)->get();
-
+$c = Comment::where('approved', 0)->whereNull('deleted_at')->get();
 if (count($c) > 0) {
     echo "                        <div class='indicator'>
                             <span class='indicator-item indicator-start badge badge-primary'
