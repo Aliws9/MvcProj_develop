@@ -51,6 +51,7 @@ Route::delete('/admin/users/delete/{id}' , 'Admin\UsersController@destroy' , 'ad
 
 //coment routs
 Route::get('/admin/comments' , 'Admin\CommentsController@index' , 'admin.comments.index');
+Route::get('/admin/comments/search' , 'Admin\CommentsController@search' , 'admin.comments.search');
 Route::get('/admin/comments/{id}' , 'Admin\CommentsController@edit' , 'admin.comments.edit');
 Route::post('/admin/comments/update' , 'Admin\CommentsController@update' , 'admin.comments.update');
 Route::post('/admin/comments/answer' , 'Admin\CommentsController@answer' , 'admin.comments.answer');

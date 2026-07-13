@@ -89,12 +89,12 @@
                     <select data-select='{
                           "placeholder": "Select option...",
                           "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
-                          "toggleClasses": "advance-select-toggle advance-select-sm max-sm:w-20 w-36",
-                          "dropdownClasses": "advance-select-menu max-sm:w-28 w-full bg-white shadow-md pr-2 rounded",
-                          "optionClasses": "advance-select-option selected:select-active",
-                          "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"icon-[tabler--check] shrink-0 size-3 text-primary hidden selected:block \"></span></div>",
-                          "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] shrink-0 size-4 text-base-content absolute top-1/2 end-23 -translate-y-1/2 \"></span>"
-                          }' class="hidden" id="select-stock">
+                          "toggleClasses": "advance-select-toggle advance-select-sm !hidden max-sm:w-20 w-36",
+                          "dropdownClasses": "advance-select-menu max-sm:w-28 !hidden w-full bg-white shadow-md pr-2 rounded",
+                          "optionClasses": "advance-select-option selected:select-active !hidden",
+                          "optionTemplate": "<div class=\"flex !hidden justify-between items-center w-full\"><span data-title></span><span class=\"icon-[tabler--check] !hidden shrink-0 size-3 text-primary hidden selected:block \"></span></div>",
+                          "extraMarkup": "<span class=\"icon-[tabler--caret-up-down] !hidden shrink-0 size-4 text-base-content absolute top-1/2 end-23 -translate-y-1/2 \"></span>"
+                          }' class="hidden" style="display: none;" id="select-stock">
                         <option value="all">All</option>
                         <option value="In Stock">In Stock</option>
                         <option value="Out of Stock">Out of Stock</option>

@@ -28,6 +28,8 @@
             display: table-row;
         }
     </style>
+    <?php  require_once Config::get('app.BASE_DIR') . '/public/jdf/jdf.php';
+     ?>
 @endsection
 
 @section('content')
@@ -36,138 +38,33 @@
 
         <div class="bg-base-100 flex flex-col rounded-md shadow-base-300/20 shadow-sm">
 
+            <div class="flex flex-col gap-2 border-b border-base-300/50 p-4 sm:flex-row sm:items-center sm:justify-between">
+                <div class="input input-sm w-full sm:max-w-80">
+                    <span class="icon-[tabler--search] text-base-content/80 my-auto me-3 size-4 shrink-0"></span>
+                    <label class="sr-only" for="comment-search">جست‌وجو در نظرات</label>
+                    <input type="search" class="grow" id="comment-search" maxlength="100" autocomplete="off"
+                        placeholder="جست‌وجو در متن نظرات...">
+                    <span id="comment-search-loading" class="loading loading-spinner loading-xs hidden" aria-hidden="true"></span>
+                </div>
+                <span id="comment-search-status" class="text-sm text-base-content/60" role="status" aria-live="polite"></span>
+            </div>
+
             <div class="overflow-x-auto">
                 <div class="inline-block min-w-full align-middle">
                     <div class="overflow-hidden">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-auto">
                             <thead class="bg-white">
                                 <tr class="border-0 bg-base-300/20 *:first:rounded-s-md *:last:rounded-e-md">
+                                    <th scope="col" class="w-px whitespace-nowrap">آیدی</th>
                                     <th scope="col" class="w-fit">کاربر</th>
-                                    <th scope="col" class="w-fit">کامنت</th>
-                                    <th scope="col" class="w-fit">وضعیت</th>
-                                    <th scope="col">عملیات</th>
-                                    <th scope="col">آیدی کامنت</th>
-
+                                    <th scope="col" class="w-full">کامنت</th>
+                                    <th scope="col" class="w-fit text-center">وضعیت</th>
+                                    <th scope="col" class="w-fit text-center">تاریخ</th>
+                                    <th scope="col" class="w-fit text-left">عملیات</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <?php
-
-    // use App\Comment;
-
-    if (empty($comments)): ?>
-                                <tr>
-                                    <td colspan="4" class="text-center py-10 text-base-content/50">
-                                        هیچ کامنتی ثبت نشده است
-                                    </td>
-                                </tr>
-                                <?php endif; ?>
-
-                                <?php foreach ($comments as $comment): ?>
-                                <?php    $user = $comment->user(); ?>
-
-                                <tr id="comment-row-<?= $comment->id ?>" class="<?= $comment->approved == 0 ? 'bg-slate-50' : '' ?>">
-
-                                    <td>
-                                        <div class="flex items-center gap-3">
-                                            <div class="avatar">
-                                                <div class="bg-base-content/10 h-10 w-10 rounded-full">
-                                                    <img src="<?= isset($user->avatar) ? asset($user->avatar) : ''; ?>"
-                                                        alt="avatar">
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="font-medium">
-                                                    <?= isset($user->first_name) ? $user->first_name . ' ' . $user->last_name : 'کاربر حذف شده'; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td
-                                        class="!max-w-[300px] !break-words !whitespace-normal !min-w-[200px] comment-text-<?= $comment->id ?>">
-                                        <div>
-                                            <span class="!text-sm">
-                                                <?= $comment->comment; ?>
-                                            </span>
-                                            <?php    $rr = Comment::find($comment->parent_id);
-        if ($rr != null) {
-            echo "                                        <span class='text-xs text-blue-400'>پاسخ به کامنت " . mb_substr(strip_tags($rr->comment), 0, 15, 'UTF-8') . "... با آیدی " . $comment->id . "</span>
-    ";
-            }
-                                              ?>
-
-                                        </div>
-
-                                    </td>
-
-                                    <td>
-                                        <?php    if ($comment->approved == 1): ?>
-                                        <span class="badge badge-soft badge-success badge-sm">تایید شده</span>
-                                        <?php    else: ?>
-                                        <span class="badge badge-soft badge-warning badge-sm">در انتظار تایید</span>
-                                        <?php    endif; ?>
-                                    </td>
-
-                                    <td>
-                                        <!-- <form action="<?php    // echo route('admin.comments.destroy', [$comment->id]) ?>"
-                                                        method="post" class="inline ajax-form join-item">
-                                                        <input type="hidden" name="_method" value="delete">
-                                                        <button type="submit">
-                                                <span class="badge badge-soft badge-error badge-sm cursor-pointer btn-delete-comment"
-                                                data-id="<?php    //echo $comment->id ?>">حذف</span>
-                                                </button>
-                                                </form> -->
-                                        <span
-                                            class="badge badge-soft badge-error badge-sm cursor-pointer btn-delete-comment"
-                                            data-id="<?= $comment->id ?>">حذف</span>
-
-                                        <span
-                                            class="badge badge-soft badge-success badge-sm cursor-pointer btn-toggle-approved"
-                                            data-id="<?= $comment->id ?>">
-                                            <?= $comment->approved == 1 ? 'عدم تایید' : 'تایید'; ?>
-                                        </span>
-
-                                        <span class="badge badge-soft badge-info badge-sm cursor-pointer btn-answer-comment"
-                                            data-id="<?= $comment->id ?>">پاسخ</span>
-
-                                        <span
-                                            class="badge badge-soft badge-primary badge-sm cursor-pointer btn-edit-comment"
-                                            data-id="<?= $comment->id ?>">ویرایش</span>
-                                    </td>
-
-                                    <td><?= $comment->id ?></td>
-
-                                </tr>
-
-                                <!-- ردیف ادیتور inline (accordion) - برای ویرایش یا پاسخ -->
-                                <tr id="editor-row-<?= $comment->id ?>" class="comment-editor-row">
-                                    <td colspan="4" class="bg-slate-50 p-4">
-                                        <div class="flex flex-col gap-3">
-                                            <span
-                                                class="editor-mode-label-<?= $comment->id ?> text-sm font-semibold"></span>
-
-                                            <div class="bg-white rounded-lg overflow-hidden shadow-sm">
-                                                <textarea id="tinymce-comment-<?= $comment->id ?>"
-                                                    class="tinymce-comment-editor"></textarea>
-                                            </div>
-
-                                            <div class="flex gap-2 justify-end">
-                                                <button type="button"
-                                                    class="btn btn-soft btn-secondary btn-sm btn-cancel-editor"
-                                                    data-id="<?= $comment->id ?>">
-                                                    انصراف
-                                                </button>
-                                                <button type="button" class="btn btn-primary btn-sm btn-save-editor"
-                                                    data-id="<?= $comment->id ?>">
-                                                    <span class="editor-save-label-<?= $comment->id ?>"></span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <?php endforeach; ?>
+                            <tbody id="comments-body" aria-busy="false">
+                                @include('admin.comments.partials.rows')
                             </tbody>
                         </table>
                     </div>
@@ -188,6 +85,90 @@
 
             const UPDATE_URL = "<?= url('admin/comments/update') ?>";
             const ANSWER_URL = "<?= url('admin/comments/answer') ?>";
+            const SEARCH_URL = "<?= route('admin.comments.search') ?>";
+            let searchTimer = null;
+            let searchRequest = null;
+            let searchVersion = 0;
+
+            function setSearchLoading(isLoading) {
+                $('#comment-search-loading').toggleClass('hidden', !isLoading);
+                $('#comments-body').attr('aria-busy', isLoading ? 'true' : 'false');
+            }
+
+            function destroyCommentEditors() {
+                Object.keys(initializedEditors).forEach(function (id) {
+                    const editor = initializedEditors[id];
+
+                    try {
+                        if (editor && typeof editor.remove === 'function') {
+                            editor.remove();
+                        }
+                    } catch (_error) {
+                        // اگر ادیتور قبلاً از DOM حذف شده باشد، فقط state محلی پاک می‌شود.
+                    }
+
+                    delete initializedEditors[id];
+                    delete editorModes[id];
+                });
+            }
+
+            function replaceCommentRows(html) {
+                destroyCommentEditors();
+                $('#comments-body').html(html);
+            }
+
+            function loadComments(query) {
+                const requestId = ++searchVersion;
+
+                if (searchRequest) {
+                    searchRequest.abort();
+                }
+
+                setSearchLoading(true);
+                $('#comment-search-status').text('در حال جست‌وجو...');
+
+                searchRequest = $.ajax({
+                    url: SEARCH_URL,
+                    type: 'GET',
+                    dataType: 'json',
+                    data: { q: query }
+                })
+                    .done(function (response) {
+                        if (requestId !== searchVersion) return;
+
+                        replaceCommentRows(response.html);
+
+                        if (query === '') {
+                            $('#comment-search-status').text('');
+                        } else if (response.count === 0) {
+                            $('#comment-search-status').text('نتیجه‌ای یافت نشد.');
+                        } else if (response.limited) {
+                            $('#comment-search-status').text('۵۰ نتیجهٔ اول نمایش داده شد.');
+                        } else {
+                            $('#comment-search-status').text(response.count + ' نتیجه پیدا شد.');
+                        }
+                    })
+                    .fail(function (_xhr, status) {
+                        if (status === 'abort' || requestId !== searchVersion) return;
+
+                        $('#comment-search-status').text('خطا در جست‌وجو؛ دوباره تلاش کنید.');
+                    })
+                    .always(function () {
+                        if (requestId !== searchVersion) return;
+
+                        searchRequest = null;
+                        setSearchLoading(false);
+                    });
+            }
+
+            $('#comment-search').on('input', function () {
+                const query = $(this).val().trim();
+
+                clearTimeout(searchTimer);
+                searchTimer = setTimeout(function () {
+                    loadComments(query);
+                }, 350);
+            });
 
             function initTinyMCE(id) {
                 if (initializedEditors[id]) return;
@@ -203,15 +184,15 @@
                     plugins: ['advlist', 'autolink', 'lists', 'link', 'charmap', 'searchreplace', 'visualblocks', 'wordcount'],
                     toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link',
                     content_style: `
-                            body {
-                                font-family: vazir, Arial, sans-serif;
-                                direction: rtl;
-                                text-align: right;
-                                font-size: 14px;
-                                line-height: 1.8;
-                                padding: 12px;
-                            }
-                        `,
+                                    body {
+                                        font-family: vazir, Arial, sans-serif;
+                                        direction: rtl;
+                                        text-align: right;
+                                        font-size: 14px;
+                                        line-height: 1.8;
+                                        padding: 12px;
+                                    }
+                                `,
                     setup: function (editor) {
                         editor.on('init', function () {
                             initializedEditors[id] = editor;
@@ -349,6 +330,11 @@
                     type: 'POST',
                     data: { _method: 'delete' },
                     success: function () {
+                        if (initializedEditors[id]) {
+                            initializedEditors[id].remove();
+                            delete initializedEditors[id];
+                            delete editorModes[id];
+                        }
                         $('#comment-row-' + id).fadeOut(300, function () {
                             $(this).remove();
                         });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Comment;
 use App\Http\Requests\Admin\CommentRequest;
 use System\Auth\Auth;
+use System\Config\Config;
 
 class CommentsController extends AdminController
     {
@@ -12,6 +13,51 @@ class CommentsController extends AdminController
         {
         $comments = Comment::all();
         return view('admin.comments.index', compact('comments'));
+        }
+
+    /**
+     * جست‌وجوی زندهٔ متن کامنت‌ها و برگرداندن ردیف‌های آمادهٔ جدول برای AJAX.
+     */
+    public function search()
+        {
+        $query = trim((string) ($_GET['q'] ?? ''));
+        $query = mb_substr($query, 0, 100, 'UTF-8');
+
+        if ($query === '') {
+            // این حالت جدول را با وضعیت تازهٔ دیتابیس به حالت اولیه برمی‌گرداند.
+            $comments = Comment::all();
+            $isLimited = false;
+            }
+        else {
+            // LIKE با PDO bind می‌شود. % و _ را هم literal در نظر می‌گیریم.
+            $likeQuery = str_replace(
+                ['\\', '%', '_'],
+                ['\\\\', '\\%', '\\_'],
+                $query
+            );
+
+            // get() در HasSoftDelete شرط deleted_at را خودکار اضافه نمی‌کند.
+            $comments = Comment::whereNull('deleted_at')
+                ->where('comment', 'LIKE', '%' . $likeQuery . '%')
+                ->orderBy('created_at', 'DESC')
+                ->limit(0, 50)
+                ->get();
+            $isLimited = count($comments) === 50;
+            }
+
+        require_once Config::get('app.BASE_DIR') . '/public/jdf/jdf.php';
+
+        ob_start();
+        view('admin.comments.partials.rows', compact('comments'));
+        $html = ob_get_clean();
+
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode([
+            'html'    => $html,
+            'count'   => count($comments),
+            'limited' => $isLimited,
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
         }
 
     public function show($id)
