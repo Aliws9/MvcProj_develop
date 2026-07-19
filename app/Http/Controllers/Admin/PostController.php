@@ -125,7 +125,7 @@ class PostController extends AdminController
             $inputs['summary'] = mb_substr($ptag, 0, 300, 'UTF-8');
             dd($inputs['summary']);
             }
-            dd($inputs['summary']);
+
         Post::create($inputs);
         return redirect('admin/post');
         }

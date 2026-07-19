@@ -29,7 +29,7 @@
         }
     </style>
     <?php  require_once Config::get('app.BASE_DIR') . '/public/jdf/jdf.php';
-     ?>
+         ?>
 @endsection
 
 @section('content')
@@ -44,9 +44,11 @@
                     <label class="sr-only" for="comment-search">جست‌وجو در نظرات</label>
                     <input type="search" class="grow" id="comment-search" maxlength="100" autocomplete="off"
                         placeholder="جست‌وجو در متن نظرات...">
-                    <span id="comment-search-loading" class="loading loading-spinner loading-xs hidden" aria-hidden="true"></span>
+                    <span id="comment-search-loading" class="loading loading-spinner loading-xs hidden"
+                        aria-hidden="true"></span>
                 </div>
-                <span id="comment-search-status" class="text-sm text-base-content/60" role="status" aria-live="polite"></span>
+                <span id="comment-search-status" class="text-sm text-base-content/60" role="status"
+                    aria-live="polite"></span>
             </div>
 
             <div class="overflow-x-auto">
@@ -91,7 +93,7 @@
             let searchVersion = 0;
 
             function setSearchLoading(isLoading) {
-                $('#comment-search-loading').toggleClass('hidden', !isLoading);
+                $('#comment-search-loading').removeClass('hidden', !isLoading);
                 $('#comments-body').attr('aria-busy', isLoading ? 'true' : 'false');
             }
 
@@ -135,6 +137,7 @@
                 })
                     .done(function (response) {
                         if (requestId !== searchVersion) return;
+
 
                         replaceCommentRows(response.html);
 
@@ -184,15 +187,15 @@
                     plugins: ['advlist', 'autolink', 'lists', 'link', 'charmap', 'searchreplace', 'visualblocks', 'wordcount'],
                     toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link',
                     content_style: `
-                                    body {
-                                        font-family: vazir, Arial, sans-serif;
-                                        direction: rtl;
-                                        text-align: right;
-                                        font-size: 14px;
-                                        line-height: 1.8;
-                                        padding: 12px;
-                                    }
-                                `,
+                                        body {
+                                            font-family: vazir, Arial, sans-serif;
+                                            direction: rtl;
+                                            text-align: right;
+                                            font-size: 14px;
+                                            line-height: 1.8;
+                                            padding: 12px;
+                                        }
+                                    `,
                     setup: function (editor) {
                         editor.on('init', function () {
                             initializedEditors[id] = editor;

@@ -5,9 +5,13 @@
     </td>
 </tr>
 <?php endif; ?>
-
+<style>
+    table td {
+        vertical-align: baseline !important;
+    }
+</style>
 <?php foreach ($comments as $comment): ?>
-<?php $user = $comment->user(); ?>
+<?php    $user = $comment->user(); ?>
 
 <tr id="comment-row-<?= $comment->id ?>" class="<?= $comment->approved == 0 ? 'bg-slate-50' : '' ?>">
     <td class="w-px whitespace-nowrap"><?= $comment->id ?></td>
@@ -30,25 +34,25 @@
     <td class="!max-w-[300px] !break-words !whitespace-normal !min-w-[200px]">
         <div>
             <span class="!text-sm comment-text-<?= $comment->id ?>">
-                <?= $comment->comment; ?>
+                <?= mb_substr($comment->comment, 0, 300, 'UTF-8'); ?>
             </span>
             <?php
-            $parentComment = \App\Comment::find($comment->parent_id);
-            if ($parentComment != null) {
-                echo "<span class='text-xs text-blue-400'>پاسخ به کامنت " .
-                    mb_substr(strip_tags($parentComment->comment), 0, 15, 'UTF-8') .
-                    "... با آیدی " . $parentComment->id . "</span>";
-            }
+    $parentComment = \App\Comment::find($comment->parent_id);
+    if ($parentComment != null) {
+        echo "<span class='text-xs text-blue-400'>پاسخ به کامنت " .
+            mb_substr(strip_tags($parentComment->comment), 0, 15, 'UTF-8') .
+            "... با آیدی " . $parentComment->id . "</span>";
+        }
             ?>
         </div>
     </td>
 
     <td class="text-center">
-        <?php if ($comment->approved == 1): ?>
+        <?php    if ($comment->approved == 1): ?>
         <span class="badge badge-soft badge-success badge-sm">تایید شده</span>
-        <?php else: ?>
+        <?php    else: ?>
         <span class="badge badge-soft badge-warning badge-sm">در انتظار تایید</span>
-        <?php endif; ?>
+        <?php    endif; ?>
     </td>
 
     <td class="text-center">

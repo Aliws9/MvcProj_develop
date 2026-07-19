@@ -43,6 +43,7 @@ Route::delete('/admin/media/delete/{id}' , 'Admin\MediaController@destroy' , 'ad
 Route::get('/admin/media/list', 'Admin\MediaController@getList', 'admin.media.list');
 // Users routs
 Route::get('/admin/users' , 'Admin\UsersController@index' , 'admin.users.index');
+Route::get('/admin/users/type/{type}' , 'Admin\UsersController@type' , 'admin.users.type');
 Route::get('/admin/users/create' , 'Admin\UsersController@create' , 'admin.users.create');
 Route::post('/admin/users/store' , 'Admin\UsersController@store' , 'admin.users.store');
 Route::get('/admin/users/edit/{id}' , 'Admin\UsersController@edit' , 'admin.users.edit');
@@ -57,3 +58,11 @@ Route::post('/admin/comments/update' , 'Admin\CommentsController@update' , 'admi
 Route::post('/admin/comments/answer' , 'Admin\CommentsController@answer' , 'admin.comments.answer');
 Route::delete('/admin/comments/delete/{id}' , 'Admin\CommentsController@destroy' , 'admin.comments.destroy');
 Route::put('/admin/comments/app/{id}' , 'Admin\CommentsController@approved' , 'admin.comments.approved');
+
+//test
+Route::get('/admin/test' , 'Admin\TestController@view' , 'admin.test.view');
+
+// auth app routs
+Route::get('/register' , 'Auth\App\RegisterController@view' , 'app.auth.view');
+
+

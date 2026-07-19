@@ -7,5 +7,9 @@ return [
         'username' => '',
         'Password' => '',
         'port' => '',
+        'setFrom' => [
+            'mail' => 'ddd',
+            'name' => ''
+        ]
     ]
 ];
