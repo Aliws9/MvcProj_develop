@@ -1,191 +1,312 @@
-<link rel="stylesheet" href="<?php echo asset('tailwind/output.css'); ?>">
+@extends('admin.layouts.page')
 
-<!DOCTYPE html>
-<html lang="fa" dir="rtl" data-theme="light" class="bg-slate-100">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Image Login</title>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <style>
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .bg-animated-gradient {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        
-        .image-upload-container {
-            transition: all 0.3s ease;
-        }
-        
-        .image-upload-container:hover {
-            transform: scale(1.05);
-        }
-        
-        .image-preview {
-            transition: all 0.3s ease;
-            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
-        }
-        
-        .image-preview:hover {
-            filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.4));
-        }
-    </style>
+    @section('head-tag')
+        <?php use System\Config\Config; ?>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ثبت‌نام</title>
+        <link rel="stylesheet" href="<?php echo asset('tailwind/output.css'); ?>">
+        <script src="<?= asset('flyonui/flyonui.js'); ?>"></script>
+
+        <style>
+            @keyframes float {
+
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+
+                50% {
+                    transform: translateY(-20px);
+                }
+            }
+
+            @keyframes gradientBG {
+                0% {
+                    background-position: 0% 50%;
+                }
+
+                50% {
+                    background-position: 100% 50%;
+                }
+
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
+            .bg-animated-gradient {
+                background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+                background-size: 400% 400%;
+                animation: gradientBG 15s ease infinite;
+            }
+
+            .floating {
+                animation: float 6s ease-in-out infinite;
+            }
+
+            .avatar-upload-box {
+                transition: all .2s ease;
+            }
+
+            .avatar-upload-box:hover {
+                transform: scale(1.03);
+            }
+
+            .avatar-preview-img {
+                filter: drop-shadow(0 10px 15px rgba(0, 0, 0, .3));
+            }
+        </style>
+    @endsection
 </head>
-<body class="min-h-screen bg-animated-gradient flex items-center justify-center p-4">
-    <div class="absolute inset-0 overflow-hidden">
-        <!-- Animated background elements -->
-        <div class="absolute top-10 left-20 w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm floating" style="animation-delay: 0s;"></div>
-        <div class="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-white/15 backdrop-blur-sm floating" style="animation-delay: 1s;"></div>
-        <div class="absolute bottom-20 left-1/4 w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm floating" style="animation-delay: 2s;"></div>
-        <div class="absolute top-1/4 right-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm floating" style="animation-delay: 3s;"></div>
+@section('content')
+
+
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-10 left-20 w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm floating"
+            style="animation-delay:0s"></div>
+        <div class="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-white/15 backdrop-blur-sm floating"
+            style="animation-delay:1s"></div>
+        <div class="absolute bottom-20 left-1/4 w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm floating"
+            style="animation-delay:2s"></div>
+        <div class="absolute top-1/4 right-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm floating"
+            style="animation-delay:3s"></div>
     </div>
 
-    <div class="relative w-full max-w-md">
-        <!-- Login Card -->
-        <div class="bg-white/20 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-3xl">
+    <div class="relative w-full md:w-[70%] lg:w-2/6">
+        <div class="bg-white/20 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden">
             <div class="p-8">
-                <div class="text-center mb-8">
-                    <h1 class="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-                    <p class="text-white/80">Authenticate with your image</p>
+
+                <div class="text-center mb-6">
+                    <h1 class="text-3xl font-bold text-white mb-2">ایجاد حساب کاربری</h1>
+                    <p class="text-white/80">برای ثبت‌نام اطلاعات زیر را تکمیل کنید</p>
                 </div>
 
-                <!-- Image Upload Section -->
-                <div class="mb-6">
-                    <div id="imageUpload" class="image-upload-container border-2 border-dashed border-white/30 rounded-xl p-6 text-center cursor-pointer hover:border-white/50 transition-colors">
-                        <div class="flex flex-col items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white mb-3 pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <p class="text-white font-medium">Click to upload your image</p>
-                            <p class="text-white/60 text-sm mt-1">Or drag and drop</p>
-                        </div>
-                        <input type="file" id="fileInput" class="hidden" accept="image/*" />
-                    </div>
-                    
-                    <div id="imagePreviewContainer" class="hidden mt-4 flex justify-center">
-                        <div class="relative">
-                            <img id="imagePreview" class="image-preview w-32 h-32 rounded-full object-cover border-4 border-white/30" src="" alt="Preview">
-                            <div class="absolute -bottom-2 -right-2 bg-indigo-500 rounded-full p-2 shadow-lg">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-                                </svg>
+                <!-- پیام‌های خطا -->
+                <?php
+    $errorEmail = errorClass('email');
+    $errorPassword = errorClass('password');
+    $errorFirstName = errorClass('first_name');
+    $errorLastName = errorClass('last_name');
+    $errorAvatar = errorClass('avatar');
+                    ?>
+
+                <div class="<?= $errorEmail['class_error']; ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
+                    role="alert" id="dismiss-alert-error-email">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
+                    <p class="text-sm"><?= $errorEmail['message_error']; ?></p>
+                    <button type="button" class="ms-auto cursor-pointer" data-remove-element="#dismiss-alert-error-email">
+                        <span class="icon-[tabler--x] size-4"></span>
+                    </button>
+                </div>
+
+                <div class="<?= $errorPassword['class_error']; ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
+                    role="alert" id="dismiss-alert-error-password">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
+                    <p class="text-sm"><?= $errorPassword['message_error']; ?></p>
+                    <button type="button" class="ms-auto cursor-pointer"
+                        data-remove-element="#dismiss-alert-error-password">
+                        <span class="icon-[tabler--x] size-4"></span>
+                    </button>
+                </div>
+
+                <div class="<?= $errorFirstName['class_error']; ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
+                    role="alert" id="dismiss-alert-error-first-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
+                    <p class="text-sm"><?= $errorFirstName['message_error']; ?></p>
+                    <button type="button" class="ms-auto cursor-pointer"
+                        data-remove-element="#dismiss-alert-error-first-name">
+                        <span class="icon-[tabler--x] size-4"></span>
+                    </button>
+                </div>
+
+                <div class="<?= $errorLastName['class_error']; ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
+                    role="alert" id="dismiss-alert-error-last-name">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
+                    <p class="text-sm"><?= $errorLastName['message_error']; ?></p>
+                    <button type="button" class="ms-auto cursor-pointer"
+                        data-remove-element="#dismiss-alert-error-last-name">
+                        <span class="icon-[tabler--x] size-4"></span>
+                    </button>
+                </div>
+
+                <div class="<?= $errorAvatar['class_error']; ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
+                    role="alert" id="dismiss-alert-error-avatar">
+                    <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
+                    <p class="text-sm"><?= $errorAvatar['message_error']; ?></p>
+                    <button type="button" class="ms-auto cursor-pointer" data-remove-element="#dismiss-alert-error-avatar">
+                        <span class="icon-[tabler--x] size-4"></span>
+                    </button>
+                </div>
+
+                <!-- فرم ثبت‌نام: تمام فیلدها هم‌نام با ستون‌های جدول users -->
+                <form action="<?= route('app.auth.register'); ?>" method="post" enctype="multipart/form-data" id="registerForm">
+
+                    <!-- تصویر پروفایل -->
+                    <div class="mb-6">
+                        <label class="block text-white/90 text-sm mb-2 text-center">تصویر پروفایل</label>
+
+                        <div class="flex justify-center">
+                            <div class="relative">
+                                <!-- پیش‌نمایش تصویر -->
+                                <div id="avatarPreviewWrap" class="hidden relative">
+                                    <img id="avatarPreview"
+                                        class="avatar-preview-img w-32 h-32 rounded-full object-cover border-4 border-white/30"
+                                        src="" alt="پیش‌نمایش تصویر">
+
+                                    <!-- دکمه تغییر تصویر -->
+                                    <button type="button" id="changeAvatarBtn"
+                                        class="absolute -bottom-1 -left-1 bg-indigo-500 hover:bg-indigo-600 rounded-full p-2 shadow-lg transition flex items-center justify-center content-center"
+                                        aria-label="تغییر تصویر" title="تغییر تصویر">
+                                        <span class="icon-[tabler--pencil] size-4 text-white"></span>
+                                    </button>
+
+                                    <!-- دکمه حذف تصویر -->
+                                    <button type="button" id="removeAvatarBtn"
+                                        class="absolute -bottom-1 -right-1 bg-red-500 hover:bg-red-600 rounded-full p-2 shadow-lg transition flex items-center justify-center content-center"
+                                        aria-label="حذف تصویر" title="حذف تصویر">
+                                        <span class="icon-[tabler--x] size-4 text-white"></span>
+                                    </button>
+                                </div>
+
+                                <!-- باکس آپلود اولیه -->
+                                <div id="avatarUploadBox"
+                                    class="avatar-upload-box w-32 h-32 rounded-full border-2 border-dashed border-white/40 flex flex-col items-center justify-center cursor-pointer hover:border-white/70 transition">
+                                    <span class="icon-[tabler--camera-plus] size-8 text-white mb-1"></span>
+                                    <span class="text-white/70 text-xs">انتخاب تصویر</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Additional Fields -->
-                <div class="space-y-4">
-                    <div class="relative">
-                        <input type="text" class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition" placeholder="Username">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
+                        <input type="file" id="avatarInput" name="avatar" class="hidden"
+                            accept="image/png,image/jpeg,image/jpg">
+                        <p class="text-white/60 text-xs text-center mt-2">فرمت مجاز: JPG یا PNG - حداکثر ۵ مگابایت</p>
                     </div>
                     
-                    <div class="relative">
-                        <input type="password" class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition" placeholder="Password">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                            </svg>
+
+                    <!-- نام و نام خانوادگی -->
+                    <div class="grid grid-cols-2 gap-3 mb-4">
+                        <div class="relative">
+                            <input type="text" name="first_name" value="<?= old('first_name'); ?>"
+                                class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition"
+                                placeholder="نام" required>
+                        </div>
+                        <div class="relative">
+                            <input type="text" name="last_name" value="<?= old('last_name'); ?>"
+                                class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition"
+                                placeholder="نام خانوادگی" required>
                         </div>
                     </div>
-                </div>
 
-                <button class="w-full mt-6 bg-white text-indigo-600 py-3 px-4 rounded-lg font-semibold hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-500 transition-all transform hover:scale-105 active:scale-95">
-                    Authenticate
-                </button>
+                    <!-- ایمیل -->
+                    <div class="relative mb-4">
+                        <input type="email" name="email" value="<?= old('email'); ?>"
+                            class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 ps-10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition"
+                            placeholder="آدرس ایمیل" required>
+                        <div class="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
+                            <span class="icon-[tabler--mail] size-5 text-white/70"></span>
+                        </div>
+                    </div>
 
-                <div class="mt-4 text-center">
-                    <a href="#" class="text-white/70 hover:text-white text-sm transition">Forgot your password?</a>
-                </div>
+                    <!-- رمز عبور -->
+                    <div class="relative mb-4">
+                        <input type="password" name="password" id="passwordInput"
+                            class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 ps-10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition toggle-password-checkbox1"
+                            placeholder="رمز عبور (حداقل ۸ کاراکتر)" minlength="8" value="<?= old('password'); ?>" required>
+                        <div class="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
+                            <span class="icon-[tabler--lock] size-5 text-white/70"></span>
+                        </div>
+
+                    </div>
+
+                    <!-- تکرار رمز عبور -->
+                    <div class="relative mb-6">
+                        <input type="password" name="password_confirmation" id="passwordConfirmInput"
+                            class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 ps-10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition toggle-password-checkbox"
+                            placeholder="تکرار رمز عبور" minlength="8" value="<?= old('password'); ?>" required>
+                        <div class="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
+                            <span class="icon-[tabler--lock-check] size-5 text-white/70"></span>
+                        </div>
+                    </div>
+
+                    <div class="relative mb-6">
+                        <div class="flex items-center gap-2">
+                            <input id="toggleCheckboxPassword" type="checkbox"
+                                data-toggle-password='{ "target": ["#passwordInput" , "#passwordConfirmInput"] }'
+                                class="checkbox checkbox-primary !rounded-full" style="border:1px solid white" />
+                            <label class="label-text !text-white" for="toggleCheckboxPassword">نمایش رمز عبور</label>
+                        </div>
+                    </div>
+
+
+
+                    <button type="submit"
+                        class="w-full bg-white text-indigo-600 py-3 px-4 rounded-lg font-semibold hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-500 transition-all transform hover:scale-105 active:scale-95">
+                        ثبت‌نام
+                    </button>
+                </form>
             </div>
         </div>
 
-        <div class="absolute -bottom-10 left-0 right-0 text-center">
-            <p class="text-white/50 text-sm">Don't have an account? <a href="#" class="text-white hover:underline">Sign up</a></p>
+        <div class="mt-6 text-center">
+            <p class="text-white/60 text-sm">قبلاً ثبت‌نام کرده‌اید؟ <a href="<?= url('login'); ?>"
+                    class="text-white hover:underline">وارد شوید</a></p>
         </div>
     </div>
 
     <script>
-        // Handle image upload and preview
-        const imageUpload = document.getElementById('imageUpload');
-        const fileInput = document.getElementById('fileInput');
-        const imagePreview = document.getElementById('imagePreview');
-        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        (function () {
+            const uploadBox = document.getElementById('avatarUploadBox');
+            const fileInput = document.getElementById('avatarInput');
+            const previewWrap = document.getElementById('avatarPreviewWrap');
+            const previewImg = document.getElementById('avatarPreview');
+            const changeBtn = document.getElementById('changeAvatarBtn');
+            const removeBtn = document.getElementById('removeAvatarBtn');
 
-        imageUpload.addEventListener('click', () => {
-            fileInput.click();
-        });
+            function openFileDialog() {
+                fileInput.click();
+            }
 
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
+            // باز کردن انتخاب فایل با کلیک روی باکس اولیه یا دکمه تغییر تصویر
+            uploadBox.addEventListener('click', openFileDialog);
+            changeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                openFileDialog();
+            });
+
+            fileInput.addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
                 const reader = new FileReader();
-                reader.onload = (event) => {
-                    imagePreview.src = event.target.result;
-                    imagePreviewContainer.classList.remove('hidden');
-                    imageUpload.classList.add('hidden');
-                    
-                    // Add animation to the preview
-                    imagePreview.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        imagePreview.style.transform = 'scale(1)';
-                        imagePreview.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                    }, 50);
+                reader.onload = function (event) {
+                    previewImg.src = event.target.result;
+                    previewWrap.classList.remove('hidden');
+                    uploadBox.classList.add('hidden');
                 };
                 reader.readAsDataURL(file);
-            }
-        });
+            });
 
-        // Allow drag and drop
-        imageUpload.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            imageUpload.classList.add('border-white/50', 'bg-white/10');
-        });
+            // حذف تصویر انتخاب‌شده و بازگشت به حالت اولیه
+            removeBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                fileInput.value = '';
+                previewImg.src = '';
+                previewWrap.classList.add('hidden');
+                uploadBox.classList.remove('hidden');
+            });
 
-        imageUpload.addEventListener('dragleave', () => {
-            imageUpload.classList.remove('border-white/50', 'bg-white/10');
-        });
-
-        imageUpload.addEventListener('drop', (e) => {
-            e.preventDefault();
-            imageUpload.classList.remove('border-white/50', 'bg-white/10');
-            
-            if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                const event = new Event('change');
-                fileInput.dispatchEvent(event);
-            }
-        });
+            // اعتبارسنجی سادهٔ سمت کلاینت برای برابر بودن رمزها قبل از ارسال
+            document.getElementById('registerForm').addEventListener('submit', function (e) {
+                const pass = document.getElementById('passwordInput').value;
+                const confirm = document.getElementById('passwordConfirmInput').value;
+                if (pass !== confirm) {
+                    e.preventDefault();
+                    alert('رمز عبور و تکرار آن یکسان نیستند.');
+                }
+            });
+        })();
     </script>
-</body>
-</html>
+@endsection

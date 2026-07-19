@@ -12,4 +12,10 @@ class RegisterController{
     public function view(){
         return view('auth.app.register');
     }
+
+    public function register(){
+        $request = new RegisterRequest();
+        $inputs = $request->all();
+        // ادامه آپلود و ارسال اطلاعات به صورت ajax به این متد و ریدایرکت به /login
+    }
 }

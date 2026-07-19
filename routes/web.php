@@ -64,5 +64,6 @@ Route::get('/admin/test' , 'Admin\TestController@view' , 'admin.test.view');
 
 // auth app routs
 Route::get('/register' , 'Auth\App\RegisterController@view' , 'app.auth.view');
+Route::post('/register' , 'Auth\App\RegisterController@register' , 'app.auth.register');
 
 
