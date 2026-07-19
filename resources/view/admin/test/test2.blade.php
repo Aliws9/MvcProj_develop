@@ -71,19 +71,19 @@
     }
 </style>
 
-<html dir="rtl">
+<html dir='rtl'>
 <body>
-    <div class="container">
-        <div class="header-mail">
-            <h1 class="h1-mail">فعال سازی اکانت</h1>
+    <div class='container'>
+        <div class='header-mail'>
+            <h1 class='h1-mail'>فعال سازی اکانت</h1>
         </div>
-        <div class="content">
-            <div class="main-content">
+        <div class='content'>
+            <div class='main-content'>
                 <p>ممنون که عضو خانواده ما شدید.</p>
                 <p>برای فعال سازی اکانت خود روی دکمه زیر کلیک کنید تا اکانت خود را فعال کنید و وارد شوید.</p>
             </div>
-            <div class="button-container">
-                <a href="#" class="button-b">فعال سازی</a>
+            <div class='button-container'>
+                <a href='#' class='button-b'>فعال سازی</a>
             </div>
         </div>
         <br>

@@ -15,7 +15,7 @@ class MailService
         $mail = new PHPMailer(true);
 
         try {
-            $mail->CharSet = 'UFT-8';
+            $mail->CharSet = 'UTF-8';
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP

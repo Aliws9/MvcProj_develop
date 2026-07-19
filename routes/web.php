@@ -65,5 +65,8 @@ Route::get('/admin/test' , 'Admin\TestController@view' , 'admin.test.view');
 // auth app routs
 Route::get('/register' , 'Auth\App\RegisterController@view' , 'app.auth.view');
 Route::post('/register' , 'Auth\App\RegisterController@register' , 'app.auth.register');
+Route::post('/register/activation/{token}' , 'Auth\App\RegisterController@activation' , 'app.auth.activation');
 
-
+// register avatar upload (FilePond)
+Route::post('/register/avatar/upload' , 'Auth\App\RegisterController@uploadAvatar' , 'app.auth.avatar.upload');
+Route::delete('/register/avatar/delete' , 'Auth\App\RegisterController@deleteAvatar' , 'app.auth.avatar.delete');

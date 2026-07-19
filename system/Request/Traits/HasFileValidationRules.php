@@ -42,7 +42,7 @@ trait HasFileValidationRules
 
     protected function fileType($name, $typesArray) {
 
-        if ($this->checkFirstError($name) && $this->checkFileExists($name))
+        if ($this->checkFirstError($name) && $this->checkFileExist($name))
         {
             $currenFileType = explode('/', $this->files[$name]['type'])[1];
             if (!in_array($currenFileType, $typesArray))
@@ -57,7 +57,7 @@ trait HasFileValidationRules
         //تبدیل کیلوبایت به مگابایت با اعشار
         $size = $size * 1024;
 
-        if ($this->checkFirstError($name) && $this->checkFileExists($name))
+        if ($this->checkFirstError($name) && $this->checkFileExist($name))
         {
             if ($this->files[$name]['size'] > $size)
             {
@@ -71,7 +71,7 @@ trait HasFileValidationRules
         //تبدیل کیلوبایت به مگابایت با اعشار
         $size = $size * 1024;
 
-        if ($this->checkFirstError($name) && $this->checkFileExists($name))
+        if ($this->checkFirstError($name) && $this->checkFileExist($name))
         {
             if ($this->files[$name]['size'] < $size)
             {

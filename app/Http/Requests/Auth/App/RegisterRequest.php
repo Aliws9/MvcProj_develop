@@ -11,7 +11,7 @@ class RegisterRequest extends Request{
             'password' => 'required|min:8|confirmed',
             'first_name' => 'required|max:64',
             'last_name' => 'required|max:64',
-            'avatar' => 'required|file|mimes:jpeg,jpg,png|max:5000',
+            'username' => 'required|max:64|unique:user,username',
         ];
     }
 }

@@ -2,14 +2,14 @@
 
 return [
     'SMTP' => [
-        'Host' => '',
+        'Host' => 'smtp.gmail.com',
         'SMTPAuth' => true,
-        'username' => '',
-        'Password' => '',
-        'port' => '',
+        'username' => 'webseo963@gmail.com',
+        'Password' => '09391278879a',
+        'port' => '587',
         'setFrom' => [
-            'mail' => 'ddd',
-            'name' => ''
+            'mail' => 'admin@mvc.com',
+            'name' => 'admin'
         ]
     ]
 ];

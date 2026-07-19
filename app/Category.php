@@ -8,7 +8,7 @@ class Category extends Model{
     use HasSoftDelete;
 
      protected $table = "categories";
-     protected $fillable = ['name' , 'parent_id' , 'description' , 'id'];
+     protected $fillable = ['name' , 'parent_id' , 'description'];
 
 
      protected $deletedAt = 'deleted_at';
