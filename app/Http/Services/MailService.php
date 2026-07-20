@@ -17,7 +17,11 @@ class MailService
         try {
             $mail->CharSet = 'UTF-8';
             //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->Debugoutput = function ($str, $level)
+                {
+                file_put_contents(__DIR__ . '/../../../storage/logs/mail.log', $str . "\n", FILE_APPEND);
+                };                    //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host = Config::get('mail.SMTP.Host');                     //Set the SMTP server to send through
             $mail->SMTPAuth = Config::get('mail.SMTP.SMTPAuth');                                   //Enable SMTP authentication

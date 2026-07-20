@@ -139,60 +139,21 @@
 
                 <!-- پیام‌های خطا -->
                 <?php
-    $errorEmail = errorClass('email');
-    $errorPassword = errorClass('password');
-    $errorFirstName = errorClass('first_name');
-    $errorLastName = errorClass('last_name');
-    $errorAvatar = errorClass('avatar');
-                    ?>
-
-                <div class="<?= $errorEmail['class_error']; ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
-                    role="alert" id="dismiss-alert-error-email">
+    if (errorExist()) {
+        foreach (allErorrs() as $key => $error) {
+                                        ?>
+                <div class="dismiss-alert-error-<?= $key ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
+                    role="alert" id="dismiss-alert-error-<?= $key ?>">
                     <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
-                    <p class="text-sm"><?= $errorEmail['message_error']; ?></p>
-                    <button type="button" class="ms-auto cursor-pointer" data-remove-element="#dismiss-alert-error-email">
-                        <span class="icon-[tabler--x] size-4"></span>
-                    </button>
-                </div>
-
-                <div class="<?= $errorPassword['class_error']; ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
-                    role="alert" id="dismiss-alert-error-password">
-                    <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
-                    <p class="text-sm"><?= $errorPassword['message_error']; ?></p>
+                    <p class="text-sm"><?= $error ?></p>
                     <button type="button" class="ms-auto cursor-pointer"
-                        data-remove-element="#dismiss-alert-error-password">
+                        data-remove-element="#dismiss-alert-error-<?= $key ?>">
                         <span class="icon-[tabler--x] size-4"></span>
                     </button>
                 </div>
-
-                <div class="<?= $errorFirstName['class_error']; ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
-                    role="alert" id="dismiss-alert-error-first-name">
-                    <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
-                    <p class="text-sm"><?= $errorFirstName['message_error']; ?></p>
-                    <button type="button" class="ms-auto cursor-pointer"
-                        data-remove-element="#dismiss-alert-error-first-name">
-                        <span class="icon-[tabler--x] size-4"></span>
-                    </button>
-                </div>
-
-                <div class="<?= $errorLastName['class_error']; ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
-                    role="alert" id="dismiss-alert-error-last-name">
-                    <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
-                    <p class="text-sm"><?= $errorLastName['message_error']; ?></p>
-                    <button type="button" class="ms-auto cursor-pointer"
-                        data-remove-element="#dismiss-alert-error-last-name">
-                        <span class="icon-[tabler--x] size-4"></span>
-                    </button>
-                </div>
-
-                <div class="<?= $errorAvatar['class_error']; ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
-                    role="alert" id="dismiss-alert-error-avatar">
-                    <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
-                    <p class="text-sm"><?= $errorAvatar['message_error']; ?></p>
-                    <button type="button" class="ms-auto cursor-pointer" data-remove-element="#dismiss-alert-error-avatar">
-                        <span class="icon-[tabler--x] size-4"></span>
-                    </button>
-                </div>
+                <?php            }
+        }
+    ; ?>
 
                 <!-- پیام خطای عمومی برای ارسال AJAX -->
                 <div id="ajaxErrorAlert" class="hidden alert alert-error alert-soft flex items-center gap-3 mb-3"
@@ -215,7 +176,7 @@
                         </div>
 
                         <!-- مسیر فایل آپلود شده که در سرور ذخیره شده -->
-                        <input type="hidden" name="avatar" id="avatarPathInput" value="<?= old('avatar'); ?>">
+                        <input type="hidden" name="avatar" id="avatarPathInput" value="<?=  ''; ?>">
 
                         <p class="text-white/60 text-xs text-center mt-2">فرمت مجاز: JPG یا PNG - حداکثر ۵ مگابایت</p>
                     </div>
@@ -244,7 +205,7 @@
                             <span class="icon-[tabler--mail] size-5 text-white/70"></span>
                         </div>
                     </div>
-                    
+
                     <!-- یوزر نیم -->
                     <div class="relative mb-4">
                         <input type="text" name="username" value="<?= old('username'); ?>"
@@ -267,8 +228,9 @@
                     </div>
 
                     <!-- تکرار رمز عبور -->
+                    <!-- password_confirmation -->
                     <div class="relative mb-6">
-                        <input type="password" name="password_confirmation" id="passwordConfirmInput"
+                        <input type="password" name="confirm_password" id="passwordConfirmInput"
                             class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 ps-10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition toggle-password-checkbox"
                             placeholder="تکرار رمز عبور" minlength="8" required>
                         <div class="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
@@ -319,21 +281,21 @@
                 credits: false,
                 allowMultiple: false,
                 maxFiles: 1,
+                instantUpload: false, // <-- کلید حل مشکل: از آپلود خودکار جلوگیری می‌کند
                 labelIdle: '<span class="icon-[tabler--camera-plus]" style="font-size:1.5rem;"></span><br>انتخاب تصویر',
                 imagePreviewHeight: "115",
-                
+
                 server: {
                     process: {
-                        url: "<?= route('app.auth.avatar.upload') ?>",
+                        url: "<?= route('auth.app.avatar.upload') ?>",
                         method: 'POST',
                         onload: (response) => {
-                            // response همون relativePath ذخیره شده در سرور هست
                             avatarPathInput.value = response;
                             return response;
                         }
                     },
                     revert: (uniqueFileId, load, error) => {
-                        fetch("<?= route('app.auth.avatar.delete') ?>", {
+                        fetch("<?= route('auth.app.avatar.delete') ?>", {
                             method: 'DELETE',
                             body: uniqueFileId
                         }).then(() => {
@@ -342,9 +304,12 @@
                         }).catch(() => error('خطا در حذف تصویر'));
                     }
                 },
-                // اگر مقدار قبلی (old) موجود بود، آن را به عنوان فایل از قبل آپلود شده نشان بده
+                // نمایش درصد آپلود روی overlay
+                onprocessfileprogress: (file, progress) => {
+                    overlayText.textContent = `در حال آپلود تصویر... ${Math.round(progress * 100)}%`;
+                },
                 <?php if (old('avatar')): ?>
-                files: [
+                        files: [
                     {
                         source: "<?= old('avatar'); ?>",
                         options: {
@@ -420,48 +385,58 @@
                     return;
                 }
 
-                if (pond.getFiles().length === 0) {
-                    showError('لطفاً یک تصویر پروفایل انتخاب کنید.');
-                    return;
+                if (pond.getFiles().length > 0) {
+
+                    submitBtn.disabled = true;
+                    showOverlay('در حال آپلود تصویر... 0%');
+
+                    pond.processFiles()
+                        .then(() => {
+                            if (!avatarPathInput.value) {
+                                hideOverlay();
+                                submitBtn.disabled = false;
+                                showError('آپلود تصویر با خطا مواجه شد. دوباره تلاش کنید.');
+                                return;
+                            }
+
+                            sendRegisterRequest();
+                        })
+                        .catch(() => {
+                            hideOverlay();
+                            submitBtn.disabled = false;
+                            showError('آپلود تصویر با خطا مواجه شد. دوباره تلاش کنید.');
+                        });
+
+                } else {
+                    sendRegisterRequest();
                 }
 
-                submitBtn.disabled = true;
-                showOverlay('در حال آپلود تصویر و ثبت‌نام...');
+                async function sendRegisterRequest() {
+                    showOverlay('در حال ثبت‌نام...');
+                    const formData = new FormData(form);
 
-                // const uploadOk = await waitForUploadToFinish();
+                    try {
+                        const response = await fetch("<?= route('auth.app.register') ?>", {
+                            method: 'POST',
+                            body: formData,
+                            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                        });
 
-                // if (!uploadOk || !avatarPathInput.value) {
-                //     hideOverlay();
-                //     submitBtn.disabled = false;
-                //     showError('آپلود تصویر با خطا مواجه شد. دوباره تلاش کنید.');
-                //     return;
-                // }
+                        const data = await response.json();
 
-                showOverlay('در حال ثبت‌نام...');
-
-                const formData = new FormData(form);
-
-                try {
-                    const response = await fetch("<?= route('app.auth.register') ?>", {
-                        method: 'POST',
-                        body: formData,
-                        headers: { 'X-Requested-With': 'XMLHttpRequest' }
-                    });
-
-                    const data = await response.json();
-
-                    if (response.ok && data.success) {
-                        showOverlay('ثبت‌نام با موفقیت انجام شد. در حال انتقال...');
-                        window.location.href = data.redirect || "<?= url('login') ?>";
-                    } else {
+                        if (response.ok && data.success) {
+                            showOverlay('ثبت‌نام با موفقیت انجام شد. در حال انتقال...');
+                            window.location.href = data.redirect || "<?= url('login') ?>";
+                        } else {
+                            hideOverlay();
+                            submitBtn.disabled = false;
+                            showError(data.message || 'ثبت‌نام با خطا مواجه شد.');
+                        }
+                    } catch (err) {
                         hideOverlay();
                         submitBtn.disabled = false;
-                        showError(data.message || 'ثبت‌نام با خطا مواجه شد.');
+                        showError('ارتباط با سرور برقرار نشد. دوباره تلاش کنید.');
                     }
-                } catch (err) {
-                    hideOverlay();
-                    submitBtn.disabled = false;
-                    showError('ارتباط با سرور برقرار نشد. دوباره تلاش کنید.');
                 }
             });
         })();

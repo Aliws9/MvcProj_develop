@@ -9,7 +9,7 @@ return [
         'port' => '465',
         'setFrom' => [
             'mail' => 'admin@mvc.com',
-            'name' => 'admin'
+            'name' => 'admin' //System\Config\Config::get('app.APP_TITLE')
         ]
     ]
 ];

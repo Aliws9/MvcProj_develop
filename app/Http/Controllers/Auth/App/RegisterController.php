@@ -13,6 +13,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 class RegisterController
     {
     private $redirectTo = '/login';
+    private $redirectWait = 'login/WaitActive';
 
     public function view()
         {
@@ -112,19 +113,17 @@ class RegisterController
 
     public function register()
         {
+        ob_start(); // شروع بافر
         $request = new RegisterRequest();
         $inputs = $request->all();
 
-
-        if ($inputs['password_confirmation'] == $inputs['password']) {
-            unset($inputs['password_confirmation']);
-
-
+        if ($inputs['confirm_password'] == $inputs['password']) {
+            unset($inputs['confirm_password']);
             $inputs['password'] = password_hash($inputs['password'], PASSWORD_DEFAULT);
             $inputs['is_active'] = 0;
             $inputs['user_type'] = 'normal';
             $inputs['verify_token'] = generateToken();
-            $inputs['status'] = 0;
+            $inputs['status'] = 1;
             }
         else {
             die('رمز عبور با تکرار آن برابر نیست.');
@@ -150,6 +149,7 @@ class RegisterController
     body {
         font-family: 'yekan' !important;
         background-color: aliceblue;
+        direction: rtl !important;
     }
     .button-b:hover{
         background-color: #3a86ff;
@@ -182,14 +182,14 @@ class RegisterController
         border-radius: 10px;
         border: 2px solid #a5e6d7;'>
             <div class='main-content' style='text-align: center;
-        color: #227C9D;'>
-                <p>ممنون که عضو خانواده ما شدید.</p>
+        color: #227C9D;direction: rtl;'>
+                <p>دوست گرامی " . $inputs['first_name'] . ' ' . $inputs['last_name'] . " عزیز با نام کاربری " . $inputs['username'] . " , ممنون که عضو خانواده ما شدید.</p>
                 <p>برای فعال سازی اکانت خود روی دکمه زیر کلیک کنید تا اکانت خود را فعال کنید و وارد شوید.</p>
             </div>
             <div class='button-container' style='width: 100%;
         text-align: center;
         padding: 10px;'>
-                <a href='" . route('app.auth.activation', [$inputs['verify_token']]) . "' class='button-b' style='margin: auto;
+                <a href='" . route('auth.app.activation', [$inputs['verify_token']]) . "' class='button-b' style='margin: auto;
         display: block;
         width: 60%;
         padding: 5px;
@@ -208,11 +208,38 @@ class RegisterController
         User::create($inputs);
         $mailService = new MailService();
         $mailService->send($inputs['email'], 'ایمیل فعال سازی', $message_email);
+
+        ob_end_clean(); // پاک کردن هر خروجی اضافه قبل از JSON
         header('Content-Type: application/json');
         echo json_encode([
             'success'  => true,
-            'redirect' => $this->redirectTo,
+            'redirect' => $this->redirectWait,
         ]);
         exit;
         }
+
+    public function activation($token)
+        {
+        $user = User::where('verify_token', $token)->get();
+        if (empty($user)) {
+            die('توکن شما اعتبار ندارد.');
+            }
+        $user = $user[0];
+        if ($user->status == 1) {
+            $user->is_active = 1;
+            $user->save();
+            }
+        else {
+            die('شما توسط ادمین مسدود شده اید.');
+            }
+        return redirect('login');
+        }
+
+    //login controller
+    public function LoginWaitActive()
+        {
+        dd('hi wait', false);
+        return view('auth.app.login_wait');
+        }
+
     }
