@@ -41,7 +41,6 @@ class MailService
             $mail->Body = $body;
 
             $result = $mail->send();
-            return $result;
             } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }

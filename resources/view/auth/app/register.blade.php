@@ -202,7 +202,7 @@
                 </div>
 
                 <!-- فرم ثبت‌نام: تمام فیلدها هم‌نام با ستون‌های جدول users -->
-                <form id="registerForm" action="<?= route('app.auth.register') ?>" method="post" novalidate>
+                <form id="registerForm" novalidate>
 
                     <!-- تصویر پروفایل -->
                     <div class="mb-6">
@@ -210,12 +210,12 @@
 
                         <div class="flex justify-center">
                             <div class="avatar-filepond-wrap">
-                                <!-- <input type="file" id="avatarFilepond" accept="image/png,image/jpeg,image/jpg"> -->
+                                <input type="file" id="avatarFilepond" accept="image/png,image/jpeg,image/jpg">
                             </div>
                         </div>
 
                         <!-- مسیر فایل آپلود شده که در سرور ذخیره شده -->
-                        <input type="hidden" name="avatar" id="avatarPathInput" value="sfsffs.png">
+                        <input type="hidden" name="avatar" id="avatarPathInput" value="<?= old('avatar'); ?>">
 
                         <p class="text-white/60 text-xs text-center mt-2">فرمت مجاز: JPG یا PNG - حداکثر ۵ مگابایت</p>
                     </div>
@@ -309,7 +309,7 @@
         </div>
     </div>
 
-    <!-- <script>
+    <script>
         (function () {
             FilePond.registerPlugin(FilePondPluginImagePreview);
 
@@ -428,14 +428,14 @@
                 submitBtn.disabled = true;
                 showOverlay('در حال آپلود تصویر و ثبت‌نام...');
 
-                const uploadOk = await waitForUploadToFinish();
+                // const uploadOk = await waitForUploadToFinish();
 
-                if (!uploadOk || !avatarPathInput.value) {
-                    hideOverlay();
-                    submitBtn.disabled = false;
-                    showError('آپلود تصویر با خطا مواجه شد. دوباره تلاش کنید.');
-                    return;
-                }
+                // if (!uploadOk || !avatarPathInput.value) {
+                //     hideOverlay();
+                //     submitBtn.disabled = false;
+                //     showError('آپلود تصویر با خطا مواجه شد. دوباره تلاش کنید.');
+                //     return;
+                // }
 
                 showOverlay('در حال ثبت‌نام...');
 
@@ -465,5 +465,5 @@
                 }
             });
         })();
-    </script> -->
+    </script>
 @endsection
