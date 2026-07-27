@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth\App;
 use App\Http\Requests\Auth\App\RegisterRequest;
 use App\Http\Services\MailService;
 use App\User;
-use Exception;
 use System\Config\Config;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;

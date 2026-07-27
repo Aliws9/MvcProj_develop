@@ -63,7 +63,7 @@ Route::put('/admin/comments/app/{id}', 'Admin\CommentsController@approved', 'adm
 Route::get('/admin/test', 'Admin\TestController@view', 'admin.test.view');
 
 // auth app routs
-Route::get('/register', 'Auth\App\RegisterController@view', 'auth.app.view');
+Route::get('/register', 'Auth\App\RegisterController@view', 'auth.app.register.view');
 Route::post('/register', 'Auth\App\RegisterController@register', 'auth.app.register');
 
 Route::get('/activation/{token}', 'Auth\App\RegisterController@activation', 'auth.app.activation');
@@ -71,7 +71,9 @@ Route::get('/activation/{token}', 'Auth\App\RegisterController@activation', 'aut
 Route::post('/register/avatar/upload', 'Auth\App\RegisterController@uploadAvatar', 'auth.app.avatar.upload');
 Route::delete('/register/avatar/delete', 'Auth\App\RegisterController@deleteAvatar', 'auth.app.avatar.delete');
 
-Route::get('/login', 'Auth\App\RegisterController@login', 'app.auth.login');
+Route::get('/login', 'Auth\App\LoginController@view', 'auth.app.login.view');
+Route::post('/login', 'Auth\App\LoginController@login', 'auth.app.login');
+
 Route::get('/remember_pass', 'Auth\App\RegisterController@remember_pass', 'auth.app.remember_pass');
 Route::post('/remember_pass', 'Auth\App\RegisterController@remember_pass', 'auth.app.remember_pass');
 

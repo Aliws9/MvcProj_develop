@@ -70,9 +70,17 @@
 
             /* FilePond را در یک باکس گرد و کوچک محدود می‌کنیم */
             .avatar-filepond-wrap .filepond--root {
-                width: 400px;
+                width: 200px;
                 height: 150px;
                 margin: 0 auto;
+            }
+
+            .filepond--list-scroller {
+                overflow-y: hidden !important;
+            }
+
+            .filepond--list.filepond--list {
+                position: static !important;
             }
 
             .avatar-filepond-wrap .filepond--panel-root {
@@ -141,7 +149,7 @@
                 <?php
     if (errorExist()) {
         foreach (allErorrs() as $key => $error) {
-                                        ?>
+                                                            ?>
                 <div class="dismiss-alert-error-<?= $key ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
                     role="alert" id="dismiss-alert-error-<?= $key ?>">
                     <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
@@ -163,10 +171,10 @@
                 </div>
 
                 <!-- فرم ثبت‌نام: تمام فیلدها هم‌نام با ستون‌های جدول users -->
-                <form id="registerForm" novalidate>
+                <form id="registerForm5" novalidate>
 
                     <!-- تصویر پروفایل -->
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <label class="block text-white/90 text-sm mb-2 text-center">تصویر پروفایل</label>
 
                         <div class="flex justify-center">
@@ -183,81 +191,85 @@
 
 
                     <!-- نام و نام خانوادگی -->
-                    <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="grid grid-cols-2 gap-3 mb-3">
                         <div class="relative">
                             <input type="text" name="first_name" value="<?= old('first_name'); ?>"
-                                class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition"
+                                class="w-full bg-white/20 text-white placeholder-white/50 rounded py-1.5 px-3 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition text-sm md:text-md border-[#dcdfe5] md:py-2.5 md:px-3.5"
                                 placeholder="نام" required>
                         </div>
                         <div class="relative">
                             <input type="text" name="last_name" value="<?= old('last_name'); ?>"
-                                class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition"
+                                class="w-full bg-white/20 text-white placeholder-white/50 rounded py-1.5 px-3 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition text-sm md:text-md border-[#dcdfe5] md:py-2.5 md:px-3.5"
                                 placeholder="نام خانوادگی" required>
                         </div>
                     </div>
 
-                    <!-- ایمیل -->
-                    <div class="relative mb-4">
-                        <input type="email" name="email" value="<?= old('email'); ?>"
-                            class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 ps-10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition"
-                            placeholder="آدرس ایمیل" required>
-                        <div class="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
-                            <span class="icon-[tabler--mail] size-5 text-white/70"></span>
+                    <div class="grid grid-cols-1 gap-3 mb-3">
+                        <!-- ایمیل -->
+                        <div class="relative">
+                            <input type="email" name="email" value="<?= old('email'); ?>"
+                                class="w-full bg-white/20 text-white placeholder-white/50 rounded py-1.5 pr-8 pl-3 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition text-sm md:text-md border-[#dcdfe5] md:py-2.5 md:pr-10 md:pl-3"
+                                placeholder="آدرس ایمیل" required>
+                            <div class="absolute inset-y-0 start-0 ps-2 flex items-center pointer-events-none">
+                                <span class="icon-[tabler--mail] xs:size-5 md:size-7 text-white/60"></span>
+                            </div>
+                        </div>
+                        <!-- یوزر نیم -->
+                        <div class="relative">
+                            <input type="text" name="username" value="<?= old('username'); ?>"
+                                class="w-full bg-white/20 text-white placeholder-white/50 rounded py-1.5 pr-8 pl-3 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition text-sm md:text-md border-[#dcdfe5] md:py-2.5 md:pr-10 md:pl-3"
+                                placeholder="نام کاربری (به انگلیسی وارد کنید)" required>
+                            <div class="absolute inset-y-0 start-0 ps-2 flex items-center pointer-events-none">
+                                <span class="icon-[tabler--user] xs:size-5 md:size-7 text-white/60"></span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- یوزر نیم -->
-                    <div class="relative mb-4">
-                        <input type="text" name="username" value="<?= old('username'); ?>"
-                            class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 ps-10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition"
-                            placeholder="نام کاربری (به انگلیسی وارد کنید)" required>
-                        <div class="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
-                            <span class="icon-[tabler--user] size-5 text-white/70"></span>
+                    <div class="grid xs:grid-rows-2 md:grid-cols-2 gap-3 mb-3">
+                        <!-- رمز عبور -->
+                        <div class="relative">
+                            <input type="password" name="password" id="passwordInput"
+                                class="w-full bg-white/20 text-white placeholder-white/50 rounded py-1.5 pr-8 pl-3 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition text-sm md:text-md border-[#dcdfe5] md:py-2.5 md:pr-10 md:pl-3 toggle-password-checkbox1"
+                                placeholder="رمز عبور (حداقل ۸ کاراکتر)" minlength="8" required>
+                            <div class="absolute inset-y-0 start-0 ps-2 flex items-center pointer-events-none">
+                                <span class="icon-[tabler--lock] xs:size-5 md:size-7 text-white/60"></span>
+                            </div>
+
+                        </div>
+
+                        <!-- تکرار رمز عبور -->
+                        <!-- password_confirmation -->
+                        <div class="relative">
+                            <input type="password" name="confirm_password" id="passwordConfirmInput"
+                                class="w-full bg-white/20 text-white placeholder-white/50 rounded py-1.5 pr-8 pl-3 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition text-sm md:text-md border-[#dcdfe5] md:py-2.5 md:pr-10 md:pl-3 toggle-password-checkbox"
+                                placeholder="تکرار رمز عبور" minlength="8" required>
+                            <div class="absolute inset-y-0 start-0 ps-2 flex items-center pointer-events-none">
+                                <span class="icon-[tabler--lock-check] xs:size-5 md:size-7 text-white/60"></span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- رمز عبور -->
-                    <div class="relative mb-4">
-                        <input type="password" name="password" id="passwordInput"
-                            class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 ps-10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition toggle-password-checkbox1"
-                            placeholder="رمز عبور (حداقل ۸ کاراکتر)" minlength="8" required>
-                        <div class="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
-                            <span class="icon-[tabler--lock] size-5 text-white/70"></span>
-                        </div>
-
-                    </div>
-
-                    <!-- تکرار رمز عبور -->
-                    <!-- password_confirmation -->
-                    <div class="relative mb-6">
-                        <input type="password" name="confirm_password" id="passwordConfirmInput"
-                            class="w-full bg-white/20 text-white placeholder-white/50 rounded-lg py-3 px-4 ps-10 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition toggle-password-checkbox"
-                            placeholder="تکرار رمز عبور" minlength="8" required>
-                        <div class="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
-                            <span class="icon-[tabler--lock-check] size-5 text-white/70"></span>
-                        </div>
-                    </div>
-
-                    <div class="relative mb-6">
+                    <div class="relative mb-3">
                         <div class="flex items-center gap-2">
                             <input id="toggleCheckboxPassword" type="checkbox"
                                 data-toggle-password='{ "target": ["#passwordInput" , "#passwordConfirmInput"] }'
-                                class="checkbox checkbox-primary !rounded-full" style="border:1px solid white" />
+                                class="checkbox checkbox-primary checkbox-sm md:checkbox-md !rounded-full"
+                                style="border:1px solid white" />
                             <label class="label-text !text-white" for="toggleCheckboxPassword">نمایش رمز عبور</label>
                         </div>
                     </div>
 
-                    <button type="submit" id="submitBtn"
-                        class="w-full bg-white text-indigo-600 py-3 px-4 rounded-lg font-semibold hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-500 transition-all transform hover:scale-105 active:scale-95">
+                    <button type="submit" id="submitBtn" class="w-full btn btn-primary !btn-sm md:!btn-md">
                         ثبت‌نام
                     </button>
                 </form>
-            </div>
-        </div>
 
-        <div class="mt-6 text-center">
-            <p class="text-white/60 text-sm">قبلاً ثبت‌نام کرده‌اید؟ <a href="<?= url('login'); ?>"
-                    class="text-white hover:underline">وارد شوید</a></p>
+
+                <div class="mt-6 text-center">
+                    <p class="text-white/60 text-sm">قبلاً ثبت‌نام کرده‌اید؟ <a href="<?= url('login'); ?>"
+                            class="text-white hover:underline">وارد شوید</a></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -309,7 +321,7 @@
                     overlayText.textContent = `در حال آپلود تصویر... ${Math.round(progress * 100)}%`;
                 },
                 <?php if (old('avatar')): ?>
-                        files: [
+                                            files: [
                     {
                         source: "<?= old('avatar'); ?>",
                         options: {
