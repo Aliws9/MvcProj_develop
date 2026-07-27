@@ -5,7 +5,7 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ثبت‌نام</title>
+        <title>فراموشی رمز عبور</title>
         <link rel="stylesheet" href="<?php echo asset('tailwind/output.css'); ?>">
         <script src="<?= asset('flyonui/flyonui.js'); ?>"></script>
 
@@ -131,15 +131,15 @@
             <div class="p-5">
 
                 <div class="text-center mb-6">
-                    <h1 class="text-3xl font-bold text-white mb-2">ایجاد حساب کاربری</h1>
-                    <p class="text-white/80">برای ثبت‌نام اطلاعات زیر را تکمیل کنید</p>
+                    <h1 class="text-3xl font-bold text-white mb-2">بازیابی رمز عبور</h1>
+                    <p class="text-white/80">برای بازیابی رمز عبور فراموش شده ایمیل یا نام کاربری خودرا وارد کنید</p>
                 </div>
 
                 <!-- پیام‌های خطا -->
                 <?php
     if (errorExist()) {
         foreach (allErorrs() as $key => $error) {
-                                                                    ?>
+                                                                            ?>
                 <div class="dismiss-alert-error-<?= $key ?> alert alert-error alert-soft flex items-center gap-3 mb-3"
                     role="alert" id="dismiss-alert-error-<?= $key ?>">
                     <span class="icon-[tabler--alert-triangle] shrink-0 size-5"></span>
@@ -151,7 +151,23 @@
                 </div>
                 <?php            }
         }
-    ; ?>
+    ;
+    if (flashExists('forgot')) {
+        foreach(allFlashes() as $keyFlash => $valueFlash){
+                    ?>
+                <div class="dismiss-alert-success-<?= $keyFlash ?> alert alert-success flex items-center gap-3 mb-3" role="alert"
+                    id="dismiss-alert-success-<?= $keyFlash ?>">
+                    <span class="icon-[tabler--circle-check] shrink-0 size-6"></span>
+                    <p class="text-sm"><?= $valueFlash ?></p>
+                    <button type="button" class="ms-auto cursor-pointer"
+                        data-remove-element="#dismiss-alert-success-<?= $keyFlash ?>">
+                        <span class="icon-[tabler--x] size-4"></span>
+                    </button>
+                </div>
+                <?php
+        }
+            }
+                 ?>
 
                 <!-- پیام خطای عمومی برای ارسال AJAX -->
                 <div id="ajaxErrorAlert" class="hidden alert alert-error alert-soft flex items-center gap-3 mb-3"
@@ -161,13 +177,13 @@
                 </div>
 
                 <!-- فرم ثبت‌نام: تمام فیلدها هم‌نام با ستون‌های جدول users -->
-                <form id="registerForm" action="<?= route('auth.app.login') ?>" method="post">
+                <form id="registerForm" action="<?= route('auth.app.forgot') ?>" method="post">
 
 
 
                     <!-- یوزر نیم -->
                     <div class="relative mb-5">
-                        <input type="text" name="emailOrusername"
+                        <input type="text" name="emailOruser"
                             class="w-full bg-white/20 text-white placeholder-white/50 rounded py-1.5 pr-8 pl-3 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition text-sm md:text-md border-[#dcdfe5] md:py-2.5 md:pr-10 md:pl-3"
                             placeholder="نام کاربری یا ایمیل (لاتین)" required>
                         <div class="absolute inset-y-0 start-0 ps-2 flex items-center pointer-events-none">
@@ -175,45 +191,17 @@
                         </div>
                     </div>
 
-
-                    <div class="grid grid-row-2 gap-3 mb-4">
-                        <!-- رمز عبور -->
-                        <div class="relative">
-
-                            <div class="flex w-full relative">
-                                <input id="toggle-password" type="password" placeholder="پسورد خود را وارد کنید..."
-                                    name="password"
-                                    class="w-full bg-white/20 text-white placeholder-white/50 rounded py-1.5 pr-8 pl-3 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/30 transition text-sm md:text-md border-[#dcdfe5] md:py-2.5 md:pr-10 md:pl-3" />
-                                <div class="absolute inset-y-0 start-0 ps-2 flex items-center pointer-events-none">
-                                    <span class="icon-[tabler--lock] xs:size-5 md:size-7 text-white/60"></span>
-                                </div>
-                                <button type="button" data-toggle-password='{ "target": "#toggle-password" }'
-                                    class="block cursor-pointer absolute top-1/2 -translate-y-1/2 left-2"
-                                    aria-label="password toggle">
-
-                                    <span
-                                        class="icon-[tabler--eye] text-base-content/80 password-active:block hidden size-5 shrink-0"></span>
-                                    <span
-                                        class="icon-[tabler--eye-off] text-base-content/80 password-active:hidden block size-5 shrink-0"></span>
-                                </button>
-                            </div>
-
-                        </div>
-
                         <button type="submit" id="submitBtn" class="w-full btn btn-primary !btn-sm md:!btn-md">
-                            ورود
+                            ارسال
                         </button>
                 </form>
 
 
                 <div class="mt-2 text-center">
-                    <p class="text-white/60 text-sm">رمزتان را فراموش کردید؟ <a href="<?= route('auth.app.forgot.password') ?>"
-                            class="text-white hover:underline">بازیابی رمز عبور</a></p>
+                    <p class="text-white/60 text-sm"><a href="<?= url('login'); ?>"
+                            class="text-white hover:underline">بازگشت به صفحه ورود</a></p>
                 </div>
-                <div class="text-center">
-                    <p class="text-white/60 text-sm">حساب کاربری ندارید؟ <a href="<?= url('register'); ?>"
-                            class="text-white hover:underline">ثبت نام کنید</a></p>
-                </div>
+
             </div>
         </div>
     </div>

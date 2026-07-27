@@ -22,11 +22,12 @@ class LoginController
         }
 
         public function login(){
-            Auth::loguot();
+            //dd('error');
+            Auth::logout();
             $request = new LoginRequest();
 
             if(Auth::loginByEmailUsername($request->emailOrusername , $request->password)){
-                $user = User::whereOr('email' , $request->emailOrusername)->where('username' , $request->emailOrusername)->get();
+                $user = User::where('email' , $request->emailOrusername)->whereOr('username' , $request->emailOrusername)->get();
                 $user = $user[0];
                 if($user->user_type == 'admin' OR $user->user_type == 'editor' OR $user->user_type == 'admin_seo' OR $user->user_type == 'admin2'){
                     return redirect($this->redirectToAdmin);

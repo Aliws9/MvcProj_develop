@@ -14,7 +14,7 @@ class User extends Model
 
     protected $table = "users";
 
-    protected $fillable = ['username', 'email', 'password', 'first_name', 'last_name', 'is_active', 'avatar', 'bio', 'user_type','verify_token' , 'status'];
+    protected $fillable = ['username', 'email', 'password', 'first_name', 'last_name', 'is_active', 'avatar', 'bio', 'user_type', 'verify_token', 'status', 'remember_token', 'remember_token_expire'];
 
     // protected $casts = [];
 

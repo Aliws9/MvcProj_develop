@@ -74,8 +74,8 @@ Route::delete('/register/avatar/delete', 'Auth\App\RegisterController@deleteAvat
 Route::get('/login', 'Auth\App\LoginController@view', 'auth.app.login.view');
 Route::post('/login', 'Auth\App\LoginController@login', 'auth.app.login');
 
-Route::get('/remember_pass', 'Auth\App\RegisterController@remember_pass', 'auth.app.remember_pass');
-Route::post('/remember_pass', 'Auth\App\RegisterController@remember_pass', 'auth.app.remember_pass');
+Route::get('/forgot', 'Auth\App\ForgotController@view', 'auth.app.forgot.password');
+Route::post('/forgot', 'Auth\App\ForgotController@forgot', 'auth.app.forgot');
 
 Route::get('/login/WaitActive', 'Auth\App\RegisterController@LoginWaitActive', 'auth.app.LoginWaitActive');
 

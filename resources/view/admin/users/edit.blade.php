@@ -93,10 +93,10 @@
                         </div>
                         <div class="md:w-1/2 w-full">
                             <div class="max-w-sm">
-                                <label class="label-text" for="toggle-password-label">رمز عبور</label>
+                                <label class="label-text" for="toggle-password-label">رمز جدید</label>
                                 <div class="input">
                                     <input id="toggle-password-label" type="password" placeholder="رمز را وارد کنید"
-                                        value="<?= $user->password ?>" name="password" />
+                                    name="password" />
                                     <button type="button" data-toggle-password='{ "target": "#toggle-password-label" }'
                                         class="block cursor-pointer" aria-label="password toggle">
                                         <span
