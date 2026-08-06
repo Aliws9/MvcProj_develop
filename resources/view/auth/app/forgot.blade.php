@@ -152,7 +152,7 @@
                 <?php            }
         }
     ;
-    if (flashExists('forgot')) {
+    if (flashExists()) {
         foreach(allFlashes() as $keyFlash => $valueFlash){
                     ?>
                 <div class="dismiss-alert-success-<?= $keyFlash ?> alert alert-success flex items-center gap-3 mb-3" role="alert"

@@ -77,6 +77,9 @@ Route::post('/login', 'Auth\App\LoginController@login', 'auth.app.login');
 Route::get('/forgot', 'Auth\App\ForgotController@view', 'auth.app.forgot.password');
 Route::post('/forgot', 'Auth\App\ForgotController@forgot', 'auth.app.forgot');
 
+Route::get('/reset-password/{token}', 'Auth\App\ResetPasswordController@view', 'auth.app.reset-password.view');
+Route::post('/reset-password/{token}', 'Auth\App\ResetPasswordController@resetPassword', 'auth.app.reset-password');
+
 Route::get('/login/WaitActive', 'Auth\App\RegisterController@LoginWaitActive', 'auth.app.LoginWaitActive');
 
 

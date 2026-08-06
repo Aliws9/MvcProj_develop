@@ -93,31 +93,41 @@ class Auth
     //ورود با ایمیل و یوزرنیم و پسورد
     private function loginByEmailUsernameMethod($emailOruser, $password)
         {
+            // $password = password_hash($password , PASSWORD_DEFAULT);
         if (filter_var($emailOruser, FILTER_VALIDATE_EMAIL)) {
             // کاربر ایمیل وارد کرده
             $user = User::where('email', $emailOruser)->get();
-            if (empty($user)) {
-                error('login', 'کاربر وجود ندارد');
-                return false;
+            if (!empty($user)) {
+                if (password_verify($password , $user[0]->password) && $user[0]->is_active == 1) {
+                    Session::set('user', $user[0]->id);
+                    return true;
+                    }
+                else {
+                    error('login', 'پسورد اشتباه است');
+                    return false;
+                    }
                 }
             }
         else {
             // کاربر یوزرنیم وارد کرده
             $user = User::where('username', $emailOruser)->get();
-            if (empty($user)) {
+            if (!empty($user)) {
+                if (password_verify($password , $user[0]->password) && $user[0]->is_active == 1) {
+                    Session::set('user', $user[0]->id);
+                    return true;
+                    }
+                else {
+                    error('login', 'پسورد اشتباه است');
+                    return false;
+                    }
+                }
+            else {
                 error('login', 'کاربر وجود ندارد');
                 return false;
                 }
             }
-            
-        if ($password == $user[0]->password && $user[0]->is_active == 1) {
-            Session::set('user', $user[0]->id);
-            return true;
-            }
-        else {
-            error('login', 'پسورد اشتباه است');
-            return false;
-            }
+
+
         }
 
     //ورود با ID

@@ -2,63 +2,65 @@
 
 namespace App\Http\Controllers\Auth\App;
 
-use App\Http\Requests\Auth\App\ForgotRequest;
+use App\Http\Requests\Auth\App\ResetPasswordRequest;
 use App\Http\Services\MailService;
 use App\User;
 use Exception;
-use System\Session\Session;
 use System\Config\Config;
 
-class ForgotController
+class ResetPasswordController
     {
-    private $redirectTo = '/home';
+    private $redirectTo = '/login';
 
-    public function view()
+    public function view($token)
         {
-        return view('auth.app.forgot');
-        }
-
-    public function forgot()
-        {
-        Session::remove('forgot.time');
-        if (Session::get('forgot.time') != false && Session::get('forgot.time') > time()) {
-            error('forgot', 'لطفا 2 دقیقه دیگر امتحان کنید.');
-            return back();
-            //dd('hi');
+        $user = User::where('remember_token', $token)->where('remember_token_expire', '>=', date('Y-m-d H:i:s'))->get();
+        if (!empty($user)) {
+            $user = $user[0];
+            return view('auth.app.reset-password', compact('token'));
             }
         else {
-            Session::set('forgot.time', time() + 120);
-            $request = new ForgotRequest();
+            error('resset-password', 'توکن شما اعتبار ندارد!');
+            return redirect($this->redirectTo);
+            }
+        }
 
-            $input = $request->all();
-            $user = User::where('email', $input['emailOruser'])->whereOr('username', $input['emailOruser'])->get();
-            if (empty($user)) {
-                error('forgot', 'کاربر وجود ندارد');
-                return back();
-                }
-            else {
-                $user = $user[0];
-                $userEmail = $user->email;
-                }
+    public function resetPassword($token)
+        {
+        $request = new ResetPasswordRequest();
+        $input = $request->all();
+        $user = User::where('remember_token', $token)->where('remember_token_expire', '>=', date('Y-m-d H:i:s'))->get();
+        if (empty($user)) {
+            error('reset-password', 'کاربر وجود ندارد');
+            return back();
+            }
+        else {
+            $user = $user[0];
+            $password = $input['password'];
+            $new_password = $input['new_password'];
+            }
+        if ($password !== $new_password) {
+            error('reset-password', 'پسورد و تکرار آن برابر نیستند');
+            return back();
+            }
+        else {
             $baseUrl = Config::get('app.BASE_URL');
             $appTitle = Config::get('app.APP_TITLE');
-            $user->remember_token = generateToken();
-            $user->remember_token_expire = date("Y-m-d H:i:s", strtotime(' + 15 min'));
+            $user->password = password_hash($input['password'], PASSWORD_DEFAULT);
             require_once Config::get('app.BASE_DIR') . '/public/jdf/jdf.php';
 
-            list($y, $m, $d) = explode('-', date('Y-m-d'));
+            list($date, $time) = explode(' ', date('Y/m/d H:i:s'));
+            list($y, $m, $d) = explode('/', $date);
+            list($h, $i, $s) = explode(':', $time);
 
-            $date = gregorian_to_jalali($y, $m, $d);
+            $g = gregorian_to_jalali($y, $m, $d);
 
-            $jalaliDate = sprintf(
-                '%04d-%02d-%02d',
-                $date[0],
-                $date[1],
-                $date[2]
+            $gregorian = sprintf(
+                "%04d-%02d-%02d %02d:%02d:%02d",
+                $g[0], $g[1], $g[2],
+                $h, $i, $s
             );
 
-            // لینک بازیابی رمز عبور
-            $resetUrl = route('auth.app.reset-password', [$user->remember_token]);
 
             if ($user->save()) {
                 // ساخت HTML ایمیل
@@ -72,7 +74,7 @@ class ForgotController
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>بازیابی رمز عبور</title>
+    <title>تغیر رمز عبور</title>
 
     <style>
 
@@ -266,60 +268,19 @@ class ForgotController
 
 
                         <h1 class="title">
-                            بازیابی رمز عبور
+                            تغیر رمز عبور
                         </h1>
 
 
-                        <p class="description">
+                        <p class="description" style="direction:rtl">
 
                             {$user->first_name} {$user->last_name} عزیز، سلام.
 
                             <br>
 
-                            درخواست بازیابی رمز عبور حساب کاربری شما دریافت شده است.
-                            برای تعیین رمز عبور جدید، روی دکمه زیر کلیک کنید.
-
+                            رمز عبور شما با موفقیت در تاریخ زیر تغیر کرد.
+                            اگر از این موضوع اطلاع ندارید به مدیر وبسایت از طریق ایمیل یا راه های ارتباطی تعیین شده اطلاع دهید.
                         </p>
-
-
-                        <!-- Button -->
-
-                        <div class="button-wrapper">
-
-                            <a
-                                href="{$resetUrl}"
-                                class="button"
-                                target="_blank"
-                            >
-                                بازیابی رمز عبور
-                            </a>
-
-                        </div>
-
-
-                        <!-- Expiration -->
-
-                        <div class="expire-box">
-
-                            ⏱️ این لینک فقط به مدت
-                            <strong>۱۵ دقیقه</strong>
-                            معتبر است و پس از آن منقضی خواهد شد.
-
-                        </div>
-
-
-                        <!-- Security -->
-
-                        <div class="security">
-
-                            اگر شما درخواست بازیابی رمز عبور نداده‌اید،
-                            می‌توانید این ایمیل را نادیده بگیرید.
-
-                            <br>
-
-                            رمز عبور حساب شما تغییر نخواهد کرد.
-
-                        </div>
 
                     </td>
 
@@ -337,7 +298,7 @@ class ForgotController
 
                         <br>
 
-                        © {$jalaliDate} {$appTitle}
+                        © {$gregorian} {$appTitle}
 
                     </td>
 
@@ -357,10 +318,10 @@ class ForgotController
 HTML;
                 try {
                     $serviceMail = new MailService();
-                    $serviceMail->send($userEmail, 'بازیابی رمز عبور شما', $messageEmail);
-                    flash('forgot', 'ایمیل بازیابی با موفقیت به ایمیل شما ارسال شد');
+                    $serviceMail->send($user->email, 'تغیر رمز عبور شما', $messageEmail);
+                    flash('reset-password', 'پسورد شما با موفقیت تغیر کرد');
                     // return redirect($this->redirectTo);
-                    return back();
+                    return redirect($this->redirectTo);
                     } catch (Exception $e) {
                     echo ('مشکل در ارسال ایمیل ') . $e->getMessage();
                     die();
@@ -368,7 +329,7 @@ HTML;
 
                 }
             else {
-                error('forgot', 'مشکل ذخیره سازی در دیتابیس');
+                error('reset-password', 'مشکل ذخیره سازی در دیتابیس');
                 return redirect($this->redirectTo);
                 }
             }
