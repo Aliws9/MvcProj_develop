@@ -67,7 +67,7 @@ Route::get('/register', 'Auth\App\RegisterController@view', 'auth.app.register.v
 Route::post('/register', 'Auth\App\RegisterController@register', 'auth.app.register');
 
 Route::get('/activation/{token}', 'Auth\App\RegisterController@activation', 'auth.app.activation');
-// register avatar upload (FilePond)
+   // register avatar upload (FilePond)
 Route::post('/register/avatar/upload', 'Auth\App\RegisterController@uploadAvatar', 'auth.app.avatar.upload');
 Route::delete('/register/avatar/delete', 'Auth\App\RegisterController@deleteAvatar', 'auth.app.avatar.delete');
 
@@ -80,7 +80,13 @@ Route::post('/forgot', 'Auth\App\ForgotController@forgot', 'auth.app.forgot');
 Route::get('/reset-password/{token}', 'Auth\App\ResetPasswordController@view', 'auth.app.reset-password.view');
 Route::post('/reset-password/{token}', 'Auth\App\ResetPasswordController@resetPassword', 'auth.app.reset-password');
 
+Route::get('/logout', 'Auth\App\LogoutController@logout', 'auth.app.logout');
+
 Route::get('/login/WaitActive', 'Auth\App\RegisterController@LoginWaitActive', 'auth.app.LoginWaitActive');
+
+// setting sections
+// Route::get('/admin/setting/email', 'Admin\Setting\EmailSettingController@index', 'admin.setting.email.index');
+// Route::get('/admin/setting/email/template/{type}', 'Admin\Setting\EmailSettingController@template', 'admin.setting.email.template');
 
 
 

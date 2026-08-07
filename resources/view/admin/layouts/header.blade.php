@@ -24,9 +24,9 @@
 
             <ul class="dropdown-menu dropdown-open:opacity-100 hidden min-w-60" role="menu" aria-orientation="vertical"
                 aria-labelledby="dropdown-footer">
-                <li><a class="dropdown-item" href="#">ویرایش پروفایل</a></li>
+                <li><a class="dropdown-item" href="<?= route('admin.users.edit' , [\System\Auth\Auth::user()->id]) ?>">ویرایش پروفایل</a></li>
                 <li class="dropdown-footer gap-2">
-                    <button class="btn btn-error btn-soft btn-block">خروج</button>
+                    <a class="btn btn-error btn-soft btn-block" href="<?= route('auth.app.logout') ?>">خروج</a>
                 </li>
             </ul>
 

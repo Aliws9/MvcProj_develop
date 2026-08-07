@@ -267,6 +267,12 @@ else
                                 منو ها
                             </a>
                         </li>
+                        <li>
+                            <a href="<?= route('admin.setting.email.index') ?>">
+                                <span class="icon-[mdi--email-outline] size-5"></span>
+                                تنظیمات ایمیل
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

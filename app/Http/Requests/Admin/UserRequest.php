@@ -8,6 +8,7 @@ class UserRequest extends Request{
 
     public function rules(){
         return [
+            //'username' => "unique:users,username"
             //'title' => "required|max:50|min:3",
             // 'summary' => "max:400",
             // 'seo_title' => "max:200",

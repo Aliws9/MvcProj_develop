@@ -5,6 +5,8 @@ use System\Config\Config;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use App\Http\Mail\EmailRenderer;
+use App\MailTemplate;
 
 class MailService
     {
@@ -48,6 +50,34 @@ class MailService
             } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
+
+        }
+
+
+    public function sendTemplate($templateName, $to, $data = [])
+        {
+
+        $template = MailTemplate::where('name', $templateName)->first();
+
+        if (!$template) {
+            throw new Exception("Email template not found.");
+            }
+
+        $html = EmailRenderer::render(
+            $template->html,
+            $data
+        );
+
+        $subject = EmailRenderer::render(
+            $template->subject,
+            $data
+        );
+
+        $this->send(
+            $to,
+            $subject,
+            $html
+        );
 
         }
 

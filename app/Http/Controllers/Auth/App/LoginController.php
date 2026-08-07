@@ -7,7 +7,7 @@ use App\Http\Services\MailService;
 use App\User;
 use System\Auth\Auth;
 use App\Http\Requests\Auth\App\LoginRequest;
-use System\Config\Config;
+//use System\Config\Config;
 // use Intervention\Image\ImageManager;
 // use Intervention\Image\Drivers\Gd\Driver;
 

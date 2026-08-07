@@ -16,8 +16,10 @@
         </div>
 
 
-        <form class="needs-validation peer grid gap-y-4 p-3" method="post" action="<?= route('admin.users.store') ?>">
-
+        <form class="needs-validation peer grid gap-y-4 p-3" method="post"
+            action="<?= route('admin.users.update', [$user->id]) ?>">
+            <input type="hidden" name="_method" value="put">
+            <input type="hidden" name="id" value="<?= $user->id ?>">
             <div class="w-full flex flex-col md:flex-row gap-4">
                 <div class="p-3 w-full md:w-2/5 gap-3 flex flex-col">
                     <div>
@@ -33,6 +35,7 @@
                     <div>
                         <label class="label-text" for="lastName">نقش کاربر</label>
                         <select class="input" name="user_type">
+                            <option value="admin" <?= $user->user_type == 'admin' ? 'selected' : '' ?>>ادمین اصلی</option>
                             <option value="admin2" <?= $user->user_type == 'admin2' ? 'selected' : '' ?>>ادمین دوم</option>
                             <option value="editor" <?= $user->user_type == 'editor' ? 'selected' : '' ?>>ادیتور</option>
                             <option value="admin_seo" <?= $user->user_type == 'admin_seo' ? 'selected' : '' ?>>مدیر SEO
@@ -47,6 +50,12 @@
                                 <input type="checkbox" class="switch switch-primary" name="is_active" id="switchType1"
                                     <?= $user->is_active == 1 ? 'checked' : '' ?> />
                                 <label class="label-text text-base" for="switchType1">کاربر فعال یا غیرفعال</label>
+                            </div>
+                        </div>
+                        <div class="w-full">
+                            <div class="flex items-center gap-1">
+                                <input type="checkbox" class="switch switch-primary" name="send_info" id="switchType2" />
+                                <label class="label-text text-base" for="switchType1">ارسال اطلاعات در ایمیل</label>
                             </div>
                         </div>
                     </div>
@@ -69,7 +78,7 @@
                                         class="w-full h-32 object-cover rounded-lg border-2 border-primary">
                                     <button type="button"
                                         class="mm-clear-btn absolute -top-2 -right-2
-                                                                                                                           btn btn-circle btn-xs btn-error">
+                                                                                                                               btn btn-circle btn-xs btn-error">
                                         <span class="icon-[tabler--x] size-3"></span>
                                     </button>
                                 </div>
@@ -96,7 +105,7 @@
                                 <label class="label-text" for="toggle-password-label">رمز جدید</label>
                                 <div class="input">
                                     <input id="toggle-password-label" type="password" placeholder="رمز را وارد کنید"
-                                    name="password" />
+                                        name="password" />
                                     <button type="button" data-toggle-password='{ "target": "#toggle-password-label" }'
                                         class="block cursor-pointer" aria-label="password toggle">
                                         <span
@@ -112,15 +121,15 @@
                     <div class="w-full">
                         <label class="label-text" for="userBio">Bio</label>
                         <textarea id="mm-tinymce-editor" name="bio">
-
-                                                                                                    </textarea>
+    <?= $user->bio; ?>
+                                                                                                        </textarea>
                     </div>
 
                 </div>
 
             </div>
             <div class="mt-4 p-2">
-                <button type="submit" name="submitButton" class="btn btn-primary">ذخیره کاربر</button>
+                <button type="submit" class="btn btn-primary">ذخیره کاربر</button>
             </div>
         </form>
     </div>
@@ -165,15 +174,15 @@
                     });
                 },
                 content_style: `
-                                                                                            body {
-                                                                                                font-family: vazir, Arial, sans-serif;
-                                                                                                direction: rtl;
-                                                                                                text-align: right;
-                                                                                                font-size: 14px;
-                                                                                                line-height: 1.8;
-                                                                                                padding: 16px;
-                                                                                            }
-                                                                                        `
+                                                                                                body {
+                                                                                                    font-family: vazir, Arial, sans-serif;
+                                                                                                    direction: rtl;
+                                                                                                    text-align: right;
+                                                                                                    font-size: 14px;
+                                                                                                    line-height: 1.8;
+                                                                                                    padding: 16px;
+                                                                                                }
+                                                                                            `
             });
 
             // این کد فقط یه بار در layout نوشته می‌شه
